@@ -1,4 +1,5 @@
 {% extends 'posts/layout.html' %}
+{% load static %}
 
 {% block local_block %}
     <ul>
@@ -8,6 +9,7 @@
                 <span>{{post.title}}</span>
                 <span>{{post.user}}</span>
                 <span>❤ {{post.like}}</span>
+                <span class="post_rate">{{post.rate}}</span>
                 </a>
             </li>
         {% endfor %}
@@ -15,4 +17,5 @@
 
     <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
 
+    <script src="{% static 'js/rateToStar.js' %}"></script>
 {% endblock local_block %}
