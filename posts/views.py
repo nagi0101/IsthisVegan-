@@ -43,9 +43,6 @@ def post_detail(request, pk):
         elif category == "VISIT" or category == "BUY":
             return render(request, "posts/rated_post_detail.html", ctx)
 
-def post_create(request):
-    category = request.GET["category"]
-
 def on_bookmark_btn_clicked(request):
     data = json.loads(request.body)
     postPk = data["postPk"]
@@ -93,7 +90,8 @@ def on_comment_like_btn_clicked(request):
 
 
 def post_create(request):
-    pass
+    category = request.GET["category"]
+
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm()
