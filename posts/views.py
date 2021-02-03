@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Post, RatedPost, Comment
 import json
+from .forms import PostForm, RatedPostForm
 
 # Create your views here.
 def post_list(request):
@@ -42,6 +43,8 @@ def post_detail(request, pk):
         elif category == "VISIT" or category == "BUY":
             return render(request, "posts/rated_post_detail.html", ctx)
 
+def post_create(request):
+    category = request.GET["category"]
 
 def on_bookmark_btn_clicked(request):
     data = json.loads(request.body)
@@ -91,3 +94,43 @@ def on_comment_like_btn_clicked(request):
 
 def post_create(request):
     pass
+    if request.method == "GET":
+        if category in ["INFO", "COMMUNICATE"]:
+            form = PostForm()
+        else:
+            form = RatedPostForm()
+        
+        ctx = {
+            "form": form,
+            "category": category,
+        }
+        return render(request, 'posts/post_create.html', ctx)
+    else:
+        if category in ["INFO", "COMMUNICATE"]:
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.category = category
+                post.save()
+                
+                for img in request.FILES.getlist('imgs'):
+                    image = Image()
+                    image.post = post
+                    image.image = img
+                    image.save()
+        else:
+            form = RatedPostForm(request.POST)
+            if form.is_valid():
+                ratedpost = form.save(commit=False)
+                ratedpost.user = request.user
+                ratedpost.category = category
+                ratedpost.save()
+
+                for img in request.FILES.getlist('imgs'):
+                    image = Image()
+                    image.post = ratedpost
+                    image.image = img
+                    image.save()
+            
+        return redirect('http://127.0.0.1:8000/posts/?category='+category)
