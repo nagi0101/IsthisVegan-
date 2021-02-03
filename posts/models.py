@@ -42,17 +42,6 @@ class RatedPost(Post):
         ],
     )
 
-
-class Image(AbstractTimestamp):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to=upload_to_uuid)
-
-    def image_tag(self):
-        return mark_safe(f'<img src="{self.image.url}" width="50px" />')
-
-    image_tag.short_description = "Image"
-
-
 class Comment(AbstractTimestamp):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="comments"

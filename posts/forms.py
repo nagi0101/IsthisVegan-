@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, RatedPost, Image
+from .models import Post, RatedPost
 
 class PostForm(forms.ModelForm):
     class Meta:
