@@ -5,8 +5,8 @@
     <div class="">
         <h1>{{post.title}}</h1>
         <span>{{post.user.nickname}}</span>
-        <button id="bookmark_btn">
-            {% if post in user.bookmarks.all %}
+        <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
+            {% if bookmarked %}
                 <i class="fas fa-bookmark"></i>
             {% else %}
                 <i class="far fa-bookmark"></i>
@@ -14,6 +14,7 @@
         </button>
         {% if user == post.user %}
             <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
+            <button><i class="fas fa-edit"></i><span>수정</span></button>
         {% endif %}
         <hr>
         <div class="">
