@@ -151,3 +151,22 @@ MEDIA_URL = "/media/"
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_IMAGE_BACKEND = "pillow"
+
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+    #  'allauth' specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend', 
+    ) 
+
+SITE_ID = 1 
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email', ],
+        'AUTH_PARAMS': {'access_type': 'online', }
+    }
+}
