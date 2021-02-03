@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
-
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -24,7 +24,7 @@ class Post(AbstractTimestamp):
         "users.User", on_delete=models.CASCADE, related_name="posts"
     )
     title = models.CharField(max_length=120)
-    content = models.TextField()
+    content = RichTextUploadingField()
     like = models.PositiveIntegerField(default=0)
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
 

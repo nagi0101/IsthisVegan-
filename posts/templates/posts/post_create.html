@@ -1,10 +1,8 @@
 <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
   {% csrf_token %}
 
-  <table>
-    {{form.as_table}}
-  </table>
+  {{form.media}}    
+  {{form.as_p}}
 
-  <input type="file" name="imgs" multiple>
   <input type="submit" value="저장하기" />
 </form>
