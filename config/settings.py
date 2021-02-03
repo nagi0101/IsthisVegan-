@@ -49,6 +49,15 @@ INSTALLED_APPS = [
     "core",
     "users",
     "posts",
+
+    # Social login
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
