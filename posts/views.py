@@ -125,3 +125,14 @@ def post_create(request):
                 ratedpost.save()
 
         return redirect("http://127.0.0.1:8000/posts/?category=" + category)
+
+
+        
+def main(request):
+        posts = Post.objects.all()
+        ctx = {
+            "posts": posts,
+         
+        }
+
+        return render(request, 'posts/main.html', ctx)

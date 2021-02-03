@@ -22,4 +22,8 @@ urlpatterns = [
         views.on_comment_like_btn_clicked,
         name="on_comment_like_btn_clicked",
     ),
+    path("main/", views.main, name="post_main" ),
+    
+
+
 ]
