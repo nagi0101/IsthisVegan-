@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'posts:post_detail' post.pk %}">
+            <span>{{post.title}}</span>
+            <span>{{post.user}}</span>
+            <span>❤ {{post.like}}</span>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
+
+</body>
+</html>
