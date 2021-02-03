@@ -1,0 +1,41 @@
+{% extends 'posts/layout.html' %}
+
+{% block local_block %}
+    <div class="">
+        <h1>{{post.title}}</h1>
+        <span>{{post.user.nickname}}</span>
+        
+        <button>
+            {% if post in user.bookmarks.all %}
+                <i class="fas fa-bookmark"></i>
+            {% else %}
+                <i class="far fa-bookmark"></i>
+            {% endif %}
+        </button>
+        {% if user == post.user %}
+            <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
+        {% endif %}
+        <hr>
+        <div class="">
+            {{post.content | linebreaks}}
+        </div>
+        <br>
+        <span><i class="fas fa-heart"></i>{{post.like}}</span>
+    </div>
+    <hr>
+    <div class="comments_container">
+        <h3>Comments</h3>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <h4 class="">{{comment.user.nickname}}</h4>
+                    <p>{{comment.content}}</p>
+                    <button><i class="far fa-heart"></i></button> <span>{{comment.like}}</span>
+                    {% if user == comment.user %}
+                        <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock local_block %}

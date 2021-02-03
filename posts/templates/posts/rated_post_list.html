@@ -5,10 +5,10 @@
     <ul>
         {% for post in posts %}
             <li>
-                <a href="{% url 'posts:post_detail' post.pk %}">
+                <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
                 <span>{{post.title}}</span>
-                <span>{{post.user}}</span>
-                <span>❤ {{post.like}}</span>
+                <span>{{post.user.nickname}}</span>
+                <span><i class="fas fa-heart"></i> {{post.like}}</span>
                 <span class="post_rate">{{post.rate}}</span>
                 </a>
             </li>
