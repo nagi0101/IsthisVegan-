@@ -26,7 +26,7 @@ class Post(AbstractTimestamp):
     )
     title = models.CharField(max_length=120)
     content = models.TextField()
-    like = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField("users.User", blank=True, related_name="likedPosts")
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
 
     def __str__(self):
@@ -57,7 +57,9 @@ class Comment(AbstractTimestamp):
         "users.User", on_delete=models.CASCADE, related_name="comments"
     )
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-    like = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField(
+        "users.User", blank=True, related_name="likedComments"
+    )
     content = models.TextField()
 
     def __str__(self):
