@@ -106,29 +106,19 @@ def post_create(request):
     else:
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm(request.POST)
+
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user = request.user
                 post.category = category
                 post.save()
-                
-                for img in request.FILES.getlist('imgs'):
-                    image = Image()
-                    image.post = post
-                    image.image = img
-                    image.save()
         else:
             form = RatedPostForm(request.POST)
+
             if form.is_valid():
                 ratedpost = form.save(commit=False)
                 ratedpost.user = request.user
                 ratedpost.category = category
                 ratedpost.save()
-
-                for img in request.FILES.getlist('imgs'):
-                    image = Image()
-                    image.post = ratedpost
-                    image.image = img
-                    image.save()
             
         return redirect('http://127.0.0.1:8000/posts/?category='+category)

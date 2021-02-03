@@ -1,14 +1,10 @@
 from django.contrib import admin
-from .models import Post, RatedPost, Image, Comment
-
-class PostImage(admin.TabularInline):
-    model = Image
+from .models import Post, RatedPost, Comment
 
 class PostComment(admin.TabularInline):
     model = Comment
 
 @admin.register(Post)
-@admin.register(RatedPost)
 class PostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
@@ -45,12 +41,4 @@ class CommentAdmin(admin.ModelAdmin):
 
     filter_horizontal = [
         "like",
-    ]
-
-
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    list_display = [
-        "post",
-        "image_tag",
     ]
