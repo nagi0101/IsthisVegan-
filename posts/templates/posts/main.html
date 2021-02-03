@@ -1,0 +1,93 @@
+{% extends 'posts/layout.html' %}
+
+{% block local_block %}
+    
+    <nav id='top_nav'>
+        <ul>
+            <a href="">이건?비건!</a>
+        </ul>
+    </nav>
+    
+    <div id="content">
+
+        <div id="content__top">
+            <p class="detail">
+                
+                <p>검색창</p>
+               
+            </p>
+        </div>
+    
+
+        <hr/>
+
+
+<div class="category">
+
+    <h1>카테고리{{post.title}}<h1>
+    {% for post in posts %}
+            <li>
+                <a href="{% url 'posts:post_list' %}?category={{post.category}}">
+                <span>{{post.category}}</span>
+                </a>
+            </li>
+    {% endfor %}
+
+</div>
+
+<div class="information">
+
+    <p>비건사이트에 당도한 것을 환영하오 낯선이여<p>
+
+</div>
+
+<div class="call">
+
+    <!-- Place <div> tag where you want the feed to appear -->
+<div id="curator-feed-default-feed-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag"></a></div>
+<!-- The Javascript can be moved to the end of the html page before the </body> tag -->
+
+
+</div>
+
+<div class="call">
+
+    <p>최신글<p>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
+                <span>{{post.title}}</span>
+                <span>{{post.user.nickname}}</span>
+                <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                <span class="post_rate">{{post.rate}}</span>
+                </a>
+            </li>
+        {% endfor %}
+     
+
+   
+</div>
+
+<button class="gameplay">
+<a href="">게임하기<a> 
+</button>
+
+
+
+    </div>
+
+    <hr/>
+    <footer class="last">
+        <div>피로그래밍 14기 화이티이이잉</div>
+        <div>방구석 피로그래밍 연구소 | 다들 마지막까지 빠이팅입니다앙</div>
+
+<script type="text/javascript">
+(function(){
+var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
+i.src = "https://cdn.curator.io/published/cd33a21b-e808-46dc-9676-e6530d263a8b.js";
+e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+})();
+</script>
+
+{% endblock local_block %}
