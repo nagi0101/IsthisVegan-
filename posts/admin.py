@@ -13,8 +13,44 @@ class PostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "title",
-        "like",
         "category",
     ]
 
-    inlines = [PostImage, PostComment]
+    filter_horizontal = [
+        "like",
+    ]
+
+
+@admin.register(RatedPost)
+class RatedPostAdmin(admin.ModelAdmin):
+    list_display = [
+        "user",
+        "title",
+        "rate",
+        "category",
+    ]
+
+    filter_horizontal = [
+        "like",
+    ]
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = [
+        "__str__",
+        "user",
+        "post",
+    ]
+
+    filter_horizontal = [
+        "like",
+    ]
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = [
+        "post",
+        "image_tag",
+    ]

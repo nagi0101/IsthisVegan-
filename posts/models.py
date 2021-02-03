@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
+from django.utils.html import mark_safe
 
 # Create your models here.
 
@@ -25,7 +26,7 @@ class Post(AbstractTimestamp):
     )
     title = models.CharField(max_length=120)
     content = models.TextField()
-    like = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField("users.User", blank=True, related_name="likedPosts")
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
 
     def __str__(self):
@@ -45,11 +46,21 @@ class Image(AbstractTimestamp):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=upload_to_uuid)
 
+    def image_tag(self):
+        return mark_safe(f'<img src="{self.image.url}" width="50px" />')
+
+    image_tag.short_description = "Image"
+
 
 class Comment(AbstractTimestamp):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="comments"
     )
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-    like = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField(
+        "users.User", blank=True, related_name="likedComments"
+    )
     content = models.TextField()
+
+    def __str__(self):
+        return f"{self.user.nickname} - {self.post.title}"
