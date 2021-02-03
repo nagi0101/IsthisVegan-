@@ -2,7 +2,7 @@ from uuid import uuid4
 
 
 def upload_to_uuid(instance, filename):
-    uuid_name = uuid4.hex
+    uuid_name = uuid4().hex
     ext = filename.split(".")[-1]
 
     return "/".join(

@@ -28,6 +28,9 @@ class Post(AbstractTimestamp):
     like = models.PositiveIntegerField(default=0)
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
 
+    def __str__(self):
+        return f"{self.user} : {self.title}"
+
 
 class RatedPost(Post):
     rate = models.PositiveSmallIntegerField(
@@ -49,3 +52,4 @@ class Comment(AbstractTimestamp):
     )
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     like = models.PositiveIntegerField(default=0)
+    content = models.TextField()
