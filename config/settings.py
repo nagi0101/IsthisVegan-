@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third Party apps
     "django_seed",
+    
+    "ckeditor",
+    "ckeditor_uploader",
+    
     # User apps
     "core",
     "users",
@@ -134,3 +138,7 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_IMAGE_BACKEND = "pillow"

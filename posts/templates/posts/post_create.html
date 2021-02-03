@@ -1,0 +1,8 @@
+<form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+  {% csrf_token %}
+
+  {{form.media}}    
+  {{form.as_p}}
+
+  <input type="submit" value="저장하기" />
+</form>
