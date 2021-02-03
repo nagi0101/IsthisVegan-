@@ -12,8 +12,11 @@ class PostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "title",
-        "like",
         "category",
+    ]
+
+    filter_horizontal = [
+        "like",
     ]
 
 
@@ -22,9 +25,12 @@ class RatedPostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "title",
-        "like",
         "rate",
         "category",
+    ]
+
+    filter_horizontal = [
+        "like",
     ]
 
 
@@ -34,6 +40,10 @@ class CommentAdmin(admin.ModelAdmin):
         "__str__",
         "user",
         "post",
+    ]
+
+    filter_horizontal = [
+        "like",
     ]
 
 

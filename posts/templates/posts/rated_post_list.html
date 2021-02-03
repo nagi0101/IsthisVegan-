@@ -8,7 +8,7 @@
                 <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
                 <span>{{post.title}}</span>
                 <span>{{post.user.nickname}}</span>
-                <span><i class="fas fa-heart"></i> {{post.like}}</span>
+                <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
                 <span class="post_rate">{{post.rate}}</span>
                 </a>
             </li>

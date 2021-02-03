@@ -1,10 +1,11 @@
 {% extends 'posts/layout.html' %}
+{% load static %}
 
 {% block local_block %}
     <div class="">
         <h1>{{post.title}}</h1>
         <span>{{post.user.nickname}}</span>
-        <button>
+        <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
             {% if post in user.bookmarks.all %}
                 <i class="fas fa-bookmark"></i>
             {% else %}
@@ -13,23 +14,40 @@
         </button>
         {% if user == post.user %}
             <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
+            <button><i class="fas fa-edit"></i><span>수정</span></button>
         {% endif %}
         <hr>
         <div class="">
             {{post.content | linebreaks}}
         </div>
         <br>
-        <span><i class="fas fa-heart"></i>{{post.like}}</span>
+        <button id="post_like_btn" onClick="onPostLikeBtnClicked({{post.pk}})">
+            {% if user in post.like.all %}
+                <i class="fas fa-heart"></i>
+            {% else %}
+                <i class="far fa-heart"></i>
+            {% endif %}
+        </button><span id="post_like_count">{{post.like.all|length}}</span>
     </div>
     <hr>
+    <div class="comment_create_area">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <button>댓글 입력</button>
+    </div>
     <div class="comments_container">
         <h3>Comments</h3>
         <ul>
             {% for comment in comments %}
-                <li>
+                <li id="comment-{{comment.pk}}">
                     <h4 class="">{{comment.user.nickname}}</h4>
                     <p>{{comment.content}}</p>
-                    <button><i class="far fa-heart"></i></button> <span>{{comment.like}}</span>
+                    <button class="comment_like_btn" onClick="onCommentLikeBtnClicked({{comment.pk}})">
+                        {% if user in comment.like.all %}
+                            <i class="fas fa-heart"></i>
+                        {% else %}
+                            <i class="far fa-heart"></i>
+                        {% endif %}
+                    </button> <span class="comment_like_count">{{comment.like.all|length}}</span>
                     {% if user == comment.user %}
                         <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
                     {% endif %}
@@ -37,4 +55,13 @@
             {% endfor %}
         </ul>
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.xsrfCookieName = "csrftoken";
+        axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    </script>
+    <script src="{% static 'js/toggleBookmark.js' %}"></script>
+    <script src="{% static 'js/togglePostLike.js' %}"></script>
+    <script src="{% static 'js/toggleCommentLike.js' %}"></script>
 {% endblock local_block %}

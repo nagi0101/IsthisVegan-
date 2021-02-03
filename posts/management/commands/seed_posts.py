@@ -18,14 +18,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        users = list(User.objects.all())
         number = options.get("number")
         seeder = Seed.seeder()
         seeder.add_entity(
             Post,
             number,
             {
-                "user": lambda x: random.choice(list(User.objects.all())),
-                "like": lambda x: random.randint(0, 100),
+                "user": lambda x: random.choice(users),
                 "category": lambda x: random.choice(["INFO", "COMMUNICATE"]),
             },
         )
@@ -33,8 +33,7 @@ class Command(BaseCommand):
             RatedPost,
             number,
             {
-                "user": lambda x: random.choice(list(User.objects.all())),
-                "like": lambda x: random.randint(0, 100),
+                "user": lambda x: random.choice(users),
                 "rate": lambda x: random.randint(1, 10),
                 "category": lambda x: random.choice(["VISIT", "BUY"]),
             },
@@ -43,8 +42,7 @@ class Command(BaseCommand):
             Comment,
             number * 5,
             {
-                "user": lambda x: random.choice(list(User.objects.all())),
-                "like": lambda x: random.randint(0, 100),
+                "user": lambda x: random.choice(users),
             },
         )
         seeder.execute()

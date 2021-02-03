@@ -7,9 +7,6 @@ function rateToStar(rate_list) {
     fullStarNum = Math.floor(fullStarNum);
     halfStarNum = number - fullStarNum * 2;
 
-    console.log(fullStarNum);
-    console.log(halfStarNum);
-
     starContainer = document.createElement("span");
     for (let i = 0; i < fullStarNum; i++) {
       fullStar = document.createElement("i");
