@@ -7,24 +7,25 @@ from core.utils import upload_to_uuid
 
 
 class Post(AbstractTimestamp):
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="posts")
     title = models.CharField(max_length=120)
     content = models.TextField()
+    like = models.PositiveIntegerField(default=0)
+
+class RatedPost(Post):
     rate = models.PositiveSmallIntegerField(
-        default=5,
         validators=[
             MinValueValidator(1),
             MaxValueValidator(10),
         ],
     )
-    like = models.PositiveIntegerField(default=0)
-
 
 class Image(AbstractTimestamp):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=upload_to_uuid)
 
 
 class Comment(AbstractTimestamp):
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    recommend = models.PositiveIntegerField(default=0)
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    like = models.PositiveIntegerField(default=0)
