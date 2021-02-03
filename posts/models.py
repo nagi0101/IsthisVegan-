@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
+from django.utils.html import mark_safe
 
 # Create your models here.
 
@@ -45,6 +46,11 @@ class Image(AbstractTimestamp):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=upload_to_uuid)
 
+    def image_tag(self):
+        return mark_safe(f'<img src="{self.image.url}" width="50px" />')
+
+    image_tag.short_description = "Image"
+
 
 class Comment(AbstractTimestamp):
     user = models.ForeignKey(
@@ -53,3 +59,6 @@ class Comment(AbstractTimestamp):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     like = models.PositiveIntegerField(default=0)
     content = models.TextField()
+
+    def __str__(self):
+        return f"{self.user.nickname} - {self.post.title}"
