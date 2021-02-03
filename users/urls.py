@@ -1,5 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from .views import login
 
 app_name = "users"
 
-urlpatterns = []
+urlpatterns = [
+    path('', login, name='login'),
+
+]
