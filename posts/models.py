@@ -26,7 +26,7 @@ class Post(AbstractTimestamp):
     title = models.CharField(max_length=120)
     content = models.TextField()
     like = models.PositiveIntegerField(default=0)
-    category = models.CharField(select=CATEGORY_SELECT, max_length=20)
+    category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
 
 
 class RatedPost(Post):
