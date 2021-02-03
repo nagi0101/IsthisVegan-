@@ -6,7 +6,7 @@
         <h1>{{post.title}}</h1>
         <span>{{post.user.nickname}}</span>
         <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
-            {% if post in user.bookmarks.all %}
+            {% if bookmarked %}
                 <i class="fas fa-bookmark"></i>
             {% else %}
                 <i class="far fa-bookmark"></i>

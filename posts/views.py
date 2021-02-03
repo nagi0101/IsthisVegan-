@@ -33,15 +33,18 @@ def post_detail(request, pk):
         elif category == "VISIT" or category == "BUY":
             post = get_object_or_404(RatedPost, pk=pk)
         comments = post.comments.all()
+        bookmarked = request.user.bookmarks.filter(pk=pk).exists()
         ctx = {
             "post": post,
             "category": category,
             "comments": comments,
+            "bookmarked": bookmarked,
         }
         if category == "INFO" or category == "COMMUNICATE":
             return render(request, "posts/post_detail.html", ctx)
         elif category == "VISIT" or category == "BUY":
             return render(request, "posts/rated_post_detail.html", ctx)
+
 
 def on_bookmark_btn_clicked(request):
     data = json.loads(request.body)
@@ -97,12 +100,12 @@ def post_create(request):
             form = PostForm()
         else:
             form = RatedPostForm()
-        
+
         ctx = {
             "form": form,
             "category": category,
         }
-        return render(request, 'posts/post_create.html', ctx)
+        return render(request, "posts/post_create.html", ctx)
     else:
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm(request.POST)
@@ -120,5 +123,5 @@ def post_create(request):
                 ratedpost.user = request.user
                 ratedpost.category = category
                 ratedpost.save()
-            
-        return redirect('http://127.0.0.1:8000/posts/?category='+category)
+
+        return redirect("http://127.0.0.1:8000/posts/?category=" + category)
