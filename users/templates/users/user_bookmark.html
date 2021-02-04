@@ -1,0 +1,12 @@
+{% extends 'posts/layout.html' %} {% block local_block %}
+<ul>
+  {% for bookmark in bookmarks %}
+  <li>
+    <a
+      href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}"
+      >{{ bookmark.title }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% endblock local_block %}
