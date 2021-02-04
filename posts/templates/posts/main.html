@@ -6,7 +6,10 @@
         <ul>
             <a href="">이건?비건!</a>
             <!--유진아 마이페이지 잘 연결되는지 확인하려고 이거 내가 추가했어!! 놀라지말길-->
+            {% if user.is_authenticated %}
             <a href="{% url 'users:user_page' pk %}">마이페이지</a>
+            {% else %}
+            {% endif %}
         </ul>
     </nav>
     

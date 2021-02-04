@@ -134,8 +134,6 @@ def main(request):
         pk=request.user.id 
         ctx = {
             "posts": posts,
-            "pk":pk
-         
+            "pk":pk 
         }
-
         return render(request, 'posts/main.html', ctx)
