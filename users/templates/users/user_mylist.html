@@ -1,0 +1,12 @@
+{% extends 'posts/layout.html' %} {% block local_block %}
+<ul>
+  {% for mylist in mylists %}
+  <li>
+    <a
+      href="{% url 'posts:post_detail' mylist.pk %}?category={{mylist.category}}"
+      >{{ mylist.title }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% endblock local_block %}
