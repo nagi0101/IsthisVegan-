@@ -162,7 +162,6 @@ def post_create(request):
 
 
 def main(request):
-<<<<<<< HEAD
         posts = Post.objects.all()
         #유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
         pk=request.user.id 
@@ -171,11 +170,3 @@ def main(request):
             "pk":pk 
         }
         return render(request, 'posts/main.html', ctx)
-=======
-    posts = Post.objects.all()
-    ctx = {
-        "posts": posts,
-    }
-
-    return render(request, "posts/main.html", ctx)
->>>>>>> post_detail
