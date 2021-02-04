@@ -1,0 +1,6 @@
+{% extends 'posts/layout.html' %} {% block local_block %}
+<h2>{{person.nickname}}의 페이지</h2>
+<br />
+<a href="{% url 'users:user_bookmark' person.pk %}">북마크</a>
+<a href="{% url 'users:user_mylist' person.pk %}">내가 쓴 글</a>
+{% endblock local_block %}
