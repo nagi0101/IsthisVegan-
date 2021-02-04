@@ -32,7 +32,7 @@
     <hr>
     <div class="comment_create_area">
         <textarea name="" id="" cols="30" rows="10"></textarea>
-        <button>댓글 입력</button>
+        <button onClick="onCommentCreateBtnClicked({{post.pk}}, '{{category}}')">댓글 입력</button>
     </div>
     <div class="comments_container">
         <h3>Comments</h3>
@@ -64,4 +64,5 @@
     <script src="{% static 'js/toggleBookmark.js' %}"></script>
     <script src="{% static 'js/togglePostLike.js' %}"></script>
     <script src="{% static 'js/toggleCommentLike.js' %}"></script>
+    <script src="{% static 'js/createComment.js' %}"></script>
 {% endblock local_block %}

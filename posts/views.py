@@ -92,6 +92,40 @@ def on_comment_like_btn_clicked(request):
     return JsonResponse(ctx)
 
 
+def comment_create(request):
+    data = json.loads(request.body)
+    postPk = data["postPk"]
+    content = data["content"]
+    category = data["category"]
+
+    if category == "INFO" or category == "COMMUNICATE":
+        post = get_object_or_404(Post, pk=postPk)
+    elif category == "VISIT" or category == "BUY":
+        post = get_object_or_404(RatedPost, pk=postPk)
+
+    newComment = Comment(
+        post=post, object_id=postPk, content=content, user=request.user
+    )
+    newComment.save()
+
+    comments = post.comments.all()
+    # comments = list(comments.values())
+    commentList = []
+    for comment in comments:
+        aComment = {
+            "id": comment.id,
+            "nickname": comment.user.nickname,
+            "user_id": comment.user.id,
+            "content": comment.content,
+            "written_by_user": comment.user == request.user,
+            "liked": comment.like.filter(pk=request.user.pk).exists(),
+            "liked_total": len(comment.like.all()),
+        }
+        commentList.append(aComment)
+
+    return JsonResponse(commentList, safe=False)
+
+
 def post_create(request):
     category = request.GET["category"]
 
@@ -127,12 +161,10 @@ def post_create(request):
         return redirect("http://127.0.0.1:8000/posts/?category=" + category)
 
 
-        
 def main(request):
-        posts = Post.objects.all()
-        ctx = {
-            "posts": posts,
-         
-        }
+    posts = Post.objects.all()
+    ctx = {
+        "posts": posts,
+    }
 
-        return render(request, 'posts/main.html', ctx)
+    return render(request, "posts/main.html", ctx)
