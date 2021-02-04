@@ -10,9 +10,11 @@ def post_list(request):
         category = request.GET["category"]
 
         if category == "INFO" or category == "COMMUNICATE":
-            posts = Post.objects.filter(category=category)
+            posts = Post.objects.filter(category=category).order_by("-created_at")[:50]
         else:
-            posts = RatedPost.objects.filter(category=category)
+            posts = RatedPost.objects.filter(category=category).order_by("-created_at")[
+                :50
+            ]
 
         ctx = {
             "posts": posts,
@@ -23,6 +25,57 @@ def post_list(request):
             return render(request, "posts/post_list.html", ctx)
         else:
             return render(request, "posts/rated_post_list.html", ctx)
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+        page = data["page"]
+        category = data["category"]
+        first_id = data["FIRST_POST_ID"]
+        post_per_page = data["POST_PER_PAGE"]
+
+        postList = []
+        if category == "INFO" or category == "COMMUNICATE":
+            first_post = get_object_or_404(Post, pk=first_id)
+            posts = (
+                Post.objects.filter(category=category)
+                .filter(created_at__lte=first_post.created_at)
+                .order_by("-created_at")[
+                    post_per_page * page : post_per_page * (page + 1)
+                ]
+            )
+
+            for post in posts:
+                aPost = {
+                    "id": post.id,
+                    "nickname": post.user.nickname,
+                    "title": post.title,
+                    "liked_total": len(post.like.all()),
+                }
+                postList.append(aPost)
+
+        elif category == "VISIT" or category == "BUY":
+            first_post = get_object_or_404(RatedPost, pk=first_id)
+            posts = (
+                RatedPost.objects.filter(category=category)
+                .filter(created_at__lte=first_post.created_at)
+                .order_by("-created_at")[
+                    post_per_page * page : post_per_page * (page + 1)
+                ]
+            )
+
+            for post in posts:
+                aPost = {
+                    "id": post.id,
+                    "nickname": post.user.nickname,
+                    "title": post.title,
+                    "liked_total": len(post.like.all()),
+                    "rate": post.rate,
+                }
+                postList.append(aPost)
+
+        posts_list = list(posts.values())
+
+        return JsonResponse(postList, safe=False)
 
 
 def post_detail(request, pk):

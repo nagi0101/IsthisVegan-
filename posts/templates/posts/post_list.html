@@ -1,13 +1,14 @@
 {% extends 'posts/layout.html' %}
+{% load static %}
 
 {% block local_block %}
-    <ul>
+    <ul class="posts">
         {% for post in posts %}
-            <li>
+            <li data-post-id="{{post.pk}}" class="post">
                 <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
                 <span>{{post.title}}</span>
                 <span>{{post.user.nickname}}</span>
-                <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                <span><i class="fas fa-heart"></i><span>{{post.like.all|length}}</span></span>
                 </a>
             </li>
         {% endfor %}
@@ -15,4 +16,11 @@
 
     <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.xsrfCookieName = "csrftoken";
+        axios.defaults.xsrfHeaderName = "X-CSRFToken";
+        const category = "{{category}}"
+    </script>
+    <script src="{% static 'js/infiniteScroll.js' %}"></script>
 {% endblock local_block %}
