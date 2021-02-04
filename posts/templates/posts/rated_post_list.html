@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block local_block %}
+    <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
     <ul class="posts">
         {% for post in posts %}
             <li data-post-id="{{post.pk}}" class="post">
@@ -15,7 +16,6 @@
         {% endfor %}
     </ul>
 
-    <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
