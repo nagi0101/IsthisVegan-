@@ -29,5 +29,10 @@ urlpatterns = [
         views.comment_create,
         name="comment_create",
     ),
+    path(
+        "commentdelete/",
+        views.comment_delete,
+        name="comment_delete",
+    ),
     path("main/", views.main, name="post_main"),
 ]
