@@ -126,6 +126,37 @@ def comment_create(request):
     return JsonResponse(commentList, safe=False)
 
 
+def comment_delete(request):
+    data = json.loads(request.body)
+    commentPk = data["commentPk"]
+
+    comment = get_object_or_404(Comment, pk=commentPk)
+    # 요청자가 댓글 작성자가 아닌 경우 False return
+    if comment.user != request.user:
+        return JsonResponse(False, safe=False)
+
+    post = comment.post
+
+    comment.delete()
+
+    comments = post.comments.all()
+    # comments = list(comments.values())
+    commentList = []
+    for comment in comments:
+        aComment = {
+            "id": comment.id,
+            "nickname": comment.user.nickname,
+            "user_id": comment.user.id,
+            "content": comment.content,
+            "written_by_user": comment.user == request.user,
+            "liked": comment.like.filter(pk=request.user.pk).exists(),
+            "liked_total": len(comment.like.all()),
+        }
+        commentList.append(aComment)
+
+    return JsonResponse(commentList, safe=False)
+
+
 def post_create(request):
     category = request.GET["category"]
 
@@ -160,12 +191,13 @@ def post_create(request):
                 ratedpost.category = category
                 ratedpost.save()
                 pk = ratedpost.id
-        
-        return redirect(f'/detail/{pk}?category={category}')
+
+        return redirect(f"/detail/{pk}?category={category}")
+
 
 def post_update(request, pk):
     category = request.GET["category"]
-    
+
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE"]:
             post = get_object_or_404(Post, id=pk)
@@ -173,7 +205,7 @@ def post_update(request, pk):
         else:
             post = get_object_or_404(RatedPost, id=pk)
             form = RatedPostForm(instance=post)
-        
+
         ctx = {
             "form": form,
             "category": category,
@@ -189,25 +221,24 @@ def post_update(request, pk):
 
         if form.is_valid():
             post.save()
-        return redirect(f'/detail/{pk}?category={category}')
+        return redirect(f"/detail/{pk}?category={category}")
 
-def post_delete(request,pk):
+
+def post_delete(request, pk):
     category = request.GET["category"]
-    
+
     if category in ["INFO", "COMMUNICATE"]:
         post = get_object_or_404(Post, id=pk)
     else:
         post = get_object_or_404(RatedPost, id=pk)
 
     post.delete()
-    return redirect(f'/posts/?category={category}')
+    return redirect(f"/posts/?category={category}")
+
 
 def main(request):
-        posts = Post.objects.all()
-        #유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
-        pk=request.user.id 
-        ctx = {
-            "posts": posts,
-            "pk":pk 
-        }
-        return render(request, 'posts/main.html', ctx)
+    posts = Post.objects.all()
+    # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
+    pk = request.user.id
+    ctx = {"posts": posts, "pk": pk}
+    return render(request, "posts/main.html", ctx)

@@ -50,7 +50,7 @@
                         {% endif %}
                     </button> <span class="comment_like_count">{{comment.like.all|length}}</span>
                     {% if user == comment.user %}
-                        <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
+                        <button onClick="onCommentDeleteBtnClicked({{comment.pk}})"><i class="fas fa-trash-alt"></i><span>삭제</span></button>
                     {% endif %}
                 </li>
             {% endfor %}
@@ -65,5 +65,7 @@
     <script src="{% static 'js/toggleBookmark.js' %}"></script>
     <script src="{% static 'js/togglePostLike.js' %}"></script>
     <script src="{% static 'js/toggleCommentLike.js' %}"></script>
+    <script src="{% static 'js/modifyComment.js' %}"></script>
+    <script src="{% static 'js/deleteComment.js' %}"></script>
     <script src="{% static 'js/createComment.js' %}"></script>
 {% endblock local_block %}
