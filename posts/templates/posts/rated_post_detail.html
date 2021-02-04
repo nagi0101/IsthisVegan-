@@ -16,6 +16,7 @@
             <button><a href="{% url 'posts:post_delete' post.pk %}?category={{category}}"><i class="fas fa-trash-alt"></i><span>삭제</span></a></button>
             <button><a href="{% url 'posts:post_update' post.pk %}?category={{category}}"><i class="fas fa-edit"></i><span>수정</span></a></button>
         {% endif %}
+        <button><a href="{% url 'posts:post_list' %}?category={{category}}">목록</a></button>
         <hr>
         <div class="">
             {{post.content|safe}}
