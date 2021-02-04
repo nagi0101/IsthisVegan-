@@ -141,6 +141,7 @@ def post_create(request):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
+        pk = 0
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm(request.POST)
 
@@ -149,6 +150,7 @@ def post_create(request):
                 post.user = request.user
                 post.category = category
                 post.save()
+                pk = post.id
         else:
             form = RatedPostForm(request.POST)
 
@@ -157,12 +159,50 @@ def post_create(request):
                 ratedpost.user = request.user
                 ratedpost.category = category
                 ratedpost.save()
+                pk = ratedpost.id
+        
+        return redirect(f'/detail/{pk}?category={category}')
 
-        return redirect("http://127.0.0.1:8000/posts/?category=" + category)
+def post_update(request, pk):
+    category = request.GET["category"]
+    
+    if request.method == "GET":
+        if category in ["INFO", "COMMUNICATE"]:
+            post = get_object_or_404(Post, id=pk)
+            form = PostForm(instance=post)
+        else:
+            post = get_object_or_404(RatedPost, id=pk)
+            form = RatedPostForm(instance=post)
+        
+        ctx = {
+            "form": form,
+            "category": category,
+        }
+        return render(request, "posts/post_create.html", ctx)
+    else:
+        if category in ["INFO", "COMMUNICATE"]:
+            post = get_object_or_404(Post, id=pk)
+            form = PostForm(request.POST, request.FILES, instance=post)
+        else:
+            post = get_object_or_404(RatedPost, id=pk)
+            form = RatedPostForm(request.POST, request.FILES, instance=post)
 
+        if form.is_valid():
+            post.save()
+        return redirect(f'/detail/{pk}?category={category}')
+
+def post_delete(request,pk):
+    category = request.GET["category"]
+    
+    if category in ["INFO", "COMMUNICATE"]:
+        post = get_object_or_404(Post, id=pk)
+    else:
+        post = get_object_or_404(RatedPost, id=pk)
+
+    post.delete()
+    return redirect(f'/posts/?category={category}')
 
 def main(request):
-<<<<<<< HEAD
         posts = Post.objects.all()
         #유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
         pk=request.user.id 
@@ -171,11 +211,3 @@ def main(request):
             "pk":pk 
         }
         return render(request, 'posts/main.html', ctx)
-=======
-    posts = Post.objects.all()
-    ctx = {
-        "posts": posts,
-    }
-
-    return render(request, "posts/main.html", ctx)
->>>>>>> post_detail
