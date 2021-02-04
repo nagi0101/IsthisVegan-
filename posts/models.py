@@ -61,4 +61,4 @@ class Comment(AbstractTimestamp):
     content = models.TextField()
 
     def __str__(self):
-        return f"{self.user.nickname} - {self.post.title}"
+        return f"{self.user.nickname} - {self.post}"
