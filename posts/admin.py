@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Post, RatedPost, Comment
 
+
 class PostComment(admin.TabularInline):
     model = Comment
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -34,7 +36,6 @@ class RatedPostAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = [
-        "__str__",
         "user",
         "post",
     ]
