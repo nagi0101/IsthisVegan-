@@ -13,8 +13,8 @@
             {% endif %}
         </button>
         {% if user == post.user %}
-            <button><i class="fas fa-trash-alt"></i><span>삭제</span></button>
-            <button><i class="fas fa-edit"></i><span>수정</span></button>
+            <button><a href="{% url 'posts:post_delete' post.pk %}?category={{category}}"><i class="fas fa-trash-alt"></i><span>삭제</span></a></button>
+            <button><a href="{% url 'posts:post_update' post.pk %}?category={{category}}"><i class="fas fa-edit"></i><span>수정</span></a></button>
         {% endif %}
         <hr>
         <div class="">
