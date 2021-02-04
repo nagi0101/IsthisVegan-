@@ -1,0 +1,11 @@
+{% extends 'posts/layout.html' %} {% block local_block %}
+<h1 class="text-center">회원정보 변경</h1>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+    {{ user_change_form }}
+  </table>
+  <a href="{% url 'users:user_password' user.pk %}">비밀번호 변경</a>
+  <input type="submit" value="저장" />
+</form>
+{% endblock local_block %}
