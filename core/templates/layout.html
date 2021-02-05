@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/9ada8679dc.js" crossorigin="anonymous"></script>
+    {% block head_block %}
+    {% endblock head_block %}
+</head>
+<body>
+    <header>
+        <a href="{% url 'posts:post_main' %}"><div class="loge">이건? 비건!</div></a>
+    </header>
+
+    <div class="main_container">
+        {% block global_block %}
+        {% endblock global_block %}
+    </div>
+
+    <footer>
+        footer
+    </footer>
+</body>
+</html>

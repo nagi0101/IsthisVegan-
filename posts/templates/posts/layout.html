@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://kit.fontawesome.com/9ada8679dc.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    {% block local_block %}
-    {% endblock local_block %}
-    <form class="form-inline my-2 my-lg-0" action="{% url 'posts:search' %}" method="post">
-         {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block head_block %}
+{% endblock head_block %}
+
+{% block global_block %}
+    <div class="local_container">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'posts:search' %}" method="post">
+             {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        {% block local_block %}
+        {% endblock local_block %}
+    </div>
+{% endblock global_block %}
