@@ -55,6 +55,7 @@ def user_password(request,pk):
         password_change_form = PasswordChangeForm(request.user, request.POST)
         if password_change_form.is_valid():
             password_change_form.save()
+            request.user.save()
         return redirect('users:user_page',pk)
       else:
         password_change_form = PasswordChangeForm(request.user)
