@@ -10,3 +10,4 @@ class RatedPostForm(forms.ModelForm):
     class Meta:
         model = RatedPost
         fields =  ['title', 'content', 'rate',]
+
