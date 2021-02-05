@@ -23,10 +23,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("posts.urls")),
     path("users/", include("users.urls")),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('oauth/', users.views.oauth, name='oauth'),
-    path('login/', users.views.login, name='slogin'),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("accounts/", include("allauth.urls")),
+    path("oauth/", users.views.oauth, name="oauth"),
+    path("login/", users.views.login, name="slogin"),
+    path("search", include("search.urls")),
 ]
 
 if settings.DEBUG:
