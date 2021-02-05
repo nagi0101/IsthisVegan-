@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://kit.fontawesome.com/9ada8679dc.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    {% block local_block %}
-    {% endblock local_block %}
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block global_block %}
+    <div class="local_container">
+        {% block local_block %}
+        {% endblock local_block %}
+    </div>
+{% endblock global_block %}

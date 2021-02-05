@@ -3,6 +3,7 @@ const FIRST_POST_ID = document.querySelector(".posts").firstElementChild.dataset
   .postId;
 const POSTS_CONTAINER = document.querySelector(".posts");
 const POSTS_URL = "/posts/";
+// const POSTS_URL = "{% url 'post_list' %}";
 let fetching = false;
 let page = 1;
 
