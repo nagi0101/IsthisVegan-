@@ -18,6 +18,7 @@
             {{user.username}} 님이 로그인 중
 
             {% else %}
+            <a href="/accounts/login">로그인</a>
             <a href="{% provider_login_url "google" %}">구글 로그인</a>
             <a href="{% provider_login_url "naver" %}">네이버 로그인</a>
             <a href="{% url 'kakao_login' %}">카카오 로그인</a>
