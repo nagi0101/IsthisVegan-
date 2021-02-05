@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path, include
-from .views import login
+from .views import login, kakao_login
+from django.contrib.auth import views as auth_views
 
 app_name = "users"
 

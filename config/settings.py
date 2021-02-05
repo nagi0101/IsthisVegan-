@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.kakao',
 
 ]
 
@@ -170,3 +172,12 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {'access_type': 'online', }
     }
 }
+
+LOGIN_REDIRECT_URL = '/login' # 로그인 후 리디렉션할 페이지
+ACCOUNT_LOGOUT_REDIRECT_URL = '/login'  # 로그아웃 후 리디렉션 할 페이지
+ACCOUNT_LOGOUT_ON_GET = True # 로그아웃 버튼 클릭 시 자동 로그아웃
+
+ACCOUNT_EMAIL_REQUIRED= True
+SOCIALACCOUNT_AUTO_SIGNUP = False
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupForm'
