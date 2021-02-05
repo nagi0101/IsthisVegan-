@@ -1,0 +1,8 @@
+{% extends 'posts/layout.html' %} {% block local_block %}
+<h1 class="text-center">회원 탈퇴</h1>
+<form method="POST">
+  {% csrf_token %}
+  <p>정말로 이건비건을 탈퇴하시겠습니까?</p>
+  <input type="submit" value="Yes" />
+</form>
+{% endblock local_block %}

@@ -8,6 +8,7 @@
 </ul>
 
 <a href="{% url 'users:user_edit' person.pk %}">프로필 편집</a>
+<a href="{% url 'users:user_delete' person.pk %}">회원 탈퇴</a>
 <br />
 <a href="{% url 'users:user_bookmark' person.pk %}">북마크</a>
 <a href="{% url 'users:user_mylist' person.pk %}">내가 쓴 글</a>

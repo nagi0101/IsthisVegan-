@@ -44,11 +44,12 @@ def user_edit(request,pk):
             ctx = {'user_change_form':user_change_form}
             return render(request,'users/user_edit.html',ctx)
 
-# def user_delete(request,pk):
-#       if request.method == 'POST':
-#             request.user.delete()
-#             return redirect()
-      #   return render(request, 'users/user_delete.html')
+def user_delete(request,pk):
+    if request.method == 'POST':
+        request.user.delete()
+        return redirect('posts:post_main')
+    return render(request, 'users/user_delete.html')
+
 
 def user_password(request,pk):
       if request.method == 'POST':
@@ -56,7 +57,7 @@ def user_password(request,pk):
         if password_change_form.is_valid():
             password_change_form.save()
             request.user.save()
-        return redirect('users:user_page',pk)
+        return redirect('posts:post_main')
       else:
         password_change_form = PasswordChangeForm(request.user)
         user = request.user
