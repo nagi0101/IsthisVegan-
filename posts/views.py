@@ -1,14 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from .models import Post, RatedPost, Comment
 import json
 from .forms import PostForm, RatedPostForm
 from django.db.models import Q
+
 # Create your views here.
 def post_list(request):
     if request.method == "GET":
         category = request.GET["category"]
 
+        # 카테고리에 따라서 Post 또는 RatedPost에서 글을 최초로 50개 불러온다.
         if category == "INFO" or category == "COMMUNICATE":
             posts = Post.objects.filter(category=category).order_by("-created_at")[:50]
         else:
@@ -17,12 +20,10 @@ def post_list(request):
             ]
 
             # 입력 파라미터
-       
-       
+
         ctx = {
             "posts": posts,
             "category": category,
-            
         }
 
         if category == "INFO" or category == "COMMUNICATE":
@@ -38,8 +39,17 @@ def post_list(request):
         post_per_page = data["POST_PER_PAGE"]
 
         postList = []
+
+        # 카테고리가 무엇이냐에 따라서 Post 또는 RatedPost에서
+        # 추가적으로 불러올 글을 postList에 추가한다.
         if category == "INFO" or category == "COMMUNICATE":
+            # 클라이언트가 첫 번째로 로드한 글을 찾는다.
+            # 그 글부터 n 번째의 글을 계산하여 불러온다.
             first_post = get_object_or_404(Post, pk=first_id)
+            # 한 카테고리 안의 글만 불러온 후, first_post보다
+            # 일찍 쓰여진 글을 불러온다. 해당 글들을 created_at
+            # 기준으로 역순으로 정렬한 후, page * post_per_page부터
+            # (page + 1) * post_per_page 에 해당하는 글을 불러온다.
             posts = (
                 Post.objects.filter(category=category)
                 .filter(created_at__lte=first_post.created_at)
@@ -58,6 +68,7 @@ def post_list(request):
                 postList.append(aPost)
 
         elif category == "VISIT" or category == "BUY":
+            # 위의 if 블록의 주석 참고
             first_post = get_object_or_404(RatedPost, pk=first_id)
             posts = (
                 RatedPost.objects.filter(category=category)
@@ -77,11 +88,12 @@ def post_list(request):
                 }
                 postList.append(aPost)
 
-        posts_list = list(posts.values())
+        # posts_list = list(posts.values())
 
         return JsonResponse(postList, safe=False)
 
 
+@login_required
 def post_detail(request, pk):
     if request.method == "GET":
         category = request.GET["category"]
@@ -90,6 +102,7 @@ def post_detail(request, pk):
         elif category == "VISIT" or category == "BUY":
             post = get_object_or_404(RatedPost, pk=pk)
         comments = post.comments.all()
+        # 로그인 된 유저가 해당 글을 bookmark 했는가?
         bookmarked = request.user.bookmarks.filter(pk=pk).exists()
         ctx = {
             "post": post,
@@ -107,6 +120,7 @@ def on_bookmark_btn_clicked(request):
     data = json.loads(request.body)
     postPk = data["postPk"]
     post = get_object_or_404(Post, pk=postPk)
+    # 로그인 된 유저가 해당 글을 bookmark 했는가?
     bookmarked = request.user.bookmarks.filter(pk=postPk).exists()
     if bookmarked:
         request.user.bookmarks.remove(post)
@@ -293,44 +307,41 @@ def post_delete(request, pk):
     return redirect(f"/posts/?category={category}")
 
 
-
-        
 def main(request):
-        
-        posts = Post.objects.all().order_by('-title')
-       
-         #유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
-        pk=request.user.id 
 
-        kw = request.GET.get('kw', '')  # 검색어
+    posts = Post.objects.all().order_by("-title")
 
-        # 조회
-        post_list = Post.objects.order_by('-title')
-        if kw:
-            post_list = post_list.filter(
-                Q(title__icontains=kw) |  # 제목검색
-                Q(content__icontains=kw) |  # 내용검색
-                Q(user__icontains=kw)   # 질문 글쓴이검색
-            ).distinct()
+    # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
+    pk = request.user.id
 
+    kw = request.GET.get("kw", "")  # 검색어
 
-        
-        ctx = {
-            "posts": posts,
-            "pk": pk,
-            "kw": kw,  
-                    }
+    # 조회
+    post_list = Post.objects.order_by("-title")
+    if kw:
+        post_list = post_list.filter(
+            Q(title__icontains=kw)
+            | Q(content__icontains=kw)  # 제목검색
+            | Q(user__icontains=kw)  # 내용검색  # 질문 글쓴이검색
+        ).distinct()
 
-        return render(request, 'posts/main.html', ctx)
+    ctx = {
+        "posts": posts,
+        "pk": pk,
+        "kw": kw,
+    }
+
+    return render(request, "posts/main.html", ctx)
+
 
 def search(request):
 
-      posts = RatedPost.objects.all().order_by('-id')
+    posts = RatedPost.objects.all().order_by("-id")
 
-      q = request.POST.get('q', "")
+    q = request.POST.get("q", "")
 
-      if q:
-          posts = posts.filter(title__icontains=q)
-          return render(request, 'posts/post_search.html', {'posts':posts, 'q':q})
-      else:
-          return render(request, 'posts/post_search.html')
+    if q:
+        posts = posts.filter(title__icontains=q)
+        return render(request, "posts/post_search.html", {"posts": posts, "q": q})
+    else:
+        return render(request, "posts/post_search.html")
