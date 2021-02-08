@@ -1,25 +1,76 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://kit.fontawesome.com/9ada8679dc.js" crossorigin="anonymous"></script>
-    {% block head_block %}
-    {% endblock head_block %}
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/9ada8679dc.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
+    {% block head_block %} {% endblock head_block %}
+  </head>
+  <body>
     <header>
-        <a href="{% url 'posts:post_main' %}"><div class="loge">이건? 비건!</div></a>
+      <div class="leftwrap">
+        <div class="dropdown">
+          <a href="{% url 'posts:post_main' %}"
+            ><div class="loge">이건?비건!</div></a
+          >
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">알아봐요!</a>
+          <div class="dropdown-content">
+            <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">소통해요!</a>
+          <div class="dropdown-content">
+            <a href="{% url 'posts:post_list' %}?category=COMMUNICATE"
+              >우리 떠들어요!</a
+            >
+            <a href="{% url 'posts:post_list' %}?category=VISIT"
+              >여기 가봤어요!</a
+            >
+            <a href="{% url 'posts:post_list' %}?category=BUY"
+              >이거 사봤어요!</a
+            >
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">함께해요!</a>
+          <div class="dropdown-content">
+            <a href="#">함께 도전해요!</a>
+          </div>
+        </div>
+      </div>
+      <div class="rightwrap">
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+          <a href="{% url 'users:user_page' user.pk %}">마이페이지</a>
+        </div>
+        <div class="dropdown">
+          <a href="/accounts/logout">로그아웃</a>
+        </div>
+        <div class="dropdown">{{user.username}} 님이 로그인 중</div>
+        {% else %}
+        <div class="dropdown">
+          <a href="/accounts/signup">회원가입</a>
+        </div>
+        <div class="dropdown">
+          <a href="{% url 'users:login' %}">로그인</a>
+        </div>
+        {% endif %}
+      </div>
     </header>
 
     <div class="main_container">
-        {% block global_block %}
-        {% endblock global_block %}
+      {% block global_block %} {% endblock global_block %}
     </div>
 
-    <footer>
-        footer
-    </footer>
-</body>
+    <footer>footer</footer>
+  </body>
 </html>
