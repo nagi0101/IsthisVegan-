@@ -1,17 +1,38 @@
 {% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/user_page.css' %}" />
 {% endblock head_block %} {% block local_block %}
-<h2>{{person.nickname}}의 페이지</h2>
-<ul>
-  <li>사용자 이름(id): {{person.username}}</li>
-  <li>성: {{person.last_name}}</li>
-  <li>이름: {{person.first_name}}</li>
-  <li>이메일: {{person.email}}</li>
-</ul>
+<div class="container">
+  <div class="wrap">
+    <h2 class="pagename">{{person.nickname}}의 페이지</h2>
 
-<a href="{% url 'users:user_edit' person.pk %}">프로필 편집</a>
-<a href="{% url 'users:user_delete' person.pk %}">회원 탈퇴</a>
-<br />
-<a href="{% url 'users:user_bookmark' person.pk %}">북마크</a>
-<a href="{% url 'users:user_mylist' person.pk %}">내가 쓴 글</a>
+    <p>
+      사용자 이름(id): {{person.username}}<br />
+      성: {{person.last_name}}<br />
+      이름: {{person.first_name}}<br />
+      이메일: {{person.email}}
+    </p>
+    <br>
+    <div class="wrap2">
+      <div class="miniwrap">
+        <a class="t1" href="{% url 'users:user_edit' person.pk %}"
+          >프로필 편집</a
+        >
+        <a class="t1" href="{% url 'users:user_delete' person.pk %}"
+          >회원 탈퇴</a
+        >
+      </div>
+      </br/>
+      <br/>
+      <div class="miniwrap2">
+        <a class="t1" href="{% url 'users:user_bookmark' person.pk %}"
+          >북마크</a
+        >
+        <a class="t1" href="{% url 'users:user_mylist' person.pk %}"
+          >내가 쓴 글</a
+        >
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
 {% endblock local_block %}
