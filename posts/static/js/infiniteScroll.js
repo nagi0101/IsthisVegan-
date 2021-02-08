@@ -2,7 +2,6 @@ const POST_PER_PAGE = 50;
 const FIRST_POST_ID = document.querySelector(".posts").firstElementChild.dataset
   .postId;
 const LOCAL_CONTAINER = document.querySelector(".local_container");
-const POSTS_CONTAINER = document.getElementsByClassName("posts");
 const POSTS_URL = "/posts/";
 // const POSTS_URL = "{% url 'post_list' %}";
 let fetching = false;
@@ -10,9 +9,9 @@ let page = 1;
 let maxPage = 1;
 
 const modifyPost = (data, mode) => {
-  if (mode === "replace") {
-    const newUl = document.createElement("ul");
-  }
+  let posts_container = document.querySelector(".posts");
+  console.log(mode);
+  const newUl = document.createElement("ul");
   data.forEach((post) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
@@ -46,13 +45,14 @@ const modifyPost = (data, mode) => {
       a.append(post_rate);
     }
     if (mode === "add") {
-      POSTS_CONTAINER.append(li);
+      posts_container.append(li);
     } else if (mode === "replace") {
       newUl.append(li);
     }
   });
   if (mode === "replace") {
-    POSTS_CONTAINER.parentNode.replace(newUl, POSTS_CONTAINER);
+    newUl.className = "posts";
+    posts_container.parentNode.replaceChild(newUl, posts_container);
   }
 };
 
@@ -68,12 +68,13 @@ const sendAxiosRequest = (mode) => {
       data = response.data;
       // 업데이트 할 데이터가 없을 경우 함수를 탈출한다.
       if (!data.length) {
+        console.log(page, "no data!");
         return;
       }
       console.log("update!");
       modifyPost(data, mode);
-      rateToStar();
       page++;
+      rateToStar();
     })
     .catch(function (error) {
       console.log(error);
@@ -101,6 +102,7 @@ const onClickPaginationNode = function (pageClicked) {
   page = pageClicked;
   fetching = true;
   sendAxiosRequest("replace");
+  window.scrollTo(0, 0);
   fetching = false;
 };
 
@@ -111,7 +113,7 @@ const createPagination = () => {
     paginationNode.innerText = index + 1;
     paginationNode.style.cursor = "pointer";
     paginationNode.style.border = "1px solid #eeeeee";
-    paginationNode.onclick = (event) => onClickPaginationNode(index + 1);
+    paginationNode.onclick = (event) => onClickPaginationNode(index);
     paginationContainer.append(paginationNode);
   }
   paginationContainer.style.position = "fixed";
