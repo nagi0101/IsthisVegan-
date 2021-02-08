@@ -1,6 +1,39 @@
 {% extends 'posts/layout.html' %}
+{% load static %}
+
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/main_login.css' %}" />
+{% endblock head_block %}
 
 {% block local_block %}
+    
+    <nav id='top_nav'>
+        <ul>
+            <a href="">이건?비건!</a>
+            <!--유진아 마이페이지 잘 연결되는지 확인하려고 이거 내가 추가했어!! 놀라지말길-->
+            {% if user.is_authenticated %}
+            <a href="{% url 'users:user_page' pk %}">마이페이지</a>
+            
+            <a href="/accounts/logout">로그아웃</a>
+            <br>
+            {{user.username}} 님이 로그인 중
+
+            {% else %}
+            
+            <div class='social'>
+
+            <button class='user_form'><a href="/accounts/login" class='login'>로그인</a></button>
+  
+            <button class='user_form'><a href="/accounts/signup" class='sign_up'>회원가입</a></button>
+            </div>
+           
+            {% endif %}
+
+
+
+        </ul>
+    </nav>
     
     <div id="content">
 

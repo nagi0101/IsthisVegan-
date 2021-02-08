@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserChangeForm
 from django.contrib.auth.forms import PasswordChangeForm
-import requests
+# import requests
 from django.contrib.auth import get_user_model
 
 
