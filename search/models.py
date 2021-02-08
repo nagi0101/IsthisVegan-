@@ -8,12 +8,14 @@ class Ingredient(models.Model):
     CATEGORY_FISH = ("FISH", "어류")
     CATEGORY_EGG = ("EGG", "난류")
     CATEGORY_MILK = ("MILK", "우유")
+    CATEGORY_ETC = ("ETC", "기타")
 
     CATEGORY_SELECT = (
         CATEGORY_MEAT,
         CATEGORY_FISH,
         CATEGORY_EGG,
         CATEGORY_MILK,
+        CATEGORY_ETC,
     )
 
     name = models.CharField(max_length=60)
