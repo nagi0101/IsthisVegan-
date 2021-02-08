@@ -34,8 +34,15 @@ def search_detail_filter(request):
         print(ingredient_text)
         ingredientDB = list(Ingredient.objects.all())
 
+        veganFilter = {}
+
+        for category in Ingredient.CATEGORY_SELECT:
+            veganFilter[category[0]] = False
+
         for ingredient in ingredientDB:
             if ingredient.name in ingredient_text:
+                veganFilter[ingredient.category] = True
 
+        print(veganFilter)
 
-        return JsonResponse(True, safe=False)
+        return JsonResponse(veganFilter)
