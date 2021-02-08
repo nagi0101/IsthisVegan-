@@ -2,6 +2,7 @@ import requests
 import json
 from django.shortcuts import render
 from django.http import JsonResponse
+from .models import Ingredient
 
 # Create your views here.
 
@@ -24,3 +25,17 @@ def search_btn_clicked(request):
         response = requests.get(request_url)
         content = json.loads(response.content)
         return JsonResponse(content, safe=False)
+
+
+def search_detail_filter(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        ingredient_text = data["ingredientText"]
+        print(ingredient_text)
+        ingredientDB = list(Ingredient.objects.all())
+
+        for ingredient in ingredientDB:
+            if ingredient.name in ingredient_text:
+
+
+        return JsonResponse(True, safe=False)
