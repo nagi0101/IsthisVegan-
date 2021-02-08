@@ -41,15 +41,15 @@ def search_detail_filter(request):
         # 해당 식품에 어떤 카테고리에 속하는 동물성 식재료들이
         # 포함되어 있는지를 저장하는 딕셔너리이다.
         vegan_filter = {}
-        # 위의 카테고리에 속한 식품들이 ingredient_text의 어디
-        # 위치하여 있는지의 인덱스를 저장할 딕셔너리이다.
-        vegan_index = {}
+        # 위의 카테고리에 속한 ingredient의 이름들을
+        # category별로 저장할 딕셔너리이다.
+        ingredient_name = {}
 
         # 딕셔너리의 내용(category)들을 생성한다.
         # category[0]은 DB에 저장된 category들의 이름이다.
         for category in Ingredient.CATEGORY_SELECT:
             vegan_filter[category[0]] = False
-            vegan_index[category[0]] = []
+            ingredient_name[category[0]] = []
             category_list.append(category[0])
 
         for ingredient in ingredientDB:
@@ -58,14 +58,13 @@ def search_detail_filter(request):
             if ingredientIndex != -1:
                 # 해당 category의 ingredient가 있음을 저장한다.
                 vegan_filter[ingredient.category] = True
-                # 해당 ingredient의 위치를 저장한다.
-                vegan_index[ingredient.category].append(
-                    [ingredientIndex, ingredientIndex + len(ingredient.name)]
-                )
+                print(ingredient.category, ingredient.name)
+                # 해당 ingredient의 이름을 저장한다.
+                ingredient_name[ingredient.category].append(ingredient.name)
 
         ctx = {
             "vegan_filter": vegan_filter,
-            "vegan_index": vegan_index,
+            "ingredient_name": ingredient_name,
             "category_list": category_list,
         }
 

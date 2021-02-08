@@ -1,26 +1,50 @@
 const onClickCloseModalBtn = () => {
   const background = document.querySelector(".modal_background");
-  remove(background);
+  background.remove();
 };
 
-const createVeganInfoBox = (data) => {
+const createVeganInfoBox = (clickedLi, data) => {
+  console.log(data);
   const categoryList = data["category_list"];
   const veganFilter = data["vegan_filter"];
-  const veganIndex = data["vegan_index"];
+  const ingredientName = data["ingredient_name"];
 
+  // create element
+  const veganInfoBox = document.createElement("div");
   const ingredientBox = document.createElement("div");
   const veganFilterBox = document.createElement("div");
   const ingredientSpan = document.createElement("span");
   const veganFilterSpan = document.createElement("span");
 
-  ingredientSpan.innerText = clickedLi.querySelector(
-    ".product_ingredient"
-  ).innerText;
-  veganIndex.forEach((element) => {
+  // set innerThel
+  let innerHTML = clickedLi.querySelector(".product_ingredient").innerHTML;
+  categoryList.forEach((categoryName) => {
+    ingredientName[categoryName].forEach((name) => {
+      let index = innerHTML.indexOf(name);
+      innerHTML =
+        innerHTML.substring(0, index) +
+        `<span class=${categoryName}>` +
+        innerHTML.substring(index, index + name.length) +
+        "</span>" +
+        innerHTML.substring(index + name.length);
+    });
+  });
+  ingredientSpan.innerHTML = innerHTML;
+  categoryList.forEach((element) => {
     if (veganFilter[element] === true) {
-      console.log(element + " true");
+      veganFilterSpan.innerText += `${element} : O    `;
+    } else {
+      veganFilterSpan.innerText += `${element} : X    `;
     }
   });
+  console.log(veganFilterSpan);
+
+  // set HTML DOM
+  ingredientBox.append(ingredientSpan);
+  veganFilterBox.append(veganFilterSpan);
+  veganInfoBox.append(ingredientBox, veganFilterBox);
+
+  return veganInfoBox;
 };
 
 const showProductModal = (clickedLi, data) => {
@@ -31,13 +55,11 @@ const showProductModal = (clickedLi, data) => {
   const modal = document.createElement("div");
   const imageBox = document.createElement("div");
   const nameBox = document.createElement("div");
-
   const image = document.createElement("img");
   const nameSpan = document.createElement("span");
-
   const closeModalBtn = document.createElement("button");
 
-  const veganInfoBox = createVeganInfoBox(data);
+  const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정
   nameSpan.innerText = clickedLi.querySelector(".product_name").innerText;
@@ -65,9 +87,7 @@ const showProductModal = (clickedLi, data) => {
   // HTML DOM 구성
   imageBox.append(image);
   nameBox.append(nameSpan);
-  ingredientBox.append(ingredientSpan);
-  veganFilterBox.append(veganFilterSpan);
-  modal.append(imageBox, nameBox, closeModalBtn);
+  modal.append(imageBox, nameBox, veganInfoBox, closeModalBtn);
   background.append(modal);
   body.append(background);
 };
