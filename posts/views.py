@@ -13,18 +13,22 @@ def post_list(request):
 
         # 카테고리에 따라서 Post 또는 RatedPost에서 글을 최초로 50개 불러온다.
         if category == "INFO" or category == "COMMUNICATE":
-            posts = Post.objects.filter(category=category).order_by("-created_at")[:50]
+            posts = Post.objects.filter(category=category).order_by("-created_at")
         else:
-            posts = RatedPost.objects.filter(category=category).order_by("-created_at")[
-                :50
-            ]
+            posts = RatedPost.objects.filter(category=category).order_by("-created_at")
 
-            # 입력 파라미터
+        max_page = len(posts) // 50
+        if max_page % 50:
+            max_page += 1
+
+        posts = posts[:50]
 
         ctx = {
             "posts": posts,
             "category": category,
+            "max_page": max_page,
         }
+        print(ctx["max_page"])
 
         if category == "INFO" or category == "COMMUNICATE":
             return render(request, "posts/post_list.html", ctx)

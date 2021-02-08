@@ -14,6 +14,10 @@ class PostAdmin(admin.ModelAdmin):
         "category",
     ]
 
+    list_filter = [
+        "category",
+    ]
+
     filter_horizontal = [
         "like",
     ]

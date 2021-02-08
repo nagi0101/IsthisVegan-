@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block local_block %}
+    <div id="max-page">{{ max_page }}</div>
     <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
     <ul class="posts">
         {% for post in posts %}
