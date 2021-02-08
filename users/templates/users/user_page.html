@@ -1,4 +1,6 @@
-{% extends 'posts/layout.html' %} {% block local_block %}
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/user_page.css' %}" />
+{% endblock head_block %} {% block local_block %}
 <h2>{{person.nickname}}의 페이지</h2>
 <ul>
   <li>사용자 이름(id): {{person.username}}</li>
