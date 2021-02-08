@@ -1,6 +1,10 @@
 {% extends 'search/layout.html' %}
 {% load static %}
 
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock head_block %}
+
 {% block local_block %}
 
     <div class="search_form">

@@ -36,17 +36,38 @@ def search_detail_filter(request):
         # DB에 저장된 Ingredient를 모두 불러온다.
         ingredientDB = list(Ingredient.objects.all())
 
-        # 해당 식품에 포함된 동물성 식재료들이 어떤 카테고리에 속하는지
-        # 저장하는 딕셔너리이다.
-        veganFilter = {}
+        # Ingredient 모델의 모든 카테고리를 저장하는 list이다.
+        category_list = []
+        # 해당 식품에 어떤 카테고리에 속하는 동물성 식재료들이
+        # 포함되어 있는지를 저장하는 딕셔너리이다.
+        vegan_filter = {}
+        # 위의 카테고리에 속한 ingredient의 이름들을
+        # category별로 저장할 딕셔너리이다.
+        ingredient_name = {}
 
+        # 딕셔너리의 내용(category)들을 생성한다.
+        # category[0]은 DB에 저장된 category들의 이름이다.
         for category in Ingredient.CATEGORY_SELECT:
-            veganFilter[category[0]] = False
+            vegan_filter[category[0]] = False
+            ingredient_name[category[0]] = []
+            category_list.append(category[0])
 
         for ingredient in ingredientDB:
-            if ingredient.name in ingredient_text:
-                veganFilter[ingredient.category] = True
+            ingredientIndex = ingredient_text.find(ingredient.name)
+            # 어떤 ingredient가 ingredient_text 안에 존재한다면
+            if ingredientIndex != -1:
+                # 해당 category의 ingredient가 있음을 저장한다.
+                vegan_filter[ingredient.category] = True
+                print(ingredient.category, ingredient.name)
+                # 해당 ingredient의 이름을 저장한다.
+                ingredient_name[ingredient.category].append(ingredient.name)
 
-        print(veganFilter)
+        ctx = {
+            "vegan_filter": vegan_filter,
+            "ingredient_name": ingredient_name,
+            "category_list": category_list,
+        }
 
-        return JsonResponse(veganFilter)
+        print(ctx)
+
+        return JsonResponse(ctx)
