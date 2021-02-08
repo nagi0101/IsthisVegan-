@@ -80,29 +80,22 @@
 
     <div class = "new">
     
-    {% for post in posts|dictsort:'category' %}
-      {% ifchanged %}
-        <li>
-          <a href = "{% url 'posts:post_list' %}?category={{post.category}}"><h2>{{post.category}}</h2></a>
-      {% endifchanged %}
-          
-          <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
-                <span>{{post.title}}</span>
-                <span>{{post.user.nickname}}</span>
-                <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
-                </a>
-       
-        </li>
-      
-    {% endfor %}  
-    
+        {% for post in posts|dictsort:'category' %}
+        {% ifchanged %}
+            <li>
+            <a href = "{% url 'posts:post_list' %}?category={{post.category}}"><h2>{{post.category}}</h2></a>
+        {% endifchanged %}
+            
+            <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
+                    <span>{{post.title}}</span>
+                    <span>{{post.user.nickname}}</span>
+                    <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                    </a>
+        
+            </li>
+        
+        {% endfor %} 
     </div>
-
-    <form id="searchForm" method="get" action="{% url 'posts:post_list' %}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
-    <input type="hidden" id="page" name="page" value="{{ page }}">
-    <input type="hidden" id="so" name="so" value="{{ so }}">
-    </form>
 
     <script type="text/javascript">
     /* curator-feed-default-feed-layout */

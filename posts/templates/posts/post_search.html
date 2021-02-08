@@ -7,15 +7,14 @@
     <h1>검색 결과가 없습니다.<h1>
   {%else%}
     
-    {% for post in posts.all %}
+    {% for post in posts %}
     <div class = "container">
         <div class = "post">
             <div class = "post_baby">
                 <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
-                    <span>{{post.title.}}</span>
+                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
+                    <span>{{post.title}}</span>
                     <span>{{post.user.nickname}}</span>
-
                     </a>
                 </li>
             </div>

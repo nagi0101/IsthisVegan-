@@ -314,21 +314,9 @@ def main(request):
     # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
     pk = request.user.id
 
-    kw = request.GET.get("kw", "")  # 검색어
-
-    # 조회
-    post_list = Post.objects.order_by("-title")
-    if kw:
-        post_list = post_list.filter(
-            Q(title__icontains=kw)
-            | Q(content__icontains=kw)  # 제목검색
-            | Q(user__icontains=kw)  # 내용검색  # 질문 글쓴이검색
-        ).distinct()
-
     ctx = {
         "posts": posts,
         "pk": pk,
-        "kw": kw,
     }
 
     return render(request, "posts/main.html", ctx)
@@ -336,12 +324,11 @@ def main(request):
 
 def search(request):
 
-    posts = RatedPost.objects.all().order_by("-id")
-
-    q = request.POST.get("q", "")
+    posts = Post.objects.all()
+    q = request.POST.get("kw", "")
 
     if q:
         posts = posts.filter(title__icontains=q)
-        return render(request, "posts/post_search.html", {"posts": posts, "q": q})
+        return render(request, "posts/post_search.html", {"posts": posts})
     else:
         return render(request, "posts/post_search.html")
