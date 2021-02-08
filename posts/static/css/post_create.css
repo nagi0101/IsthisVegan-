@@ -1,0 +1,26 @@
+.container {
+  height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: solid 1px black;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border: solid 1px black;
+}
+
+.wrap2 {
+  display: flex;
+  justify-content: center;
+}
+
+.i1 {
+  padding: 10px;
+}

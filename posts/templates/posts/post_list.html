@@ -1,27 +1,47 @@
 {% extends 'posts/layout.html' %}
 {% load static %}
 
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+/>
+{% endblock head_block %} 
+
+
 {% block local_block %}
-    <div id="max-page">{{ max_page }}</div>
-    <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
+<div class="container">
+  <div class="wrap">
+    <div id="max-page" style = "display:none;">{{ max_page }}</div>
     <ul class="posts">
-        {% for post in posts %}
-            <li data-post-id="{{post.pk}}" class="post">
-                <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
-                <span>{{post.title}}</span>
-                <span>{{post.user.nickname}}</span>
-                <span><i class="fas fa-heart"></i><span>{{post.like.all|length}}</span></span>
-                </a>
-            </li>
-        {% endfor %}
+      {% for post in posts %}
+      <li data-post-id="{{post.pk}}" class="post">
+        <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
+          <span>{{post.title}}</span>
+          <span>{{post.user.nickname}}</span>
+          <span
+            ><i class="fas fa-heart"></i
+            ><span>{{post.like.all|length}}</span></span
+          >
+        </a>
+      </li>
+      {% endfor %}
     </ul>
+  </div>
+</div>
+<div class="edit">
+  <a href="{% url 'posts:post_create' %}?category={{category}}"
+    ><i id="pencil" class="fas fa-edit"></i
+  ></a>
+</div>
 
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.defaults.xsrfHeaderName = "X-CSRFToken";
-        const category = "{{category}}"
-    </script>
-    <script src="{% static 'js/infiniteScroll.js' %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  axios.defaults.xsrfCookieName = "csrftoken";
+  axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  const category = "{{category}}";
+</script>
+<script src="{% static 'js/infiniteScroll.js' %}"></script>
 {% endblock local_block %}
