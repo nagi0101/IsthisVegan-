@@ -36,6 +36,13 @@
 
             </p>
         </div>
+
+        <div class="search_prd_container">
+            <form class="search_form" method="GET" action="{% url 'search:search' %}" >
+                <input id="product_search_input"  type="text" name="init" id="" placeholder="제품명을 검색해봐요!">
+                <button id="product_search_btn" onclick = "onProductSearchBtnClicked()" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
     
 
         <hr/>
