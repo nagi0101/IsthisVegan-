@@ -38,8 +38,11 @@ const modifyDataList = (data_list) => {
   oldUl.parentElement.replaceChild(newUl, oldUl);
 };
 
-const onProductSearchBtnClicked = () => {
-  const searchInput = SEARCH_INPUT.value;
+const searchProductList = (init) => {
+  let searchInput = SEARCH_INPUT.value;
+  if (init !== "") {
+    searchInput = init;
+  }
   requestUrl = "/search_prd/search_btn_clicked/";
   // 공백일 경우 함수 탈출
   if (!searchInput) {
@@ -53,9 +56,7 @@ const onProductSearchBtnClicked = () => {
     })
     // 응답(성공)
     .then(function (response) {
-      console.log(response);
       data_list = response.data.list;
-      console.log(data_list);
       modifyDataList(data_list);
     })
     // 응답(실패)
@@ -67,6 +68,26 @@ const onProductSearchBtnClicked = () => {
       // ...
     });
 };
+
+const onKeyUp = (event) => {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    SEARCH_BTN.click();
+  }
+};
+
+const onProductSearchBtnClicked = () => {
+  searchProductList("");
+};
+
+const init = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const init = urlParams.get("init");
+  searchProductList(init);
+};
+
+init();
 // if clickBtn{
 //     axios.poss{
 
