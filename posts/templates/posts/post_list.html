@@ -1,3 +1,9 @@
+{% extends 'posts/layout.html' %}
+{% load static %}
+
+{% block local_block %}
+    <div id="max-page">{{ max_page }}</div>
+    <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
 {% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
 <link

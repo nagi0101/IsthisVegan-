@@ -3,6 +3,12 @@
 {% endblock head_block %} {% block local_block %}
 <div class="container">
   <div class="wrap">
+{% extends 'posts/layout.html' %}
+{% load static %}
+
+{% block local_block %}
+    <div id="max-page">{{ max_page }}</div>
+    <a href="{% url 'posts:post_create' %}?category={{category}}">글쓰기</a>
     <ul class="posts">
       {% for post in posts %}
       <li data-post-id="{{post.pk}}" class="post">
