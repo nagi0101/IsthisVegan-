@@ -1,12 +1,19 @@
-{% extends 'posts/layout.html' %} {% block local_block %}
-<ul>
-  {% for mylist in mylists %}
-  <li>
-    <a
-      href="{% url 'posts:post_detail' mylist.pk %}?category={{mylist.category}}"
-      >{{ mylist.title }}</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/user_mylist.css' %}" />
+{% endblock head_block %} {% block local_block %}
+<div class="container">
+  <div class="wrap">
+    <h2 class="text-center">내가 쓴 글 목록</h2>
+    <ul>
+      {% for mylist in mylists %}
+      <li>
+        <a
+          href="{% url 'posts:post_detail' mylist.pk %}?category={{mylist.category}}"
+          >{{ mylist.title }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock local_block %}

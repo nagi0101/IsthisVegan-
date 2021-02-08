@@ -6,6 +6,13 @@ from posts.models import Post, Comment
 from users.models import User
 
 
+def random_user():
+    users = list(User.objects.all())
+    randint = random.randint(0, len(users))
+    liked_users = random.choices(users, k=randint)
+    return liked_users
+
+
 class Command(BaseCommand):
 
     help = "This command creates comments"
