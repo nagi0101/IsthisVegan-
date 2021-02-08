@@ -32,8 +32,12 @@ def search_detail_filter(request):
         data = json.loads(request.body)
         ingredient_text = data["ingredientText"]
         print(ingredient_text)
+
+        # DB에 저장된 Ingredient를 모두 불러온다.
         ingredientDB = list(Ingredient.objects.all())
 
+        # 해당 식품에 포함된 동물성 식재료들이 어떤 카테고리에 속하는지
+        # 저장하는 딕셔너리이다.
         veganFilter = {}
 
         for category in Ingredient.CATEGORY_SELECT:

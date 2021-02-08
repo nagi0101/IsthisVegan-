@@ -9,7 +9,8 @@ const showProductDetail = (clickedLi) => {
     })
     // 응답(성공)
     .then(function (response) {
-      console.log(response);
+      data = response.data;
+      console.log(data);
     })
     // 응답(실패)
     .catch(function (error) {
