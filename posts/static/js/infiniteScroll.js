@@ -10,7 +10,6 @@ let maxPage = 1;
 
 const modifyPost = (data, mode) => {
   let posts_container = document.querySelector(".posts");
-  console.log(mode);
   const newUl = document.createElement("ul");
   data.forEach((post) => {
     const li = document.createElement("li");
@@ -52,6 +51,7 @@ const modifyPost = (data, mode) => {
   });
   if (mode === "replace") {
     newUl.className = "posts";
+    newUl.addEventListener("scroll", handleScroll);
     posts_container.parentNode.replaceChild(newUl, posts_container);
   }
 };
@@ -71,10 +71,11 @@ const sendAxiosRequest = (mode) => {
         console.log(page, "no data!");
         return;
       }
-      console.log("update!");
       modifyPost(data, mode);
       page++;
-      rateToStar();
+      try {
+        rateToStar();
+      } catch (error) {}
     })
     .catch(function (error) {
       console.log(error);
@@ -83,22 +84,21 @@ const sendAxiosRequest = (mode) => {
 
 const fetchMorePosts = async () => {
   fetching = true;
-  console.log(page);
   sendAxiosRequest("add");
   fetching = false;
 };
 
-const handleScroll = () => {
-  const scrollHeight = document.documentElement.scrollHeight;
-  const scrollTop = document.documentElement.scrollTop;
-  const clientHeight = document.documentElement.clientHeight;
+const handleScroll = (event) => {
+  const target = event.target;
+  const scrollHeight = target.scrollHeight;
+  const scrollTop = target.scrollTop;
+  const clientHeight = target.clientHeight;
   if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
     fetchMorePosts();
   }
 };
 
 const onClickPaginationNode = function (pageClicked) {
-  console.log(pageClicked + " clicked");
   page = pageClicked;
   fetching = true;
   sendAxiosRequest("replace");
@@ -125,10 +125,9 @@ const createPagination = () => {
 const initPage = () => {
   const maxPageStr = document.querySelector("#max-page").innerText;
   maxPage = Number(maxPageStr);
-  console.log(maxPage);
   createPagination();
 };
 
 initPage();
 
-window.addEventListener("scroll", handleScroll);
+document.querySelector(".posts").addEventListener("scroll", handleScroll);
