@@ -19,11 +19,16 @@ const modifyDataList = (data_list) => {
     if (allergy === "알수없음") {
       ingredient.innerText = rawmtrl;
     } else {
-      ingredient.innerText = rawmtrl + allergy;
+      ingredient.innerText = rawmtrl + "\n 알러지 정보 : " + allergy;
     }
+    ingredient.style.display = "none";
 
     // class, src 등 설정
+    name.className = "product_name";
+    category.className = "product_category";
+    ingredient.className = "product_ingredient";
     image.src = data["imgurl1"];
+    li.onclick = onClickProductDetail;
 
     // DOM Tree 구성
     li.append(image, name, category, ingredient);
