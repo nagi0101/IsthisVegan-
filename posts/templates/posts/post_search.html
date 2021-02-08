@@ -1,25 +1,29 @@
-{% extends 'posts/layout.html' %}
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/post_search.css' %}" />
+{% endblock head_block %} {% block local_block %}
 
-{% block local_block %}
+<div class="bigcontainer">
+  <div class="wrap">
+    <h2 class="reuslt">검색 결과</h2>
+    {% if not posts %}
+    <p>검색 결과가 없습니다.</p>
+    <p>{%else%} {% for post in posts %}</p>
 
-  <h1>검색결과</h1>
-  {% if not posts %}
-    <h1>검색 결과가 없습니다.<h1>
-  {%else%}
-    
-    {% for post in posts %}
-    <div class = "container">
-        <div class = "post">
-            <div class = "post_baby">
-                <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
-                    <span>{{post.title}}</span>
-                    <span>{{post.user.nickname}}</span>
-                    </a>
-                </li>
-            </div>
+    <div class="container">
+      <div class="post">
+        <div class="post_baby">
+          <li>
+            <a
+              href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+            >
+              <span>{{post.title}}</span>
+              <span>{{post.user.nickname}}</span>
+            </a>
+          </li>
         </div>
+      </div>
     </div>
-    {% endfor %}
-    {% endif %}
+    {% endfor %} {% endif %}
+  </div>
+</div>
 {% endblock local_block%}

@@ -1,0 +1,27 @@
+.h2 {
+  border: solid 1px black;
+  padding: 10px;
+}
+
+.bigcontainer {
+  height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border: solid 1px black;
+}
+
+li {
+  list-style: none;
+}
