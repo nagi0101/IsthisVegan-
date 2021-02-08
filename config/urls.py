@@ -27,7 +27,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("oauth/", users.views.oauth, name="oauth"),
     path("login/", users.views.login, name="slogin"),
-    path("search", include("search.urls")),
+    path("search_prd/", include("search.urls")),
 ]
 
 if settings.DEBUG:
