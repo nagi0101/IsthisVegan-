@@ -4,7 +4,7 @@ header {
   left: 0;
   right: 0;
   height: 50px;
-  padding: 1rem;
+  padding: 16px;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -16,7 +16,7 @@ header {
 }
 
 .main_container {
-  margin-top: 50px;
+  margin-top: 82px;
 }
 
 .dropdown {
