@@ -36,6 +36,9 @@ class Post(AbstractTimestamp):
     def __str__(self):
         return f"{self.user} : {self.title}"
 
+    def get_like_count(self):
+        return len(self.like.all())
+
 
 class RatedPost(Post):
     rate = models.PositiveSmallIntegerField(
