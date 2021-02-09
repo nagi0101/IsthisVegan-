@@ -249,6 +249,9 @@ def post_create(request):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
+        if len(request.POST['content']) == 0:
+            return render(request, 'posts/post_create.html', {'alert_flag': True})
+
         pk = 0
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm(request.POST)
