@@ -34,9 +34,6 @@ urlpatterns = [
         views.comment_delete,
         name="comment_delete",
     ),
-    path("main/", views.main, name="post_main"),
+    path("", views.main, name="post_main"),
     path("search/", views.search, name="search"),
-   
-
-
 ]
