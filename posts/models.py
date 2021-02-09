@@ -3,6 +3,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.html import mark_safe
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+
 # Create your models here.
 
 
@@ -25,11 +29,15 @@ class Post(AbstractTimestamp):
     )
     title = models.CharField(max_length=120)
     content = RichTextUploadingField()
-    like = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField("users.User", blank=True, related_name="likedPosts")
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
+    comments = GenericRelation("Comment")
 
     def __str__(self):
         return f"{self.user} : {self.title}"
+
+    def get_like_count(self):
+        return len(self.like.all())
 
 
 class RatedPost(Post):
@@ -41,15 +49,19 @@ class RatedPost(Post):
     )
 
 
-class Image(AbstractTimestamp):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to=upload_to_uuid)
-
-
 class Comment(AbstractTimestamp):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="comments"
     )
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-    like = models.PositiveIntegerField(default=0)
+    # post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    post = GenericForeignKey("content_type", "object_id")
+
+    like = models.ManyToManyField(
+        "users.User", blank=True, related_name="likedComments"
+    )
     content = models.TextField()
+
+    def __str__(self):
+        return f"{self.user.nickname} - {self.post}"

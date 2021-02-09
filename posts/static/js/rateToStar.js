@@ -1,14 +1,10 @@
-const POST_RATE_LIST = document.querySelectorAll(".post_rate");
-
-function rateToStar(rate_list) {
+function rateToStar() {
+  const rate_list = document.querySelectorAll(".post_rate");
   rate_list.forEach((element) => {
     number = parseInt(element.innerText);
     fullStarNum = number / 2;
     fullStarNum = Math.floor(fullStarNum);
     halfStarNum = number - fullStarNum * 2;
-
-    console.log(fullStarNum);
-    console.log(halfStarNum);
 
     starContainer = document.createElement("span");
     for (let i = 0; i < fullStarNum; i++) {
@@ -23,11 +19,12 @@ function rateToStar(rate_list) {
     }
     element.innerText = "";
     element.appendChild(starContainer);
+    element.className = "post_rate_star";
   });
 }
 
 function init() {
-  rateToStar(POST_RATE_LIST);
+  rateToStar();
 }
 
 init();

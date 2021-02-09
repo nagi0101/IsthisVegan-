@@ -1,0 +1,44 @@
+.container {
+  height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: solid 1px black;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border: solid 1px black;
+  width: 700px;
+}
+
+.text-center {
+  border: solid 1px black;
+  padding: 10px;
+}
+
+table {
+  border: solid 1px black;
+  padding: 10px;
+}
+
+.wrap2 {
+  display: flex;
+  justify-content: center;
+}
+
+.t2 {
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.i1 {
+  padding: 10px;
+  margin: 10px;
+}

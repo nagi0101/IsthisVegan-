@@ -1,0 +1,23 @@
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/user_bookmark.css' %}" />
+{% endblock head_block %} {% block local_block %}
+<div class="container">
+  <div class="wrap">
+    {% if request.user.pk == person.pk %}
+    <h2 class="text-center">북마크 목록</h2>
+    <ul>
+      {% for bookmark in bookmarks %}
+      <li>
+        <a
+          href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}"
+          >{{ bookmark.title }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>다른 사용자의 북마크에 접근할 수 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock local_block %}
