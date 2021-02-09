@@ -28,7 +28,7 @@ video {
 
 .product_text {
   width: 100%;
-  top: 10%;
+  top: 40%;
   position: absolute;
   text-align: center;
 }
@@ -80,19 +80,19 @@ video {
 .info_text {
   width: 80%;
   height: 400px;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info_text .left {
   width: 400px;
-  font-size: 50px;
+  font-size: 80px;
   color: #3c3530;
-  float: left;
-  margin-right: 50px;
 }
 
 .info_text .right {
-  margin-top: 150px;
+  width: 600px;
 }
 
 .new {
