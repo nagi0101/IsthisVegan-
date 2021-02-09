@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import User, Badge
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -14,7 +14,7 @@ def login(request):
 
 @login_required
 def user_page(request, pk):
-    person = User.objects.get(id=pk)
+    person = get_object_or_404(User, id=pk)
     ctx = {'person': person}
     return render(request, 'users/user_page.html', context=ctx)
 
@@ -47,7 +47,9 @@ def user_edit(request, pk):
         return redirect('users:user_page', pk)
     else:
         user_change_form = CustomUserChangeForm(instance=request.user)
-        ctx = {'user_change_form': user_change_form}
+        person = User.objects.get(id=pk)
+        ctx = {'user_change_form': user_change_form,
+               'person': person}
         return render(request, 'users/user_edit.html', ctx)
 
 
@@ -56,7 +58,10 @@ def user_delete(request, pk):
     if request.method == 'POST':
         request.user.delete()
         return redirect('posts:post_main')
-    return render(request, 'users/user_delete.html')
+    else:
+        person = User.objects.get(id=pk)
+        ctx = {'person': person}
+        return render(request, 'users/user_delete.html', ctx)
 
 
 @login_required

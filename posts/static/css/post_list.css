@@ -16,6 +16,7 @@
   padding-left: 100px;
   padding-right: 100px;
   border: solid 1px black;
+  width: 700px;
 }
 
 .posts {
@@ -29,6 +30,17 @@ ul {
 
 li {
   list-style: none;
+}
+
+.post2 {
+  width: 500px;
+}
+
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow: hidden;
 }
 
 .edit {
