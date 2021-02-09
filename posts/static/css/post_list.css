@@ -33,14 +33,9 @@ li {
 }
 
 .post2 {
-  width: 500px;
-}
-
-.title {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal;
-  overflow: hidden;
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .edit {

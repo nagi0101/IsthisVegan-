@@ -11,13 +11,16 @@
     <ul class="posts">
       {% for post in posts %}
       <li data-post-id="{{post.pk}}" class="post">
-        <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
-          <span class="title">{{post.title}}</span>
-          <span>{{post.user.nickname}}</span>
-          <span
-            ><i class="fas fa-heart"></i
-            ><span>{{post.like.all|length}}</span></span
-          >
+        <a
+          class="post2"
+          href="{% url 'posts:post_detail' post.pk %}?category={{category}}"
+        >
+          <div class="title">{{post.title}}</div>
+          <div>
+            {{post.user.nickname}}
+            <i class="fas fa-heart"></i>
+            <span>{{post.like.all|length}}</span>
+          </div>
         </a>
       </li>
       {% endfor %}

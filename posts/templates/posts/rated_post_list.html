@@ -1,27 +1,23 @@
-{% extends 'posts/layout.html' %} 
-{% load static %} 
-
-
-{% block head_block %}
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
-{% endblock head_block %} 
-
-
-{% block local_block %}
+{% endblock head_block %} {% block local_block %}
 <div class="container">
   <div class="wrap">
-    <div id="max-page" style = "display:none;">{{ max_page }}</div>
+    <div id="max-page" style="display: none">{{ max_page }}</div>
     <ul class="posts">
       {% for post in posts %}
       <li data-post-id="{{post.pk}}" class="post">
-        <a href="{% url 'posts:post_detail' post.pk %}?category={{category}}">
-          <span>{{post.title}}</span>
-          <span>{{post.user.nickname}}</span>
+        <a
+          class="post2"
+          href="{% url 'posts:post_detail' post.pk %}?category={{category}}"
+        >
           <span
-            ><i class="fas fa-heart"></i
-            ><span>{{post.like.all|length}}</span></span
+            >{{post.title}}<span class="post_rate">{{post.rate}}</span></span
           >
-          <span class="post_rate">{{post.rate}}</span>
+          <span
+            >{{post.user.nickname}}<i class="fas fa-heart"></i
+            ><span>{{post.like.all|length}}</span>
+          </span>
         </a>
       </li>
       {% endfor %}
