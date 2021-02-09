@@ -11,6 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "title",
+        "get_like_count",
         "category",
     ]
 
@@ -28,6 +29,7 @@ class RatedPostAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "title",
+        "get_like_count",
         "rate",
         "category",
     ]
