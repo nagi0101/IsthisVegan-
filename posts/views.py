@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from .models import Post, RatedPost, Comment
 import json
 from .forms import PostForm, RatedPostForm
@@ -313,16 +314,48 @@ def post_delete(request, pk):
 
 
 def main(request):
+    NEW_POST_DATE_RANGE = 700
 
-    posts = Post.objects.all().order_by("-title")
+    posts = Post.objects.all()
+    # category들의 리스트
+    category_list = []
+    for category in Post.CATEGORY_SELECT:
+        # DB에 저장되는 이름의 형태("BUY" 등)로 category의 리스트를 저장한다.
+        category_list.append(category[0])
+
+    ctx = {}
+    # 카테고리별로 최근 NEW_POST_DATE_RANGE일 내에 작성된 글들을
+    # 좋아요 순으로 정렬 후 좋아요가 가장 많은 5개를 ctx에 저장한다.
+    for category in category_list:
+        query_set = posts.filter(category=category).filter(
+            created_at__gte=timezone.now()
+            - timezone.timedelta(days=NEW_POST_DATE_RANGE)
+        )
+        unordered_list = list(query_set)
+        ordered_list = sorted(unordered_list, key=lambda k: k.get_like_count())[::-1][
+            :5
+        ]
+        ctx[category] = ordered_list
+    ctx["category_list"] = category_list
+    ctx["pk"] = request.user.id
+
+    # buy = Post.objects.filter(category="BUY").order_by("-get_like_count", "title")[:5]
+    #  # print(buy)
+    # communicate = Post.objects.filter(category="COMMUNICATE").order_by(
+    #     "-get_like_count", "title"
+    # )[:5]
+    # info = Post.objects.filter(category="INFO").order_by("-get_like_count", "title")[:5]
+    # visit = Post.objects.filter(category="VISIT").order_by("-get_like_count", "title")[
+    #     :5
+    # ]
 
     # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
-    pk = request.user.id
+    # pk = request.user.id
 
-    ctx = {
-        "posts": posts,
-        "pk": pk,
-    }
+    # ctx = {
+    #     "posts": posts,
+    #     "pk": pk,
+    # }
 
     return render(request, "posts/main.html", ctx)
 
