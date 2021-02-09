@@ -17,8 +17,10 @@ def post_list(request):
         else:
             posts = RatedPost.objects.filter(category=category).order_by("-created_at")
 
-        max_page = len(posts) // 50
-        if max_page % 50:
+        posts_len = len(posts)
+        max_page = posts_len // 50
+        # max_page가 50으로 나누어 떨어지지 않을 경우
+        if posts_len % 50 != 0:
             max_page += 1
 
         posts = posts[:50]
@@ -28,7 +30,6 @@ def post_list(request):
             "category": category,
             "max_page": max_page,
         }
-        print(ctx["max_page"])
 
         if category == "INFO" or category == "COMMUNICATE":
             return render(request, "posts/post_list.html", ctx)
