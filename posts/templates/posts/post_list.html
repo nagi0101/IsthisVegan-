@@ -1,10 +1,15 @@
-{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+{% extends 'posts/layout.html' %} 
+{% load static %} 
+
+{% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
 />
-{% endblock head_block %} {% block local_block %}
+{% endblock head_block %} 
+
+{% block local_block %}
 <div class="container">
   <div class="wrap">
     <div id="max-page" style="display: none">{{ max_page }}</div>

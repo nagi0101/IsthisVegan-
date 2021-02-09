@@ -54,7 +54,7 @@ li {
 
 .post_grid-header {
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr 2fr;
+  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
   border-bottom: 2px solid #3c3530;
   padding-bottom: 5px;
 }
@@ -68,7 +68,7 @@ li {
 
 .post_grid-a {
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr 2fr;
+  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
   text-decoration: none;
   color: #3c3530;
   border-bottom: 1px solid #3c3530;

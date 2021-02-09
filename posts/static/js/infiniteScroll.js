@@ -48,8 +48,10 @@ const modifyPost = (data, mode) => {
       const post_rate = document.createElement("span");
       post_rate.innerText = post.rate;
       post_rate.className = "post_rate";
-      a.append(post_rate);
+      a.insertBefore(post_rate, date);
     }
+
+    // append
     if (mode === "add") {
       posts_container.append(li);
     } else if (mode === "replace") {
