@@ -58,12 +58,8 @@
         </div>
         <div class="dropdown">{{user.username}} 님이 로그인 중</div>
         {% else %}
-        <div class="dropdown">
           <a href="/accounts/signup" class="dtn">회원가입</a>
-        </div>
-        <div class="dropdown">
           <a href="{% url 'users:login' %}" class="dtn">로그인</a>
-        </div>
         {% endif %}
       </div>
     </header>
