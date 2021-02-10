@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -46,57 +51,59 @@ header {
   display: block;
 }
 
-.login{
-  text-decoration:none;
-  color:white;
+.login {
+  text-decoration: none;
+  color: white;
 }
 
-.sign_up{
-  text-decoration:none;
-  color:white;
+.sign_up {
+  text-decoration: none;
+  color: white;
 }
 
-.logout{
-  text-decoration:none;
-  color:white;
+.logout {
+  text-decoration: none;
+  color: white;
 }
 
-button.user_form{
-  background:#AACD6E;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:30px;
-  font-size:15px;
-  padding:0 2em;
+button.user_form {
+  background: #aacd6e;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 30px;
+  font-size: 15px;
+  padding: 0 2em;
   margin-left: 15px;
   margin-right: 15px;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
 }
 
-button.user_form:hover{
-  background:#fff;
-  color:#1AAB8A;
+button.user_form:hover {
+  background: #fff;
+  color: #1aab8a;
 }
-button.user_form:before,button.user_form:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #9EBF56;
-  transition:400ms ease all;
+button.user_form:before,
+button.user_form:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #9ebf56;
+  transition: 400ms ease all;
 }
-button.user_form:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
+button.user_form:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
 }
-button.user_form:hover:before,button.user_form:hover:after{
-  width:100%;
-  transition:800ms ease all;
+button.user_form:hover:before,
+button.user_form:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
 }
