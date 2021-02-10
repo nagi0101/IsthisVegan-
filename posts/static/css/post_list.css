@@ -43,6 +43,7 @@ html {
   background-color: white;
   color: #aacd6e;
   transition: 0.2s;
+  cursor: pointer;
 }
 .search_form .btn:hover {
   border: 1px solid #aacd6e;
@@ -92,9 +93,8 @@ html {
   width: 700px;
 }
 
-.posts {
-  height: 500px;
-  overflow: scroll;
+.post_grid-wrapper {
+  width: 100%;
 }
 
 .edit {
@@ -105,7 +105,7 @@ html {
   position: fixed;
   bottom: 50px;
   right: 50px;
-  animation: hover 5s infinite ease-in-out;
+  animation: hover 10s infinite;
   transform-origin: center;
 }
 
@@ -115,7 +115,7 @@ html {
     box-shadow: #cdcdcd 1px 1px 1px;
   }
   50% {
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-5px) scale(1.03);
     box-shadow: #cdcdcd 1px 1px 8px;
   }
   100% {
@@ -130,7 +130,7 @@ html {
 
 .post_grid-header {
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
+  grid-template-columns: 6fr 2fr 1fr 2fr;
   border-bottom: 2px solid #3c3530;
   padding-bottom: 5px;
 }
@@ -144,19 +144,25 @@ html {
 
 .post_grid-a {
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
+  grid-template-columns: 6fr 2fr 1fr 2fr;
   text-decoration: none;
   color: #3c3530;
-  border-bottom: 1px solid #3c3530;
+  border-bottom: 1px dashed #3c3530;
   padding: 8px 0px;
   height: 35px;
   box-sizing: border-box;
+}
+
+.rated_post_grid-a,
+.rated_post_grid-header {
+  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
 }
 
 .post_grid-a:hover {
   color: #fdfdfd;
   /* border-bottom: 1px solid #fdfdfd; */
   background-color: #aacd6e;
+  border-bottom: 1px solid #3c3530;
   /* text-shadow: #fdfdfd 1px 1px 1px; */
   transition: 0.1s;
 }
@@ -170,6 +176,8 @@ html {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding-left: 5px;
+  box-sizing: border-box;
 }
 
 .fa-heart {

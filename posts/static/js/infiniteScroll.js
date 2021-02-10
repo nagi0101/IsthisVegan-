@@ -48,6 +48,7 @@ const modifyPost = (data, mode) => {
       const post_rate = document.createElement("span");
       post_rate.innerText = post.rate;
       post_rate.className = "post_rate";
+      a.classList.add("rated_post_grid-a");
       a.insertBefore(post_rate, date);
     }
 
@@ -120,8 +121,8 @@ const createPagination = () => {
   const paginationHead = document.createElement("div");
   const paginationTail = document.createElement("div");
   let ADD_ELLIPSES = false;
-  let PAGINATION_HEAD_LENGTH = 4;
-  let PAGINATION_TAIL_LENGTH = 4;
+  let PAGINATION_HEAD_LENGTH = 3;
+  let PAGINATION_TAIL_LENGTH = 2;
 
   paginationHead.className = "pagination_head";
   paginationTail.className = "pagination_tail";
