@@ -2,98 +2,88 @@
 <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script>
 </script>
 {% endblock head_block %}
 {% block local_block %}
-<div id="content">
-  <video muted autoplay loop class="video">
-    <source src="../../static/img/production.mp4" type="video/mp4" />
-  </video>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div id="content" class="swiper-slide">
+            <video muted autoplay loop class="video">
+                <source src="../../static/img/production.mp4" type="video/mp4"> 
+            </video>
 
-  <div class="product_text">
-    <div id="content__top">
-      <h1>IsThis?<br />VEGAN!</h1>
-    </div>
+            <div class="product_text">
+                <div id="content__top">
+                    <h1>IsThis?<br>VEGAN!</h1>
+                </div>
 
-    <div class="search_prd_container">
-      <form class="search_form" method="GET" action="{% url 'search:search' %}">
-        <input
-          id="product_search_input"
-          type="text"
-          name="init"
-          id=""
-          placeholder="제품명을 검색해봐요!"
-        />
-        <button
-          id="product_search_btn"
-          onclick="onProductSearchBtnClicked()"
-          type="submit"
-        >
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
+                <div class="search_prd_container">
+                    <form class="search_form" method="GET" action="{% url 'search:search' %}">
+                        <input
+                        id="product_search_input"
+                        type="text"
+                        name="init"
+                        id=""
+                        placeholder="제품명을 검색해봐요!"
+                        />
+                        <button
+                        id="product_search_btn"
+                        onclick="onProductSearchBtnClicked()"
+                        type="submit"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-<!--
-    <div class="category">
-        {% for category in category_list %}
-            <a href="{% url 'posts:post_list' %}?category={{category}}">
-            <span>{{category}}</span>
-            </a>
-        {% endfor %}
-    </div>
-   -->
+        <div class="information swiper-slide">
+            <div class="info_text">
+                <div class="left">
+                    <h1>IsThis?<br>VEGAN!</h1>
+                </div>
 
-<div class="information">
-  <div class="info_text">
-    <div class="left">
-      <h1>IsThis?<br />VEGAN!</h1>
-    </div>
+                <div class="right">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In qui eveniet
+                        dolor sit commodi corrupti inventore maiores nemo, earum similique quis
+                        voluptas provident cupiditate? Facilis reiciendis aut eaque velit omnis.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    <div class="right">
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In qui eveniet
-        dolor sit commodi corrupti inventore maiores nemo, earum similique quis
-        voluptas provident cupiditate? Facilis reiciendis aut eaque velit omnis.
-      </p>
-    </div>
-  </div>
-</div>
+        <div class="new swiper-slide">
+            <div class="navbarcontain">
+                <button id="menu" onClick="btn1()">COMMUNICATE</button>
+                <button id="menu" onClick="btn2()">INFO</button>
+                <button id="menu" onClick="btn3()">VISIT</button>
+                <button id="menu"  onClick="btn4()">BUY</button>
+            </div>
+            <div class="new_text">
+                {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
+                <li>
+                <a href="{% url 'posts:post_list' %}?category={{post.category}}"
+                    ><h2>{{post.category}}</h2></a
+                >
+                {% endifchanged %}
 
-<div class="new">
-  <div class="navbarcontain">
-    <button id="menu" onClick="btn1()">
-        COMMUNICATE
-    </button>
-    <button id="menu" onClick="btn2()">
-        INFO
-    </button>
-    <button id="menu" onClick="btn3()">VISIT</button>
-    <button id="menu"  onClick="btn4()">BUY</button>
-  </div>
-  <div class="new_text">
-    {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
-    <li>
-      <a href="{% url 'posts:post_list' %}?category={{post.category}}"
-        ><h2>{{post.category}}</h2></a
-      >
-      {% endifchanged %}
+                <a
+                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+                >
+                    <span>{{post.title}}</span>
+                    <span>{{post.user.nickname}}</span>
+                    <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                </a>
+                </li>
 
-      <a
-        href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-      >
-        <span>{{post.title}}</span>
-        <span>{{post.user.nickname}}</span>
-        <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
-      </a>
-    </li>
-    {% endfor %} {% endcomment %}
-    <ul id="commu">
-      {% for post in COMMUNICATE %}
-      <li>
+                {% endfor %} {% endcomment %}
+                <ul id="commu">
+                {% for post in COMMUNICATE %}
+                <li>
         <span class="list"><a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           >{{post.title}}</a
@@ -138,16 +128,17 @@
   </div>
 </div>
 
-<div class="call">
-  <div class="instagrams">
-    <!-- Place <div> tag where you want the feed to appear -->
-    <div id="curator-feed-default-feed-layout">
-      <a href="https://curator.io" target="_blank" class="crt-logo crt-tag"
-        >Powered by Curator.io</a
-      >
+        <div class="call swiper-slide">
+            <div class="instagrams">
+                <!-- Place <div> tag where you want the feed to appear -->
+                <div id="curator-feed-default-feed-layout">
+                <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
+                </div>
+                <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
+            </div>
+        </div>
     </div>
-    <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
-  </div>
+    <div class="swiper-pagination"></div>
 </div>
 
 <script
@@ -194,5 +185,22 @@
         $('#visit').hide();
         $('#buy').show();
     }
+</script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        mousewheel: true,
+        keyboard: {
+            enabled: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
 </script>
 {% endblock local_block %}

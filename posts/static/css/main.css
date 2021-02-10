@@ -1,25 +1,35 @@
-/*
-.main_container {
-  margin: 0;
+html,
+body,
+.main_container,
+.local_container {
+  position: relative;
+  height: 100%;
 }
-*/
 
-#content,
-.information,
-.new,
-.call {
+.swiper-container {
   width: 100%;
-  height: 700px;
-  background-size: cover;
-  background-position: center center;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#content,
+.information,
+.new,
+.call {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 #content {
   overflow: hidden;
-  /*position: relative;*/
 }
 
 video {
