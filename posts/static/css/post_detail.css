@@ -1,16 +1,17 @@
-.container {
-  height: calc(100vh - 140px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: solid 1px black;
-}
+@import "background.css";
+@import "post_container.css";
 
 .wrap {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
-  padding: 20px;
-  border: solid 1px black;
+  padding: 100px;
+  /* border: solid 1px black; */
   width: 700px;
+}
+
+.post_content h1 {
+  font-size: 40px;
+  margin: 10px 0;
 }

@@ -7,11 +7,11 @@
     <title>Document</title>
     <script
       src="https://kit.fontawesome.com/9ada8679dc.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
     <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'users/css/login.css' %}" />
     {% block head_block %} {% endblock head_block %}
   </head>
   <body>
@@ -52,27 +52,44 @@
       <div class="rightwrap">
         {% if user.is_authenticated %}
         <div class="dropdown">
-          <a href="{% url 'users:user_page' user.pk %}">마이페이지</a>
+          <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
         </div>
         <div class="dropdown">
-          <a href="/accounts/logout">로그아웃</a>
+          <a href="/accounts/logout" class="dtn">로그아웃</a>
         </div>
         <div class="dropdown">{{user.username}} 님이 로그인 중</div>
         {% else %}
-        <div class="dropdown">
-          <a href="/accounts/signup">회원가입</a>
-        </div>
-        <div class="dropdown">
-          <a href="{% url 'users:login' %}">로그인</a>
-        </div>
+          <div class="dropdown">
+          <a href="/accounts/signup" class="dtn">회원가입</a>
+          </div>
+          <div class="dropdown">
+          <a href="/accounts/login" class="dtn">로그인</a>
+          </div>
         {% endif %}
       </div>
     </header>
-
     <div class="main_container">
       {% block global_block %} {% endblock global_block %}
     </div>
 
+    <form
+      class="form-inline my-2 my-lg-0"
+      action="{% url 'posts:search' %}"
+      method="post"
+    >
+      {% csrf_token %}
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        name="kw"
+        value="{{q}}"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
     <footer>footer</footer>
   </body>
 </html>

@@ -81,6 +81,11 @@ const showProductModal = (clickedLi, data) => {
   background.style.justifyContent = "center";
   background.style.top = "0";
   background.style.left = "0";
+  imageBox.style.display = "flex";
+  imageBox.style.justifyContent = "center";
+  closeModalBtn.style.display = "flex";
+  closeModalBtn.style.justifyContent = "center";
+  closeModalBtn.style.alignItems = "center";
 
   modal.style.backgroundColor = "#ffffff";
 

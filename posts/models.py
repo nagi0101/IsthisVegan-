@@ -75,3 +75,5 @@ class Comment(AbstractTimestamp):
 
     def __str__(self):
         return f"{self.user.nickname} - {self.post}"
+
+
