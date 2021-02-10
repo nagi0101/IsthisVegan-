@@ -1,5 +1,24 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .container {
-  height: calc(100vh - 140px);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +65,23 @@ li {
   position: fixed;
   bottom: 50px;
   right: 50px;
+  animation: hover 5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes hover {
+  0% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: #cdcdcd 1px 1px 8px;
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
 }
 
 #pencil {
@@ -97,4 +133,30 @@ li {
 
 .fa-heart {
   margin-right: 2px;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 20px;
+}
+
+.pagination_head,
+.pagination_tail {
+  display: flex;
+}
+
+.page {
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+
+.page:hover {
+  background-color: #aacd6e;
+  color: white;
+  transition: 0.3s;
 }

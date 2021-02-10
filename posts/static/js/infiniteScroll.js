@@ -1,7 +1,7 @@
 const POST_PER_PAGE = 50;
 const FIRST_POST_ID = document.querySelector(".post_grid-li").firstElementChild
   .dataset.postId;
-const LOCAL_CONTAINER = document.querySelector(".local_container");
+const CONTAINER = document.querySelector(".container");
 const POSTS_URL = "/posts/";
 // const POSTS_URL = "{% url 'post_list' %}";
 let fetching = false;
@@ -117,18 +117,48 @@ const onClickPaginationNode = function (pageClicked) {
 
 const createPagination = () => {
   const paginationContainer = document.createElement("div");
-  for (let index = 0; index < maxPage; index++) {
+  const paginationHead = document.createElement("div");
+  const paginationTail = document.createElement("div");
+  let ADD_ELLIPSES = false;
+  let PAGINATION_HEAD_LENGTH = 4;
+  let PAGINATION_TAIL_LENGTH = 4;
+
+  paginationHead.className = "pagination_head";
+  paginationTail.className = "pagination_tail";
+  if (maxPage < PAGINATION_HEAD_LENGTH + PAGINATION_TAIL_LENGTH) {
+    PAGINATION_TAIL_LENGTH = maxPage - PAGINATION_HEAD_LENGTH;
+    if (maxPage < PAGINATION_HEAD_LENGTH) {
+      PAGINATION_HEAD_LENGTH = maxPage;
+    }
+  }
+  if (PAGINATION_HEAD_LENGTH + PAGINATION_TAIL_LENGTH < maxPage) {
+    ADD_ELLIPSES = true;
+  }
+  for (let index = 0; index < PAGINATION_HEAD_LENGTH; index++) {
     const paginationNode = document.createElement("div");
     paginationNode.innerText = index + 1;
-    paginationNode.style.cursor = "pointer";
-    paginationNode.style.border = "1px solid #eeeeee";
     paginationNode.onclick = (event) => onClickPaginationNode(index);
-    paginationContainer.append(paginationNode);
+    paginationNode.className = "page";
+    paginationHead.append(paginationNode);
   }
-  paginationContainer.style.position = "fixed";
-  paginationContainer.style.right = "20px";
-  paginationContainer.style.top = "20px";
-  LOCAL_CONTAINER.append(paginationContainer);
+  for (let index = 0; index < PAGINATION_TAIL_LENGTH; index++) {
+    const paginationNode = document.createElement("div");
+    paginationNode.innerText = maxPage - index;
+    paginationNode.onclick = (event) =>
+      onClickPaginationNode(maxPage - index - 1);
+    paginationNode.className = "page";
+    paginationTail.prepend(paginationNode);
+  }
+  if (ADD_ELLIPSES) {
+    const ellipses = document.createElement("div");
+    ellipses.innerText = "...";
+    ellipses.className = "page";
+    paginationContainer.append(paginationHead, ellipses, paginationTail);
+  } else {
+    paginationContainer.append(paginationHead, paginationTail);
+  }
+  paginationContainer.className = "pagination";
+  CONTAINER.append(paginationContainer);
 };
 
 const initPage = () => {
