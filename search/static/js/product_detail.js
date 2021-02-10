@@ -70,6 +70,8 @@ const showProductModal = (clickedLi, data) => {
   background.className = "modal_background";
   imageBox.className = "modal_image";
   closeModalBtn.className = "modal_button";
+  nameSpan.className = "name_span";
+  
   image.src = clickedLi.querySelector("img").src;
   closeModalBtn.onclick = onClickCloseModalBtn;
 
