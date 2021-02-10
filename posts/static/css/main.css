@@ -28,15 +28,16 @@ video {
 
 .product_text {
   width: 100%;
-  top: 40%;
+  top: 25%;
   position: absolute;
   text-align: center;
 }
 
 #content__top h1 {
+  font-family: "Pangolin", cursive;
   font-size: 100px;
   color: #ffffff;
-  text-shadow: -2px 0 #aacd6e, 0 2px #aacd6e, 2px 0 #aacd6e, 0 -2px #aacd6e;
+  text-shadow: -3px 0 #5e7a2d, 0 2px #5e7a2d, 2px 0 #5e7a2d, 0 -2px #5e7a2d;
 }
 
 .search_form {
@@ -45,11 +46,13 @@ video {
   border: 1px solid #9ebf56;
   background-color: #ffffff;
   margin: 0 auto;
+  border-radius: 10px;
 }
 
 #product_search_input,
 #product_search_btn {
   border: 0px;
+  border-radius: 5px;
   outline: none;
 }
 
@@ -97,13 +100,44 @@ video {
 
 .new {
   background-image: url("../img/main3.png");
+  display: flex;
+  flex-direction: column;
+}
+
+.navbarcontain {
+  display: flex;
+  justify-content: space-between;
+}
+
+#menu {
+  margin: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+button {
+  outline: 0;
+}
+
+.list {
+  color: #3c3530;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+ul {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding-left: 200px;
 }
 
 .new_text {
   background-image: url("../img/main3_2.png");
-  background-size: cover;
+  background-size: auto;
   background-position: center center;
-  width: 50%;
+  border-radius: 20px;
+  width: 700px;
+  height: 300px;
 }
 
 .call {
