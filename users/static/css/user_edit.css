@@ -14,6 +14,7 @@
   flex-direction: column;
   padding: 20px;
   border: solid 1px black;
+  width: 700px;
 }
 
 .text-center {

@@ -16,6 +16,7 @@
   padding-left: 100px;
   padding-right: 100px;
   border: solid 1px black;
+  width: 700px;
 }
 
 .posts {
@@ -31,6 +32,12 @@ li {
   list-style: none;
 }
 
+.post2 {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .edit {
   border: solid 1px black;
   border-radius: 30px;
@@ -43,4 +50,77 @@ li {
 
 #pencil {
   color: white;
+}
+
+.post_grid-header {
+  display: grid;
+  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
+  border-bottom: 2px solid #3c3530;
+  padding-bottom: 5px;
+}
+
+.post_grid-ul {
+  height: 500px;
+  overflow-y: scroll;
+  padding: 0;
+  margin-right: -5px;
+}
+
+.post_grid-a {
+  display: grid;
+  grid-template-columns: 6fr 2fr 1fr 2fr 2fr;
+  text-decoration: none;
+  color: #3c3530;
+  border-bottom: 1px solid #3c3530;
+  padding: 8px 0px;
+  height: 35px;
+  box-sizing: border-box;
+}
+
+.post_grid-a:hover {
+  color: #aacd6e;
+  border-bottom: 1px solid #aacd6e;
+  background-color: #fdfdfd;
+  text-shadow: #cdcdcd 1px 1px 1px;
+}
+
+.post_grid-header > *,
+.post_grid-a > *:not(:first-child) {
+  text-align: center;
+}
+
+.post_title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fa-heart {
+  margin-right: 2px;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 20px;
+}
+
+.pagination_head,
+.pagination_tail {
+  display: flex;
+}
+
+.page {
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+
+.page:hover {
+  background-color: #aacd6e;
+  color: white;
+  transition: 0.3s;
 }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -35,6 +36,18 @@ class Post(AbstractTimestamp):
 
     def __str__(self):
         return f"{self.user} : {self.title}"
+
+    def get_like_count(self):
+        return len(self.like.all())
+
+    def written_before_today(self):
+        return self.created_at < timezone.now() - timezone.timedelta(days=1)
+
+    def return_written_time_or_date(self):
+        if self.written_before_today():
+            return self.created_at.strftime("%Y-%m-%d")
+        else:
+            return self.created_at.strftime("%H:%M")
 
 
 class RatedPost(Post):

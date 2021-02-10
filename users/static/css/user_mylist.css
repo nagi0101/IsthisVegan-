@@ -14,6 +14,7 @@
   flex-direction: column;
   padding: 20px;
   border: solid 1px black;
+  width: 700px;
 }
 
 .text-center {
@@ -21,6 +22,16 @@
   padding: 10px;
 }
 
+ul {
+  height: 400px;
+  overflow: scroll;
+}
+
 li {
   list-style: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  width: 500px;
+  overflow: hidden;
 }
