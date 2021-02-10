@@ -125,6 +125,9 @@ video {
   background-color: transparent;
 }
 
+#menu:hover {
+  color: #f27d52;
+}
 button {
   outline: 0;
 }
@@ -132,11 +135,27 @@ button {
 .list {
   color: #3c3530;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 17px;
+}
+
+.list:hover {
+  color: white;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #3c3530;
+}
+
+a:hover {
+  color: white;
 }
 
 ul {
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 100px;
   padding-left: 200px;
 }

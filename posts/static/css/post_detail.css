@@ -1,16 +1,211 @@
-.container {
-  height: calc(100vh - 140px);
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;500;800;900&display=swap");
+@import "background.css";
+@import "post_container.css";
+
+.main_container {
+  min-height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  border: solid 1px black;
+}
+
+.local_container {
+  min-height: 100%;
+  height: auto;
+  background-color: white;
 }
 
 .wrap {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border: solid 1px black;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 100px;
+  /* border: solid 1px black; */
   width: 700px;
+  font-family: "Noto Sans KR";
+  color: rgba(0, 0, 0, 0.9);
+}
+
+a {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.post_content {
+  width: 100%;
+}
+
+.post_content .post_header {
+  position: relative;
+  width: 100%;
+}
+
+.post_content .post_header h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin: 15px 0 20px 0;
+}
+
+.post_content .post_header .user {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.post_content .post_header .post_btns_container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.post_content .post_content_content {
+  font-weight: 200;
+  line-height: 1.2;
+  font-size: 18px;
+}
+
+.post_content .post_header .post_btns_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .post_content .post_header #bookmark_btn,
+.post_content .post_header #post_delete_btn,
+.post_content .post_header #post_edit_btn,
+.post_content .post_header #post_list_btn  */
+.post_content .post_header .post_btns_container > *,
+.comment_delete_btn {
+  height: 30px;
+  width: 60px;
+  outline: none;
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #cdcdcd;
+  margin: 0px 5px;
+  border-radius: 3px;
+}
+
+.post_content .post_header .post_btns_container > *:hover,
+.comment_delete_btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  transition: 0.2s;
+}
+
+.post_content .post_header .post_btns_container > * > * {
+  color: inherit;
+}
+
+.post_content .post_rate_star {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: gold;
+  text-shadow: #cdcdcd 1px 1px 5px;
+}
+
+#post_like_btn {
+  margin-top: 10px;
+}
+
+/* comment */
+
+.comment_btns_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 5px 0px;
+}
+
+#post_like_btn,
+.comment_like_btn {
+  outline: none;
+  background-color: white;
+  border: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+#post_like_btn > i,
+.comment_like_btn > i {
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+#post_like_btn > i[class*="fas"],
+.comment_like_btn > i[class*="fas"] {
+  color: #f16b6f;
+}
+
+#post_like_btn > i[class*="far"]:hover,
+.comment_like_btn > i[class*="far"]:hover {
+  color: #f1b4b6;
+}
+
+#post_like_btn > #post_like_count,
+.comment_like_btn > .comment_like_count {
+  font-size: 18px;
+  margin-left: 4px;
+}
+
+.comment_create_area {
+  position: relative;
+}
+
+.comment_create_area > textarea {
+  width: 100%;
+  resize: none;
+  height: 60px;
+  padding: 5px 38px 5px 5px;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+}
+
+.comment_create_area > button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  outline: none;
+  border: none;
+  background-color: white;
+}
+
+.comment_create_area > button:hover {
+  transition: 0.2s;
+  color: #aacd6e;
+}
+.comments_container {
+  width: 100%;
+}
+
+.comments_container h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.comments_container > ul > li {
+  border-bottom: 1px solid #cdcdcd;
+  margin-top: 5px;
+}
+
+.comments_container > ul > li > h4 {
+  font-size: 20px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.comments_container > ul > li > p {
+  font-size: 17px;
+  font-family: "Noto Sans KR";
+  font-weight: 200;
+  line-height: 1.2;
 }

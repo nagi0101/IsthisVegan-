@@ -84,49 +84,49 @@
                 <ul id="commu">
                 {% for post in COMMUNICATE %}
                 <li>
-                    <a
-                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}" class="list"
-                    >{{post.title}}</a
-                    >
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-                {% endfor %}
-                </ul>
-                <ul id="info" style="display:none;">
-                {% for post in INFO %}
-                <li>
-                    <a
-                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-                    class="list">{{post.title}}</a
-                    >
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-                {% endfor %}
-                </ul>
-                <ul id="visit" style="display:none;">
-                {% for post in VISIT %}
-                <li>
-                    <a
-                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-                    class="list">{{post.title}}</a
-                    >
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-                {% endfor %}
-                </ul>
-                <ul id="buy" style="display:none;">
-                {% for post in BUY %}
-                <li>
-                    <a
-                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-                    class="list">{{post.title}}</a
-                    >
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-                {% endfor %}
-                </ul>
-            </div>
-        </div>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          >{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul id="info" style="display:none;">
+      {% for post in INFO %}
+      <li>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul id="visit" style="display:none;">
+      {% for post in VISIT %}
+      <li>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul id="buy" style="display:none;">
+      {% for post in BUY %}
+      <li>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 
         <div class="call swiper-slide">
             <div class="instagrams">
