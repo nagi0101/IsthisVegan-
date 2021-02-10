@@ -1,5 +1,24 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .container {
-  height: calc(100vh - 140px);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
