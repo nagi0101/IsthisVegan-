@@ -65,14 +65,14 @@
 
 <div class="new">
   <div class="navbarcontain">
-    <button id="menuc" onClick="btn1()">
+    <button id="menu" onClick="btn1()">
         COMMUNICATE
     </button>
-    <button id="menui" onClick="btn2()">
+    <button id="menu" onClick="btn2()">
         INFO
     </button>
-    <button id="menuv" onClick="btn3()">VISIT</button>
-    <button id="menub"  onClick="btn4()">BUY</button>
+    <button id="menu" onClick="btn3()">VISIT</button>
+    <button id="menu"  onClick="btn4()">BUY</button>
   </div>
   <div class="new_text">
     {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
@@ -96,7 +96,7 @@
       {% for post in COMMUNICATE %}
       <li>
         <a
-          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}" class="list"
           >{{post.title}}</a
         >
         <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
@@ -108,7 +108,7 @@
       <li>
         <a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-          >{{post.title}}</a
+          class="list">{{post.title}}</a
         >
         <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
       </li>
@@ -119,7 +119,7 @@
       <li>
         <a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-          >{{post.title}}</a
+          class="list">{{post.title}}</a
         >
         <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
       </li>
@@ -130,7 +130,7 @@
       <li>
         <a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-          >{{post.title}}</a
+          class="list">{{post.title}}</a
         >
         <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
       </li>
