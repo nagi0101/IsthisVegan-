@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 
 
 def login(request):
-    return render(request, 'users/login.html')
+    return render(request, 'account/login.html')
 
 
 @login_required
