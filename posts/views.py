@@ -372,3 +372,6 @@ def search(request):
         return render(request, "posts/post_search.html", {"posts": posts})
     else:
         return render(request, "posts/post_search.html")
+
+
+

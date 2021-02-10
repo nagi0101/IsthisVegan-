@@ -5,53 +5,52 @@
 
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 {% endblock head_block %}
 
 
 {% block global_block %}
 
+
+<div class='all_content'>
   <h1 class="login_title">{% trans "Sign In" %}</h1>
 
   {% get_providers as socialaccount_providers %}
 
   {% if socialaccount_providers %}
-  <p class="login_info">{% blocktrans with site.name as site_name %}존재하는 소셜 계정으로 회원가입 해보세요!
-  아니면 이건비건에 직접 <a href="{{ signup_url }}">회원가입</a>
-  하세요! {% endblocktrans %}</p>
+  <p class="login_info">소셜 계정으로 로그인</p>
 
   <div class="socialaccount_ballot">
 
     <div class="socialaccount_providers"> 
-      <a href="{% provider_login_url "google" %}"><img src='https://postfiles.pstatic.net/MjAyMTAyMDhfMTg1/MDAxNjEyNzg0NjEzNzk0.sDeHGg0LYPGmME1dBuTorzDM5ntPy3LhIMOFze2-h9gg.Hh3-6A3KcdvRrNlRUQRtk461gEhTtDPW02F8kzpnNM0g.PNG.dongdong7251/%EA%B5%AC%EA%B8%80_%EB%A1%9C%EA%B7%B8%EC%9D%B81.png?type=w966' alt='구글 로그인' class='google'></a>
-      </br>
-      <a href="{% provider_login_url "naver" %}"><img src='https://postfiles.pstatic.net/MjAyMTAyMDhfMTgy/MDAxNjEyNzg1NDgwNTIw.Y6HHb34yDTgsu-iul5xa45pZdke49N8AhqOqSRfBAWMg.EQvz7eXGKAiphuzN98ZtPJ28TwJlj12vcHJV9X85irMg.PNG.dongdong7251/%EB%84%A4%EC%9D%B4%EB%B2%84_%EB%A1%9C%EA%B7%B8%EC%9D%B82.png?type=w966' alt='네이버 로그인' class='naver'></a>
-      </br>
-      <a href="{% url 'kakao_login' %}"><img src='https://postfiles.pstatic.net/MjAyMTAyMDhfMzAg/MDAxNjEyNzg2NTI2MjMw.vws8ZXUfry7NWhQiIpUnT6s1smPBY0g8CpqqTSbc93gg.PfKcxIWf85zTHmQ7E2WDq6oRHa4pItmc1QaAmiVBEy8g.PNG.dongdong7251/%EC%B9%B4%EC%B9%B4%EC%98%A4_%EB%A1%9C%EA%B7%B8%EC%9D%B83.png?type=w966' alt='카카오 로그인' class='kakao'></a>
-      </br></br>
+      <a href="{% provider_login_url "google" %}" class='google'>GOOGLE</a>
+      <a href="{% provider_login_url "naver" %}" class='naver'>NAVER</a>
+      <a href="{% url 'kakao_login' %}" class="kakao">KAKAO</a>
     </div>
   </div>
 
-  <div class="login-or">{% trans 'or' %}</div>
-
+  <hr align="center" style=" background-color: #fff;
+  border-top: 2px dashed #8c8b8b;">
+  <div class="login-or">
+    이건비건으로 로그인
   </div>
 
   {% include "socialaccount/snippets/login_extra.html" %}
 
-  {% else %}
-  <p>{% blocktrans %}If you have not created an account yet, then please
-  <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
   {% endif %}
 
-  <form class="login_form" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br/>
-    <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-  </form>
-
+  <div class='local_login'> 
+    <form class="login_form" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class='submit_button'>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button></br></br></div>
+    </form></br>
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
+  </div>
 </div>
 
 {% endblock global_block %}
