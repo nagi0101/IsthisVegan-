@@ -9,6 +9,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000;
 }
 
 .rightwrap {
@@ -33,6 +34,7 @@ header {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 10px;
 }
 
 .dropdown-content a {
@@ -44,4 +46,17 @@ header {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.loge {
+  color: white;
+}
+
+.dtn {
+  color: white;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
 }
