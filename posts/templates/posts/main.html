@@ -65,14 +65,14 @@
 
 <div class="new">
   <div class="navbarcontain">
-    <button id="menuc" onclick="btn1()">
+    <button id="menuc" onClick="btn1()">
         COMMUNICATE
     </button>
-    <button id="menui" onclick="btn2()">
+    <button id="menui" onClick="btn2()">
         INFO
     </button>
-    <button id="menuv" onclick="btn3()">VISIT</button>
-    <button id="menub"  onclick="btn4()">BUY</button>
+    <button id="menuv" onClick="btn3()">VISIT</button>
+    <button id="menub"  onClick="btn4()">BUY</button>
   </div>
   <div class="new_text">
     {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
@@ -103,7 +103,7 @@
       </li>
       {% endfor %}
     </ul>
-    <ul class="info" style="display:none;">
+    <ul id="info" style="display:none;">
       {% for post in INFO %}
       <li>
         <a
@@ -114,7 +114,7 @@
       </li>
       {% endfor %}
     </ul>
-    <ul class="visit" style="display:none;">
+    <ul id="visit" style="display:none;">
       {% for post in VISIT %}
       <li>
         <a
@@ -125,7 +125,7 @@
       </li>
       {% endfor %}
     </ul>
-    <ul class="buy" style="display:none;">
+    <ul id="buy" style="display:none;">
       {% for post in BUY %}
       <li>
         <a
@@ -150,6 +150,11 @@
     <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
   </div>
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.js"
+  integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+  crossorigin="anonymous"></script>
 
 <script type="text/javascript">
   /* curator-feed-default-feed-layout */
