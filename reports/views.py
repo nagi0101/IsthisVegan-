@@ -22,5 +22,5 @@ def ask_post_create(request):
             askpost.save()
             pk = askpost.id
 
-    return redirect(f"/main")
+    return redirect(f"/")
 

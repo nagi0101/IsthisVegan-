@@ -9,14 +9,15 @@
 
 {% block global_block %}
 
-
+<div class="bg"></div>
 <div class='all_content'>
   <h1 class="login_title">{% trans "Sign Up" %}</h1>
 
-  </br>
-  <p class='login_info'>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+  <p style='line-height:30%'>&nbsp</p>
+  <p class='login_info' style='line-height:100%'>이미 계정이 있으신가요?</p>
+  <p class='login_info'>바로 &nbsp<a href="{{ login_url }}"> 로그인</a>&nbsp하세요</p>
 
-  </br>
+  <p style='line-height:10%'>&nbsp</p>
   <div class="local_signup">
     <form class="signupform" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
