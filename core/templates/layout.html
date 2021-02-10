@@ -7,9 +7,7 @@
     <title>Document</title>
     <script
       src="https://kit.fontawesome.com/9ada8679dc.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
     <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
     {% block head_block %} {% endblock head_block %}
@@ -51,24 +49,19 @@
       </div>
       <div class="rightwrap">
         {% if user.is_authenticated %}
-        <div class="dropdown">
+
           <a href="{% url 'users:user_page' user.pk %}">마이페이지</a>
-        </div>
-        <div class="dropdown">
-          <a href="/accounts/logout">로그아웃</a>
-        </div>
-        <div class="dropdown">{{user.username}} 님이 로그인 중</div>
+          <button class='user_form'><a href="/accounts/logout" class="logout">로그아웃</a></button>
+          {{user.username}} 님이 로그인 중
         {% else %}
-        <div class="dropdown">
-          <a href="/accounts/signup">회원가입</a>
-        </div>
-        <div class="dropdown">
-          <a href="{% url 'users:login' %}">로그인</a>
-        </div>
+
+        <button class='user_form'><a href="/accounts/signup" class='sign_up'>회원가입</a></button>
+
+        <button class='user_form'><a href="/accounts/login" class='login'>로그인</a></button>
+
         {% endif %}
       </div>
     </header>
-
     <div class="main_container">
       {% block global_block %} {% endblock global_block %}
     </div>

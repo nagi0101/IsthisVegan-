@@ -49,3 +49,4 @@ class CommentAdmin(admin.ModelAdmin):
     filter_horizontal = [
         "like",
     ]
+

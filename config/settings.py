@@ -32,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
+    "users",
+    "posts",
+
     # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -45,8 +49,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     # User apps
     "core",
-    "users",
-    "posts",
+    "reports",
     "search",
     # Social login
     "django.contrib.sites",
@@ -159,8 +162,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
-
-LOGIN_REDIRECT_URL = "/"
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
