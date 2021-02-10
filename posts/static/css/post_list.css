@@ -46,6 +46,23 @@ li {
   position: fixed;
   bottom: 50px;
   right: 50px;
+  animation: hover 5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes hover {
+  0% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: #cdcdcd 1px 1px 8px;
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
 }
 
 #pencil {
