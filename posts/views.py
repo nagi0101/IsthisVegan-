@@ -70,7 +70,6 @@ def post_list(request):
                     "nickname": post.user.nickname,
                     "title": post.title,
                     "liked_total": len(post.like.all()),
-                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 
@@ -92,7 +91,6 @@ def post_list(request):
                     "title": post.title,
                     "liked_total": len(post.like.all()),
                     "rate": post.rate,
-                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 

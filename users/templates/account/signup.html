@@ -9,14 +9,15 @@
 
 {% block global_block %}
 
-
+<div class="bg"></div>
 <div class='all_content'>
   <h1 class="login_title">{% trans "Sign Up" %}</h1>
 
   </br>
-  <p class='login_info'>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+  <p class='signup_info' style='line-height:100%'>이미 계정이 있으신가요?</p>
+  <p class='signup_info'>바로 &nbsp<a href="{{ login_url }}"> 로그인</a>&nbsp하세요</p>
 
-  </br>
+  </br></br>
   <div class="local_signup">
     <form class="signupform" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
@@ -24,7 +25,8 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <br/>
+
+      </br>
       <div class='submit_button'>
       <button class="primaryAction" type="submit" >{% trans "Sign Up" %} &raquo;</button>
       </div>
