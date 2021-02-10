@@ -24,22 +24,19 @@
 
     <div class="socialaccount_providers"> 
       <a href="{% provider_login_url "google" %}" class='google'>GOOGLE</a>
-      </br>
       <a href="{% provider_login_url "naver" %}" class='naver'>NAVER</a>
-      </br>
       <a href="{% url 'kakao_login' %}" class="kakao">KAKAO</a>
-      </br>
     </div>
   </div>
 
-  <div class="login-or">-------0--------
-  <br/>이건비건 로그인</div>
+  <hr align="center" style=" background-color: #fff;
+  border-top: 2px dashed #8c8b8b;">
+  <div class="login-or">
+    이건비건으로 로그인
+  </div>
 
   {% include "socialaccount/snippets/login_extra.html" %}
 
-  {% else %}
-  <p>{% blocktrans %}If you have not created an account yet, then please
-  <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
   {% endif %}
 
   <div class='local_login'> 
@@ -49,8 +46,9 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
-      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button></br></br>
-    </form>
+      <div class='submit_button'>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button></br></br></div>
+    </form></br>
     <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
   </div>
 </div>
