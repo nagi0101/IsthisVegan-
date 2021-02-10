@@ -60,6 +60,13 @@ input:focus {
   box-shadow: inset 0 -2px 0 #a6a085;
 }
 
+.modal_button{
+  margin:auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
   color:#a6a085;
   border: none;
@@ -88,6 +95,28 @@ span{
   display:flex;
   justify-content: center;
   
+}
+
+.modal{
+  background-color:"#ffffff";
+}
+.modal_background{
+  position: fixed;
+  width:100%;
+  height:100%;
+  background-color:"rgba(0, 0, 0, 0.6)";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top:0;
+  left:0;
+
+}
+
+.modal_image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .MEAT {
