@@ -22,6 +22,7 @@ const modifyDataList = (data_list) => {
       ingredient.innerText = rawmtrl + "\n 알러지 정보 : " + allergy;
     }
     ingredient.style.display = "none";
+    
 
     // class, src 등 설정
     name.className = "product_name";
