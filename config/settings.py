@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     # User apps
     "core",
-    
+    "reports",
     "search",
     # Social login
     "django.contrib.sites",
@@ -162,8 +162,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
-
-LOGIN_REDIRECT_URL = "../../"
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
