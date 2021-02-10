@@ -20,8 +20,14 @@
   padding-left: 100px;
   padding-right: 100px;
   border: solid 1px black;
+  width: 700px;
 }
 
 li {
   list-style: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  width: 500px;
+  overflow: hidden;
 }

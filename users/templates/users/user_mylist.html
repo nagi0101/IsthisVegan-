@@ -3,6 +3,7 @@
 {% endblock head_block %} {% block local_block %}
 <div class="container">
   <div class="wrap">
+    {% if request.user.pk == person.pk %}
     <h2 class="text-center">내가 쓴 글 목록</h2>
     <ul>
       {% for mylist in mylists %}
@@ -14,6 +15,9 @@
       </li>
       {% endfor %}
     </ul>
+    {% else %}
+    <p>다른 사용자의 내가 쓴 글에 접근할 수 없습니다.</p>
+    {% endif %}
   </div>
 </div>
 {% endblock local_block %}
