@@ -1,158 +1,128 @@
 {% extends 'posts/layout.html' %}
 {% load static %}
 
-
 {% block head_block %}
-<link rel="stylesheet" href="{% static 'css/main_login.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% endblock head_block %}
 
 {% block local_block %}
-    
-    <nav id='top_nav'>
-        <ul>
-            <a href="">이건?비건!</a>
-            <!--유진아 마이페이지 잘 연결되는지 확인하려고 이거 내가 추가했어!! 놀라지말길-->
-            {% if user.is_authenticated %}
-            <a href="{% url 'users:user_page' pk %}">마이페이지</a>
-            
-            <a href="/accounts/logout">로그아웃</a>
-            <br>
-            {{user.username}} 님이 로그인 중
-
-            {% else %}
-            
-            <div class='social'>
-
-            <button class='user_form'><a href="/accounts/login" class='login'>로그인</a></button>
-  
-            <button class='user_form'><a href="/accounts/signup" class='sign_up'>회원가입</a></button>
-            </div>
-           
-            {% endif %}
-
-
-
-        </ul>
-    </nav>
-    
     <div id="content">
+        <video muted autoplay loop class="video">
+            <source src="../../static/img/production.mp4" type="video/mp4"> 
+        </video>
 
-        <div id="content__top">
-            <h1>Post Search</h1>
-            <br>
+        <div class="product_text">
+            <div id="content__top">
+                <h1>IsThis?<br>VEGAN!</h1>
+            </div>
 
-            </p>
-        </div>
-
-        <div class="search_prd_container">
-            <form class="search_form" method="GET" action="{% url 'search:search' %}" >
-                <input id="product_search_input"  type="text" name="init" id="" placeholder="제품명을 검색해봐요!">
-                <button id="product_search_btn" onclick = "onProductSearchBtnClicked()" type="submit"><i class="fas fa-search"></i></button>
+            <div class="search_prd_container">
+                <form class="search_form" method="GET" action="{% url 'search:search' %}" >
+                    <input id="product_search_input"  type="text" name="init" id="" placeholder="제품명을 검색해봐요!">
+                    <button id="product_search_btn" onclick = "onProductSearchBtnClicked()" type="submit"><i class="fas fa-search"></i></button>
+                </form>
             </div>
         </div>
-    
-
-        <hr/>
     </div>
 
-    
-
+    <!--
     <div class="category">
-
-        
         {% for category in category_list %}
             <a href="{% url 'posts:post_list' %}?category={{category}}">
             <span>{{category}}</span>
             </a>
         {% endfor %}
-
-       
-
     </div>
-
-   
+   -->
 
     <div class="information">
+        <div class="info_text">
+            <div class="left">
+                <h1>IsThis?<br>VEGAN!</h1>
+            </div>
 
-        <p>비건사이트에 당도한 것을 환영하오 낯선이여<p>
+            <div class="right">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                   In qui eveniet dolor sit commodi corrupti inventore maiores nemo, 
+                   earum similique quis voluptas provident cupiditate? 
+                   Facilis reiciendis aut eaque velit omnis.
+                </p>
+            </div>
+        </div>
+    </div>
 
+    <div class = "new">
+        <div class="new_text">
+            {% comment %} {% for post in posts|dictsort:'category' %}
+            {% ifchanged %}
+                <li>
+                <a href = "{% url 'posts:post_list' %}?category={{post.category}}"><h2>{{post.category}}</h2></a>
+            {% endifchanged %}
+                
+                <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
+                        <span>{{post.title}}</span>
+                        <span>{{post.user.nickname}}</span>
+                        <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                        </a>
+            
+                </li>
+            
+            {% endfor %}  {% endcomment %}
+            <ul>
+                <h2><a href="{% url 'posts:post_list' %}?category=COMMUNICATE">COMMUNICATE</a></h2>
+                {% for post in COMMUNICATE %}
+                    <li>
+                        <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
+                        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul>
+                <h2><a href="{% url 'posts:post_list' %}?category=INFO">INFO</a></h2>
+                {% for post in INFO %}
+                    <li>
+                        <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
+                        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul>
+                <h2><a href="{% url 'posts:post_list' %}?category=VISIT">VISIT</a></h2>
+                {% for post in VISIT %}
+                    <li>
+                        <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
+                        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul>
+                <h2><a href="{% url 'posts:post_list' %}?category=BUY">BUY</a></h2>
+                {% for post in BUY %}
+                    <li>
+                        <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
+                        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
     <div class="call">
-
-    <!-- Place <div> tag where you want the feed to appear -->
-    <div id="curator-feed-default-feed-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
-    <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
-
-    </div>
-
-
-    <div class = "new">
-    
-        {% comment %} {% for post in posts|dictsort:'category' %}
-        {% ifchanged %}
-            <li>
-            <a href = "{% url 'posts:post_list' %}?category={{post.category}}"><h2>{{post.category}}</h2></a>
-        {% endifchanged %}
-            
-            <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">
-                    <span>{{post.title}}</span>
-                    <span>{{post.user.nickname}}</span>
-                    <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
-                    </a>
-        
-            </li>
-        
-        {% endfor %}  {% endcomment %}
-        <ul>
-            <h2><a href="{% url 'posts:post_list' %}?category=COMMUNICATE">COMMUNICATE</a></h2>
-            {% for post in COMMUNICATE %}
-                <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <ul>
-            <h2><a href="{% url 'posts:post_list' %}?category=INFO">INFO</a></h2>
-            {% for post in INFO %}
-                <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <ul>
-            <h2><a href="{% url 'posts:post_list' %}?category=VISIT">VISIT</a></h2>
-            {% for post in VISIT %}
-                <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <ul>
-            <h2><a href="{% url 'posts:post_list' %}?category=BUY">BUY</a></h2>
-            {% for post in BUY %}
-                <li>
-                    <a href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}">{{post.title}}</a>
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span>
-                </li>
-            {% endfor %}
-        </ul>
-
+        <div class="instagrams">
+             <!-- Place <div> tag where you want the feed to appear -->
+            <div id="curator-feed-default-feed-layout">
+                <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
+            </div>
+            <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
+        </div>
     </div>
 
     <script type="text/javascript">
-    /* curator-feed-default-feed-layout */
-    (function(){
-    var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
-    i.src = "https://cdn.curator.io/published/cd33a21b-e808-46dc-9676-e6530d263a8b.js";
-    e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
-    })();
+        /* curator-feed-default-feed-layout */
+        (function(){
+        var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
+        i.src = "https://cdn.curator.io/published/cd33a21b-e808-46dc-9676-e6530d263a8b.js";
+        e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+        })();
     </script>
-
-  
-
-
 {% endblock local_block %}

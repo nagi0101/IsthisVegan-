@@ -1,7 +1,18 @@
-{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+{% extends 'posts/layout.html' %} 
+{% load static %} 
+
+{% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
-{% endblock head_block %} {% block local_block %}
+{% endblock head_block %} 
+
+{% block local_block %}
+<div class="bg"></div>
 <div class="container">
+  <form class="form-inline my-2 my-lg-0" action="{% url 'posts:search' %}" method="post">
+       {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="kw" value="{{q}}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
   <div class="wrap">
     <div id="max-page" style="display: none">{{ max_page }}</div>
     <div class="post_grid-wrapper">
