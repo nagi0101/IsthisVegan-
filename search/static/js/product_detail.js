@@ -68,11 +68,13 @@ const showProductModal = (clickedLi, data) => {
 
   // img src, className, onclick 설정
   background.className = "modal_background";
+  imageBox.className = "modal_image";
+  closeModalBtn.className = "modal_button";
   image.src = clickedLi.querySelector("img").src;
   closeModalBtn.onclick = onClickCloseModalBtn;
 
   // style 설정
-  background.style.position = "fixed";
+/*   background.style.position = "fixed";
   background.style.width = "100%";
   background.style.height = "100%";
   background.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
@@ -85,7 +87,7 @@ const showProductModal = (clickedLi, data) => {
   imageBox.style.justifyContent = "center";
   closeModalBtn.style.display = "flex";
   closeModalBtn.style.justifyContent = "center";
-  closeModalBtn.style.alignItems = "center";
+  closeModalBtn.style.alignItems = "center"; */
 
   modal.style.backgroundColor = "#ffffff";
 
