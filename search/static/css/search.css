@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-/* .bg {
+.bg {
   background-image: url("../img/userimage.png");
   height: 100vh;
   width: 100vw;
@@ -12,11 +12,11 @@
   top: 0;
   left: 0;
   z-index: -1;
-} */
+}
 
-body{
+/* body{
   background-image: url("../img/userimage.png");
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -28,7 +28,7 @@ body{
   z-index: -1;
   
 
-}
+} */
 .form-inline{
   display:none;
 }
@@ -116,11 +116,20 @@ img{
 }
 
 span{
-  display:flex;
+  
   justify-content: center;
   
 }
 
+.product_name,.product_category,.name_span{
+  display: flex;
+  justify-content: center;
+}
+
+.name_info{
+ 
+  justify-content: center;
+}
 
 .modal_background{
   position: fixed;
@@ -142,18 +151,22 @@ span{
   align-items: center;
 }
 
+#text{
+  white-space:nowrap; 
+}
+
 .MEAT {
   background-color: red;
   white-space:nowrap; 
   height:fit-content;
-  padding: 0.5px;
+ 
 }
 
 .FISH {
   background-color: cornflowerblue;
   white-space:nowrap; 
   height:fit-content;
-  padding: 0.5px;
+ 
 
 }
 
@@ -161,21 +174,21 @@ span{
   background-color: burlywood;
   white-space:nowrap; 
   height:fit-content;
-  padding: 0.5px;
+ 
 }
 
 .MILK {
   background-color: gold;
   white-space:nowrap; 
   height:fit-content;
-  padding: 0.5px;
+ 
 }
 
 .ECT {
   background-color: cadetblue;
   white-space:nowrap; 
   height:fit-content;
-  padding: 0.5px;
+ 
 }
 
 
