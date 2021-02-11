@@ -1,7 +1,8 @@
-{% extends 'search/layout.html' %}
+{% extends 'reports/layout.html' %}
 {% load static %}
 
 {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/tipoff.css' %}" />
 {% endblock head_block %}
 
 {% block local_block %}
@@ -9,7 +10,8 @@
   <div class="container">
     <div class="wrap">
       <p class="post_title">제보하기</p>
-      <div class='post_create_content'>
+      <p class="post_info">잘못된 정보를 제보해주세요!</p>
+      <div class='post_content'>
         <form action="{% url 'search:tip_off_create' %}" method="post" enctype="multipart/form-data" autocomplete="off" class="post_create_form">
             {% csrf_token %} 
 
