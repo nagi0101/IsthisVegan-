@@ -1,0 +1,17 @@
+{
+  "short_name": "이건비건",
+  "name": "이건비건",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/static/img/icon6x.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#FFF",
+  "theme_color": "#92BF56",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any"
+}

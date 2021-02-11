@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.generic import TemplateView
 import users.views
 
 urlpatterns = [
@@ -29,6 +30,8 @@ urlpatterns = [
     path("oauth/", users.views.oauth, name="oauth"),
     path("login/", users.views.login, name="slogin"),
     path("search_prd/", include("search.urls")),
+    path('serviceWorker.js', (TemplateView.as_view(template_name="serviceWorker.js", 
+  content_type='application/javascript', )), name='serviceWorker.js'),
 ]
 
 if settings.DEBUG:
