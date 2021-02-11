@@ -21,6 +21,13 @@
           class="ask_product_create_form"
         >
           {% csrf_token %} {{form.media}} {{form.as_p}}
+
+      {% if alert_flag %}
+      <script>
+        alert("내용을 입력하세요");
+        history.back();
+      </script>
+      {% endif %}
           <div class="wrap2">
             <input class="i1" type="submit" value="저장" />
           </div>
