@@ -1,29 +1,53 @@
-{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+{% extends 'posts/layout.html' %}
+{% load static %}
+
+{% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_search.css' %}" />
-{% endblock head_block %} {% block local_block %}
+{% endblock head_block %}
 
-<div class="bigcontainer">
+
+{% block local_block %}
+
+<div class='bg'></div>
+<div class="container">
   <div class="wrap">
-    <h2 class="reuslt">검색 결과</h2>
-    {% if not posts %}
-    <p>검색 결과가 없습니다.</p>
-    <p>{%else%} {% for post in posts %}</p>
 
-    <div class="container">
-      <div class="post">
-        <div class="post_baby">
-          <li>
-            <a
-              href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-            >
-              <span>{{post.title}}</span>
-              <span>{{post.user.nickname}}</span>
+    <form class="form-inline my-2 my-lg-0 search_form" action="{% url 'posts:search' %}" method="post">
+       {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="kw" value="{{q}}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    </br></br></br></br>
+
+    <h2 class="post_reuslt">검색 결과</h2>
+    {% if not posts %}
+    </br></br>
+    
+    <p class="no_post">검색 결과가 없습니다.</p>
+    
+    {%else%}
+    <div id="max-page" style="display: none">{{ max_page }}</div>
+    <div class="post_grid-wrapper">
+      <div class="post_grid-header">
+        <span class="post_header_title">제목</span>
+        <span class="post_header_user">글쓴이</span>
+        <span class="post_header_like">좋아요</span>
+        <span class="post_header_date">날짜</span>
+      </div>
+      <ul class="post_grid-ul">
+        {% for post in posts %}
+          <li class="post_grid-li">
+            <a data-post-id="{{post.pk}}" class="post_grid-a" href="{% url 'posts:post_detail' post.pk %}?category={{ post.category }}">
+              <span class="post_title">{{ post.title }}</span>
+              <span class="post_user">{{ post.user }}</span>
+              <span class="post_like"><i class="fas fa-heart"></i><span>{{ post.get_like_count }}</span></span>
+              <span class="post_date">{{ post.return_written_time_or_date }}</span>
             </a>
           </li>
-        </div>
-      </div>
+        {% endfor %}
+      </ul>
     </div>
-    {% endfor %} {% endif %}
+    {% endif %}
   </div>
 </div>
 {% endblock local_block%}
