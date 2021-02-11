@@ -34,7 +34,6 @@
 }
 
 #box_wrap{
-  
   height:120%;
   min-height: 900px;
   display:flex;
@@ -193,6 +192,39 @@ span{
   white-space:nowrap; 
   height:fit-content;
  
+}
+
+
+
+.edit {
+  border: solid 1px #A6A085;
+  border-radius: 30px;
+  background-color: #A6A085;
+  padding: 20px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  animation: hover 10s infinite;
+  transform-origin: center;
+}
+
+@keyframes hover {
+  0% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: #cdcdcd 1px 1px 8px;
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: #cdcdcd 1px 1px 1px;
+  }
+}
+
+#pencil {
+  color: white;
 }
 
 

@@ -8,15 +8,19 @@
 {% block local_block %}
  
   <div id="box_wrap">
-      <div class = "bg"></div>
-        <div class="search_form" >
-            <input id="product_search_input" onkeyup="onKeyUp(event)" type="text" name="" id="" placeholder="제품명을 검색해봐요!">
-            <button id="product_search_btn" onclick = "onProductSearchBtnClicked()" type="submit"><i class="fas fa-search"></i></button>
-        </div>
-        <div id="search_result">
-            <ul></ul>
-        </div>
-      </div>
+    <div class="search_form" >
+        <input id="product_search_input" onkeyup="onKeyUp(event)" type="text" name="" id="" placeholder="제품명을 검색해봐요!">
+        <button id="product_search_btn" onclick = "onProductSearchBtnClicked()" type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <div id="search_result">
+        <ul></ul>
+    </div>
+
+    <div class="edit">
+    <a href="{% url 'reports:ask_product_create' %}">궁금해요!
+    <i id="pencil" class="fas fa-edit"></i></a>
+    </div>
+  </div>
 
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

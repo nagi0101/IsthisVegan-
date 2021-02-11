@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import AskPost
 from .forms import AskPostForm
 
-def ask_post_create(request):
+def ask_product_create(request):
 
     if request.method == "GET":
         form = AskPostForm()
@@ -12,7 +12,7 @@ def ask_post_create(request):
             "form": form,
         }
     
-        return render(request, "reports/ask_post_create.html", ctx)
+        return render(request, "reports/ask_product_create.html", ctx)
     else:
         form = AskPostForm(request.POST)
 

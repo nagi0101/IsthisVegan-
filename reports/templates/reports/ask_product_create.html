@@ -1,22 +1,24 @@
-{% extends 'posts/layout.html' %} 
+{% extends 'reports/layout.html' %}
 {% load static %}
 
 {% block head_block %}
-<link rel="stylesheet" href="{% static 'css/post_create.css' %}" />
+<link rel="stylesheet" href="{% static 'css/ask_product_create.css' %}" />
 {% endblock head_block %}
 
 {% block local_block %}
+
 <div class='bg'></div>
   <div class="container">
     <div class="wrap">
-      <p class="post_title">게시글 작성하기</p>
-      <div class='post_create_content'>
+    <p class="ask_title">궁금해요!</p>
+    <p class="ask_info">검색 결과가 없는 음식을 물어보세요!</p>
+      <div class='ask_product'>
         <form
           action=""
           method="post"
           enctype="multipart/form-data"
           autocomplete="off"
-          class="post_create_form"
+          class="ask_product_create_form"
         >
           {% csrf_token %} {{form.media}} {{form.as_p}}
           <div class="wrap2">
@@ -26,4 +28,5 @@
       </div>
     </div>
   </div>
+
 {% endblock local_block %}
