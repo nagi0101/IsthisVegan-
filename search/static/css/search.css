@@ -1,10 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-body{
+.bg {
   background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* body{
+  background-image: url("../img/userimage.png");
+  height: 100%;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
   
 
-}
+} */
 .form-inline{
   display:none;
 }
@@ -89,17 +113,26 @@ img{
   display:flex;
   justify-content: center;
   align-items: center;
+  max-height:400px;
+  margin:auto;
 }
 
 span{
-  display:flex;
+  
   justify-content: center;
   
 }
 
-.modal{
-  background-color:"#ffffff";
+.product_name,.product_category,.name_span{
+  display: flex;
+  justify-content: center;
 }
+
+.name_info{
+ 
+  justify-content: center;
+}
+
 .modal_background{
   position: fixed;
   width:100%;
@@ -110,6 +143,7 @@ span{
   align-items: center;
   top:0;
   left:0;
+  font-family: 'Jua', sans-serif;
 
 }
 
@@ -117,26 +151,48 @@ span{
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  
+}
+
+#text{
+  white-space:nowrap; 
 }
 
 .MEAT {
   background-color: red;
+  white-space:nowrap; 
+  height:fit-content;
+ 
 }
 
 .FISH {
   background-color: cornflowerblue;
+  white-space:nowrap; 
+  height:fit-content;
+ 
+
 }
 
 .EGG {
   background-color: burlywood;
+  white-space:nowrap; 
+  height:fit-content;
+ 
 }
 
 .MILK {
   background-color: gold;
+  white-space:nowrap; 
+  height:fit-content;
+ 
 }
 
 .ECT {
   background-color: cadetblue;
+  white-space:nowrap; 
+  height:fit-content;
+ 
 }
 
 
