@@ -14,6 +14,8 @@ def ask_product_create(request):
     
         return render(request, "reports/ask_product_create.html", ctx)
     else:
+        if len(request.POST["content"]) == 0:
+            return render(request, "reports/ask_product_create.html", {"alert_flag": True})
         form = AskPostForm(request.POST)
 
         if form.is_valid():
