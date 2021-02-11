@@ -10,29 +10,34 @@ const modifyDataList = (data_list) => {
     const name = document.createElement("span");
     const category = document.createElement("span");
     const ingredient = document.createElement("span");
+    const prdlstReportNo = document.createElement("span");
 
     // 안에 들어갈 text 설정
     name.innerText = data["prdlstNm"];
     category.innerText = data["prdkind"];
+    prdlstReportNo.innerText = data["prdlstReportNo"]
+    //const prdlstReportNo = data["prdlstReportNo"]
     const rawmtrl = data["rawmtrl"];
     const allergy = data["allergy"];
+
     if (allergy === "알수없음") {
       ingredient.innerText = rawmtrl;
     } else {
       ingredient.innerText = rawmtrl + "\n 알러지 정보 : " + allergy;
     }
     ingredient.style.display = "none";
-    
+    prdlstReportNo.style.display = "none";
 
     // class, src 등 설정
     name.className = "product_name";
     category.className = "product_category";
     ingredient.className = "product_ingredient";
+    prdlstReportNo.className = "product_id";
     image.src = data["imgurl1"];
     li.onclick = onClickProductDetail;
 
     // DOM Tree 구성
-    li.append(image, name, category, ingredient);
+    li.append(image, name, category, ingredient, prdlstReportNo);
     newUl.append(li);
     console.log("appended!");
   });
