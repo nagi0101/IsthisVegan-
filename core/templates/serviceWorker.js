@@ -45,13 +45,13 @@ async function networkFirst(req) {
   }
 }
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", async (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
   if (url.origin === location.url) {
     event.respondWith(cacheFirst(req));
   } else {
-    event.respondWith(networkFirst(req));
+    {% comment %} event.respondWith(networkFirst(req)); {% endcomment %}
   }
 });
