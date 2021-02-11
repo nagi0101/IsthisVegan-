@@ -75,6 +75,9 @@ def search_detail_filter(request):
 
 def tip_off(request):
     if request.method == "POST":
+        if len(request.POST['content']) == 0:
+            return render(request, 'search/tipoff_create.html', {'alert_flag': True})
+
         form = TipOffPostForm(request.POST)
 
         if form.is_valid():
@@ -83,7 +86,6 @@ def tip_off(request):
             post.save()
 
         return redirect(f"/")
-        pass
     
     else:
         form = TipOffPostForm()

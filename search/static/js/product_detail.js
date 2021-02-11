@@ -3,6 +3,10 @@ const onClickCloseModalBtn = () => {
   background.remove();
 };
 
+const onClickTipOffModalBtn = () => {
+  window.location.href = 'tipoff/'
+};
+
 const createVeganInfoBox = (clickedLi, data) => {
   console.log(data);
   const categoryList = data["category_list"];
@@ -58,6 +62,7 @@ const showProductModal = (clickedLi, data) => {
   const image = document.createElement("img");
   const nameSpan = document.createElement("span");
   const closeModalBtn = document.createElement("button");
+  const tipoffModalBtn = document.createElement("button");
 
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
@@ -65,15 +70,18 @@ const showProductModal = (clickedLi, data) => {
   nameSpan.innerText = clickedLi.querySelector(".product_name").innerText;
 
   closeModalBtn.innerText = "닫기";
+  tipoffModalBtn.innerText = "제보하기";
 
   // img src, className, onclick 설정
   background.className = "modal_background";
   imageBox.className = "modal_image";
   closeModalBtn.className = "modal_button";
+  tipoffModalBtn.className = "modal_button";
   nameSpan.className = "name_span";
   
   image.src = clickedLi.querySelector("img").src;
   closeModalBtn.onclick = onClickCloseModalBtn;
+  tipoffModalBtn.onclick = onClickTipOffModalBtn;
 
   // style 설정
 /*   background.style.position = "fixed";
@@ -96,7 +104,7 @@ const showProductModal = (clickedLi, data) => {
   // HTML DOM 구성
   imageBox.append(image);
   nameBox.append(nameSpan);
-  modal.append(imageBox, nameBox, veganInfoBox, closeModalBtn);
+  modal.append(imageBox, nameBox, veganInfoBox, closeModalBtn, tipoffModalBtn);
   background.append(modal);
   body.append(background);
 };
