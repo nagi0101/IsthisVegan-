@@ -44,7 +44,7 @@
 
 ul {
   padding: 10px;
-  height: 400px;
+  height: 300px;
   overflow: scroll;
 }
 
@@ -63,4 +63,26 @@ li {
 
 .title:hover {
   color: #9ebf56;
+}
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 300px;
+  }
+  .wrap2 {
+    width: 270px;
+  }
+  .text-center {
+    font-size: 15px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  li {
+    width: 250px;
+  }
+  .pwform {
+    width: 230px;
+    font-size: 7px;
+  }
 }

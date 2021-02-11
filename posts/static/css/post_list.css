@@ -7,7 +7,6 @@
   align-items: center;
   flex-direction: column;
   padding: 20px 100px;
-
   /* border: solid 1px black; */
   width: 700px;
 }
@@ -173,4 +172,39 @@
 .page:hover {
   background-color: #aacd6e;
   color: white;
+}
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 400px;
+  }
+  .post_header_title {
+    font-size: 10px;
+  }
+  .post_header_user {
+    font-size: 10px;
+  }
+  .post_header_like {
+    font-size: 10px;
+  }
+  .post_header_date {
+    font-size: 10px;
+  }
+  .post_header_rate {
+    font-size: 10px;
+  }
+  .fas.fa-star {
+    font-size: 5px;
+    margin-right: 1px;
+  }
+  .fas.fa-star-half {
+    font-size: 5px;
+    margin-right: 1px;
+  }
+  .post_date {
+    font-size: 10px;
+  }
+  .search_form {
+    width: 300px;
+  }
 }
