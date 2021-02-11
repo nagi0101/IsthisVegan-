@@ -1,8 +1,9 @@
 import requests
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Ingredient
+from .forms import TipOffPostForm
 
 # Create your views here.
 
@@ -71,3 +72,22 @@ def search_detail_filter(request):
         print(ctx)
 
         return JsonResponse(ctx)
+
+def tip_off(request):
+    if request.method == "POST":
+        form = TipOffPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+        return redirect(f"/")
+        pass
+    
+    else:
+        form = TipOffPostForm()
+        ctx = {
+                "form": form,
+        }
+        return render(request, "search/tipoff_create.html", ctx) 
