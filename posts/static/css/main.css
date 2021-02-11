@@ -96,6 +96,7 @@ video {
 
 .information {
   background-image: url("../img/main2.png");
+  
 }
 
 .info_text {
@@ -184,4 +185,60 @@ ul {
 .instagrams {
   width: 80%;
   height: 500px;
+}
+
+
+@media (max-width:575px) {
+  #content__top h1 {
+    font-size: 90px;
+  }
+
+  .search_form {
+    width: 350px;
+    height: 40px;
+  }
+
+  #product_search_input {
+    width: 290px;
+    font-size: 13px;
+  }
+  
+  #product_search_btn {
+    width: 30px;
+  }
+  
+  #product_search_btn i {
+    font-size: 15px;
+  }
+
+  .info_text .left {
+    width: 180px;
+    font-size: 40px;
+  }
+  
+  .info_text .right {
+    width: 140px;
+    font-size: 13px;
+  }
+  
+  #menu {
+    margin: 10px;
+  }
+
+  .new_text {
+    width: 340px;
+    height: 200px;
+  }
+
+  ul {
+    margin-top: 40px;
+    margin-bottom: 100px;
+    padding-left: 50px;
+  }
+
+  .instagrams {
+    width: 60%;
+    height: 400px;
+  }
+
 }

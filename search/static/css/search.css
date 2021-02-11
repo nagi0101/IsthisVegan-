@@ -51,6 +51,7 @@
   justify-content: center;
   margin-top: 50px;
 }
+
 .local_container {
   display: flex;
   justify-content: center;
@@ -218,7 +219,7 @@ span {
   border: solid 1px #a6a085;
   border-radius: 30px;
   background-color: #a6a085;
-  padding: 20px;
+  padding: 10px;
   position: fixed;
   bottom: 50px;
   right: 50px;
@@ -241,6 +242,48 @@ span {
   }
 }
 
-#pencil {
+#pencil, .ask_name {
   color: white;
+}
+
+@media (max-width:575px) {
+  .bg{
+    visibility:hidden;
+  }
+
+  #box_wrap {
+    height: 100%;
+    width: 320px;
+    font-size: 1rem;
+  }
+
+  input {
+    width: 300px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  img {
+    max-height: 340px;
+    max-width: 340px;
+  }
+
+  .modal {
+    width: 350px;
+    max-height: 100vh;
+  }
+
+  .modal_image {
+    max-width: 300px;
+  }
+  
+  .modal_product_name {
+    font-size: 18px;
+  }
+
+  .edit {
+    padding: 7px;
+    bottom: 50px;
+    right: 30px;
+  }
 }
