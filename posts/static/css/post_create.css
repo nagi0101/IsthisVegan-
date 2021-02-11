@@ -2,34 +2,41 @@
 @import "post_container.css";
 
 .wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	padding: 20px 100px;
-	/* border: solid 1px black; */
-	width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 100px;
+  /* border: solid 1px black; */
+  width: 700px;
+}
+
+.post_create_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.post_create_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+}
+
+.post_title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 80x;
+}
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 300px;
   }
-
-.post_create_content{
-  display: flex;
-    align-items: center;
-    justify-content: center;
-	text-align: center;
-	margin-top: 50px;
+  .post_create_form {
+    width: 100%;
+  }
 }
-
-.post_create_form{
-  display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 500px;
-}
-
-.post_title{
-	font-size: 30px;
-	font-weight: 400;
-	line-height: 80x;
-}
-
-

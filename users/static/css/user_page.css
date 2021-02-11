@@ -71,3 +71,38 @@ p {
   justify-content: center;
   padding-bottom: 40px;
 }
+
+/* @media (min-width: 320px) and (max-width: 575px) {
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.445);
+    border-radius: 20px;
+    width: 300px;
+  }
+} */
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 250px;
+  }
+  .t1 {
+    padding: 5px;
+    margin: 5px 5px;
+    width: 100px;
+  }
+  .btn {
+    color: black;
+    font-size: 12px;
+  }
+  p {
+    font-size: 10px;
+  }
+  .pagename {
+    font-size: 15px;
+  }
+}
