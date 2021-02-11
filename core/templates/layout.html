@@ -4,10 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#92BF56"/>
     <title>Document</title>
     <script
       src="https://kit.fontawesome.com/9ada8679dc.js"
       crossorigin="anonymous"></script>
+    <link rel="manifest" href="{% static 'js/manifest.json' %}">
+    <script src="{% url 'serviceWorker.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
     <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
