@@ -30,10 +30,18 @@ body,
 
 #content {
   overflow: hidden;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  /* position: fixed; */
+  /* top: 0;
+  left: 0; */
 }
 
 video {
-  width: 100%;
+  /* width: 100%; */
+  /* min-width: 100%;
+  min-height: 100%; */
 }
 
 .product_text {
