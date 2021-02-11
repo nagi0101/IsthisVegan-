@@ -10,24 +10,25 @@
     <div class="wrap">
       <p class="post_title">제보하기</p>
       <div class='post_create_content'>
-        <form
-          action=""
-          method="post"
-          enctype="multipart/form-data"
-          autocomplete="off"
-          class="post_create_form"
-        >
-          {% csrf_token %} {{form.media}} {{form.as_p}}
+        <form action="{% url 'search:tip_off_create' %}" method="post" enctype="multipart/form-data" autocomplete="off" class="post_create_form">
+            {% csrf_token %} 
+
+            {{form.media}} 
+            {{form.as_p}}
       
-      {% if alert_flag %}
-      <script>
-        alert("내용을 입력하세요");
-        history.back();
-      </script>
-      {% endif %}
-          <div class="wrap2">
-            <input class="i1" type="submit" value="저장" />
-          </div>
+            {% if alert_flag %}
+            <script>
+                alert("내용을 입력하세요");
+                history.back();
+            </script>
+            {% endif %}
+
+            {% if prdlstReportNo %}
+                <input type="hidden" name="prdlstReportNo", value={{prdlstReportNo}}>
+            {% endif %}
+            <div class="wrap2">
+                <input class="i1" type="submit" value="저장" />
+            </div>
         </form>
       </div>
     </div>

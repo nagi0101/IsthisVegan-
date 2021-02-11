@@ -5,8 +5,6 @@ from django.http import JsonResponse
 from .models import Ingredient
 from .forms import TipOffPostForm
 
-# Create your views here.
-
 
 def search_main(request):
     return render(request, "search/search.html")
@@ -75,6 +73,17 @@ def search_detail_filter(request):
 
 def tip_off(request):
     if request.method == "POST":
+        prdlstReportNo = request.POST['prdlstReportNo']
+        form = TipOffPostForm()
+        ctx = {
+            'form': form,
+            'prdlstReportNo': prdlstReportNo,
+        }
+        return render(request, 'search/tipoff_create.html', ctx)
+
+def tip_off_create(request):
+    if request.method == "POST":
+        print(request.POST['prdlstReportNo'])
         if len(request.POST['content']) == 0:
             return render(request, 'search/tipoff_create.html', {'alert_flag': True})
 

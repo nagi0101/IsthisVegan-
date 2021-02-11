@@ -4,10 +4,40 @@ const onClickCloseModalBtn = () => {
 };
 
 const onClickTipOffModalBtn = () => {
-  //window.location.href = 'tipoff/'
   product_id = document.querySelector(".id_span").innerText;
-  console.log(product_id)
+  
+  function parse_cookies() {
+    var cookies = {};
+    if (document.cookie && document.cookie !== '') {
+        document.cookie.split(';').forEach(function (c) {
+            var m = c.trim().match(/(\w+)=(.*)/);
+            if(m !== undefined) {
+                cookies[m[1]] = decodeURIComponent(m[2]);
+            }
+        });
+    }
+    return cookies;
+  }
+  const cookies = parse_cookies();
 
+  const form = document.createElement("form");
+  form.setAttribute("method", "Post");
+  form.setAttribute("action", "tipoff/");
+
+  const idField = document.createElement("input");
+  idField.setAttribute("type", "hidden");
+  idField.setAttribute("name", "prdlstReportNo");
+  idField.setAttribute("value", product_id);
+  form.appendChild(idField);
+
+  const hiddenField = document.createElement("input");
+  hiddenField.setAttribute("type", "hidden");
+  hiddenField.setAttribute("name", "csrfmiddlewaretoken");
+  hiddenField.setAttribute("value", cookies['csrftoken']);
+  form.appendChild(hiddenField);
+
+  document.body.appendChild(form);
+  form.submit()
 };
 
 const createVeganInfoBox = (clickedLi, data) => {
@@ -68,7 +98,6 @@ const showProductModal = (clickedLi, data) => {
   const idSpan = document.createElement("span")
   const closeModalBtn = document.createElement("button");
   const tipoffModalBtn = document.createElement("button");
-
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정

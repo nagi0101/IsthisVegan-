@@ -16,7 +16,6 @@ const modifyDataList = (data_list) => {
     name.innerText = data["prdlstNm"];
     category.innerText = data["prdkind"];
     prdlstReportNo.innerText = data["prdlstReportNo"]
-    //const prdlstReportNo = data["prdlstReportNo"]
     const rawmtrl = data["rawmtrl"];
     const allergy = data["allergy"];
 

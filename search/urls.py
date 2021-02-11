@@ -11,4 +11,5 @@ urlpatterns = [
         "search_detail_filter/", views.search_detail_filter, name="search_detail_filter"
     ),
     path("tipoff/", views.tip_off, name="tip_off"),
+    path("tipoff/create/", views.tip_off_create, name="tip_off_create"),
 ]
