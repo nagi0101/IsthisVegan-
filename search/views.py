@@ -83,6 +83,7 @@ def tip_off(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
+            post.prdlstReportNo = request.POST["prdlstReportNo"]
             post.save()
 
         return redirect(f"/")
