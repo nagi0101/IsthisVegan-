@@ -193,6 +193,14 @@
   .post_header_rate {
     font-size: 10px;
   }
+  .fas.fa-star {
+    font-size: 5px;
+    margin-right: 1px;
+  }
+  .fas.fa-star-half {
+    font-size: 5px;
+    margin-right: 1px;
+  }
   .post_date {
     font-size: 10px;
   }

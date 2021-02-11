@@ -36,7 +36,10 @@
   .wrap {
     width: 300px;
   }
-  .post_create_form {
-    width: 100%;
+  #cke_id_content {
+    max-width: 370px;
+  }
+  p {
+    padding-bottom: 10px;
   }
 }

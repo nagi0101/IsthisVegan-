@@ -7,15 +7,16 @@
   align-items: center;
   flex-direction: column;
   padding: 20px 100px;
-
   /* border: solid 1px black; */
   width: 700px;
 }
 
-.post_reuslt{
+.post_result {
   font-size: 30px;
-	font-weight: 400;
-	line-height: 100x;
+  font-weight: 400;
+  line-height: 100x;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
 .search_form {
@@ -148,4 +149,31 @@
 .page:hover {
   background-color: #aacd6e;
   color: white;
+}
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 400px;
+  }
+  .post_header_title {
+    font-size: 10px;
+  }
+  .post_header_user {
+    font-size: 10px;
+  }
+  .post_header_like {
+    font-size: 10px;
+  }
+  .post_header_date {
+    font-size: 10px;
+  }
+  .post_header_rate {
+    font-size: 10px;
+  }
+  .post_date {
+    font-size: 10px;
+  }
+  .search_form {
+    width: 300px;
+  }
 }
