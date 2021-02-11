@@ -1,10 +1,11 @@
-const onClickCloseModalBtn = () => {
+const closeModal = () => {
   const background = document.querySelector(".modal_background");
+  const modal = document.querySelector(".modal");
+  modal.remove();
   background.remove();
 };
 
 const createVeganInfoBox = (clickedLi, data) => {
-  console.log(data);
   const categoryList = data["category_list"];
   const veganFilter = data["vegan_filter"];
   const ingredientName = data["ingredient_name"];
@@ -16,7 +17,7 @@ const createVeganInfoBox = (clickedLi, data) => {
   const ingredientSpan = document.createElement("span");
   const veganFilterSpan = document.createElement("span");
 
-  // set innerThel
+  // set innerHTML
   let innerHTML = clickedLi.querySelector(".product_ingredient").innerHTML;
   categoryList.forEach((categoryName) => {
     ingredientName[categoryName].forEach((name) => {
@@ -37,7 +38,9 @@ const createVeganInfoBox = (clickedLi, data) => {
       veganFilterSpan.innerText += `${element} : X    `;
     }
   });
-  console.log(veganFilterSpan);
+
+  // set ClassName
+  veganFilterBox.className = "modal_vegan_filter";
 
   // set HTML DOM
   ingredientBox.append(ingredientSpan);
@@ -56,49 +59,31 @@ const showProductModal = (clickedLi, data) => {
   const imageBox = document.createElement("div");
   const nameBox = document.createElement("div");
   const image = document.createElement("img");
-  const nameSpan = document.createElement("span");
   const closeModalBtn = document.createElement("button");
 
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정
-  nameSpan.innerText = clickedLi.querySelector(".product_name").innerText;
+  nameBox.innerText = clickedLi.querySelector(".product_name").innerText;
 
   closeModalBtn.innerText = "닫기";
 
   // img src, className, onclick 설정
   background.className = "modal_background";
+  modal.className = "modal";
   imageBox.className = "modal_image";
   closeModalBtn.className = "modal_button";
-  nameSpan.className = "name_span";
-  
+  nameBox.className = "modal_product_name";
+  veganInfoBox.className = "modal_vegan_info";
+
   image.src = clickedLi.querySelector("img").src;
-  closeModalBtn.onclick = onClickCloseModalBtn;
-
-  // style 설정
-/*   background.style.position = "fixed";
-  background.style.width = "100%";
-  background.style.height = "100%";
-  background.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-  background.style.display = "flex";
-  background.style.alignItems = "center";
-  background.style.justifyContent = "center";
-  background.style.top = "0";
-  background.style.left = "0";
-  imageBox.style.display = "flex";
-  imageBox.style.justifyContent = "center";
-  closeModalBtn.style.display = "flex";
-  closeModalBtn.style.justifyContent = "center";
-  closeModalBtn.style.alignItems = "center"; */
-
-  modal.style.backgroundColor = "#ffffff";
+  closeModalBtn.onclick = closeModal;
+  background.onclick = closeModal;
 
   // HTML DOM 구성
   imageBox.append(image);
-  nameBox.append(nameSpan);
   modal.append(imageBox, nameBox, veganInfoBox, closeModalBtn);
-  background.append(modal);
-  body.append(background);
+  body.append(background, modal);
 };
 
 const getProductDetail = (clickedLi) => {
@@ -112,7 +97,6 @@ const getProductDetail = (clickedLi) => {
     // 응답(성공)
     .then(function (response) {
       data = response.data;
-      console.log(data);
       showProductModal(clickedLi, data);
     })
     // 응답(실패)
