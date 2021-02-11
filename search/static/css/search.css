@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 
 .bg {
   background-image: url("../img/userimage.png");
@@ -29,43 +29,42 @@
   
 
 } */
-.form-inline{
-  display:none;
+.form-inline {
+  display: none;
 }
 
-#box_wrap{
-  height:120%;
+#box_wrap {
+  height: 120%;
   min-height: 900px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
-  flex-direction:column;
-  padding:20px 70px 20px 70px;
-  font-family: 'Jua', sans-serif;
-  font-size:1.5rem;
+  flex-direction: column;
+  padding: 20px 70px 20px 70px;
+  font-family: "Jua", sans-serif;
+  font-size: 1.5rem;
 }
-  
-.search_form{
-  
-  display:flex;
+
+.search_form {
+  display: flex;
   justify-content: center;
-  margin-top:50px;
+  margin-top: 50px;
 }
-.local_container{
-  display:flex;
+.local_container {
+  display: flex;
   justify-content: center;
 }
 
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   width: 600px;
   border: 0;
   font-family: inherit;
   padding: 16px 12px 0 12px;
-  
+
   font-size: 16px;
   font-weight: 400;
   background: rgba(0, 0, 0, 0.02);
@@ -74,7 +73,6 @@ input {
   transition: all 0.15s ease;
 }
 input:hover {
-
   box-shadow: inset 0 -1px 0 rgba(166, 160, 133, 0.5);
 }
 input:focus {
@@ -83,123 +81,143 @@ input:focus {
   box-shadow: inset 0 -2px 0 #a6a085;
 }
 
-.modal_button{
-  margin:auto;
-  display:flex;
+.modal_button {
+  margin: auto;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 button {
-  color:#a6a085;
+  color: #a6a085;
   border: none;
   border-radius: 2px;
-  width:40px;
-
+  width: 40px;
 }
 button:focus {
-  
   box-shadow: inset 0 0 0 rgba(166, 160, 133, 1);
   outline: none;
-  border:none;
+  border: none;
 }
 button:active {
-outline: none;
-border: none;
+  outline: none;
+  border: none;
 }
-          
-img{
-  display:flex;
+
+img {
+  display: flex;
   justify-content: center;
   align-items: center;
-  max-height:400px;
-  margin:auto;
+  max-height: 400px;
+  margin: auto;
 }
 
-span{
-  
+span {
   justify-content: center;
-  
 }
 
-.product_name,.product_category,.name_span{
+.product_name,
+.product_category,
+.name_span {
   display: flex;
   justify-content: center;
 }
 
-.name_info{
- 
+.name_info {
   justify-content: center;
 }
 
-.modal_background{
+.modal_background {
   position: fixed;
-  width:100%;
-  height:100%;
-  background-color:"rgba(0, 0, 0, 0.6)";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  top:0;
-  left:0;
-  font-family: 'Jua', sans-serif;
-
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
-.modal_image{
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 550px;
+  max-height: 100vh;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.9);
+  z-index: 4;
+  font-family: "Jua", sans-serif;
+}
+
+.modal_image {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  
+  /* width: 100vw; */
 }
 
-#text{
-  white-space:nowrap; 
+.modal_image > img {
+  border-radius: 15px;
+}
+
+.modal_product_name {
+  font-size: 24px;
+  border-bottom: #a6a085 dashed 2px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.modal_vegan_filter {
+  border-top: #a6a085 dashed 2px;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+#text {
+  white-space: nowrap;
 }
 
 .MEAT {
   background-color: red;
-  white-space:nowrap; 
-  height:fit-content;
- 
+  white-space: nowrap;
+  height: fit-content;
 }
 
 .FISH {
   background-color: cornflowerblue;
-  white-space:nowrap; 
-  height:fit-content;
- 
-
+  white-space: nowrap;
+  height: fit-content;
 }
 
 .EGG {
   background-color: burlywood;
-  white-space:nowrap; 
-  height:fit-content;
- 
+  white-space: nowrap;
+  height: fit-content;
 }
 
 .MILK {
   background-color: gold;
-  white-space:nowrap; 
-  height:fit-content;
- 
+  white-space: nowrap;
+  height: fit-content;
 }
 
 .ECT {
   background-color: cadetblue;
-  white-space:nowrap; 
-  height:fit-content;
- 
+  white-space: nowrap;
+  height: fit-content;
 }
 
-
-
 .edit {
-  border: solid 1px #A6A085;
+  border: solid 1px #a6a085;
   border-radius: 30px;
-  background-color: #A6A085;
+  background-color: #a6a085;
   padding: 20px;
   position: fixed;
   bottom: 50px;
@@ -226,8 +244,3 @@ span{
 #pencil {
   color: white;
 }
-
-
-
-
-

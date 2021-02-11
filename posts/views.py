@@ -70,6 +70,7 @@ def post_list(request):
                     "nickname": post.user.nickname,
                     "title": post.title,
                     "liked_total": len(post.like.all()),
+                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 
@@ -91,6 +92,7 @@ def post_list(request):
                     "title": post.title,
                     "liked_total": len(post.like.all()),
                     "rate": post.rate,
+                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 
@@ -249,8 +251,8 @@ def post_create(request):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
-        if len(request.POST['content']) == 0:
-            return render(request, 'posts/post_create.html', {'alert_flag': True})
+        if len(request.POST["content"]) == 0:
+            return render(request, "posts/post_create.html", {"alert_flag": True})
 
         pk = 0
         if category in ["INFO", "COMMUNICATE"]:
@@ -373,6 +375,3 @@ def search(request):
         return render(request, "posts/post_search.html", {"posts": posts})
     else:
         return render(request, "posts/post_search.html")
-
-
-

@@ -19,10 +19,9 @@ const modifyDataList = (data_list) => {
     if (allergy === "알수없음") {
       ingredient.innerText = rawmtrl;
     } else {
-      ingredient.innerText = rawmtrl + "\n 알러지 정보 : " + allergy;
+      ingredient.innerText = rawmtrl + "\n\n 알러지 정보 : " + allergy;
     }
     ingredient.style.display = "none";
-    
 
     // class, src 등 설정
     name.className = "product_name";
