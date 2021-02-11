@@ -209,3 +209,9 @@ a {
   font-weight: 200;
   line-height: 1.2;
 }
+
+@media (max-width: 575px) {
+  .wrap {
+    width: 400px;
+  }
+}

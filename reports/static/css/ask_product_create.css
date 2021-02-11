@@ -64,3 +64,48 @@
 	font-weight: 400;
 	line-height: 100px;
 }
+
+@media (max-width:575px) {
+	.bg{
+		visibility:hidden;
+	  }
+	.wrap{
+		width: 350px;
+		height: 600px;
+	}
+
+	.ask_title{
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 50px;
+	}
+
+	.ask_info{
+		font-size: 14px;
+	}
+
+	.ask_product_create_form{
+		height: 480px;
+		margin-top: 20px;
+		font-size: 13px;
+	}
+
+	.ask_product{
+		margin-top: 5px;
+	}
+
+	#cke_id_content{
+		max-width: 350px;
+		max-height: 400px;
+	}
+
+	#cke_1_contents{
+		max-height: 200px;
+	}
+
+	#cke_1_top{
+		max-height: 150px;
+	}
+
+
+}

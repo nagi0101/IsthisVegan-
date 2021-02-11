@@ -6,7 +6,7 @@
   <div class="wrap">
     {% if request.user.pk == person.pk %}
     <h2 class="text-center">회원 탈퇴</h2>
-    <form method="POST">
+    <form class="deleteform" method="POST">
       {% csrf_token %}
       <p>정말로 이건비건을 탈퇴하시겠습니까?</p>
       <div class="wrap2">
