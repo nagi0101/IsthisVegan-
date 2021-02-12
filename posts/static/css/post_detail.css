@@ -107,6 +107,11 @@ a {
   text-shadow: #cdcdcd 1px 1px 5px;
 }
 
+.post_content img {
+  max-width: 100%;
+  height: auto;
+}
+
 #post_like_btn {
   margin-top: 10px;
 }
