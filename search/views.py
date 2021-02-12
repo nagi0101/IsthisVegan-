@@ -2,6 +2,7 @@ import requests
 import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from .models import Ingredient
 from .forms import TipOffPostForm
 
@@ -71,6 +72,7 @@ def search_detail_filter(request):
 
         return JsonResponse(ctx)
 
+@login_required
 def tip_off(request):
     if request.method == "POST":
         prdlstReportNo = request.POST['prdlstReportNo']
@@ -81,6 +83,7 @@ def tip_off(request):
         }
         return render(request, 'search/tipoff_create.html', ctx)
 
+@login_required
 def tip_off_create(request):
     if request.method == "POST":
         print(request.POST['prdlstReportNo'])
