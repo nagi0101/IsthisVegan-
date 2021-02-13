@@ -269,8 +269,8 @@ span {
   }
 
   img {
-    max-height: 340px;
-    max-width: 340px;
+    max-height: 250px;
+    max-width: 250px;
   }
 
   .modal {
@@ -279,7 +279,7 @@ span {
   }
 
   .modal_image {
-    max-width: 300px;
+    max-width: 350px;
   }
 
   .modal_product_name {

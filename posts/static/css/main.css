@@ -263,9 +263,11 @@ ul {
     padding-left: 40px;
   }
 
-  .list,
-  .fa-heart {
+  .list{
     font-size: 12px;
+    font-weight: 500;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .instagrams {
