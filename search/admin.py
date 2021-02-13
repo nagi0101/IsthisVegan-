@@ -9,7 +9,6 @@ class IngredientAdmin(admin.ModelAdmin):
 
 @admin.register(models.TipOffPost)
 class PostAdmin(admin.ModelAdmin):
-    list_display = [
-        "user",
-        "prdlstReportNo",
-    ]
+    list_display = ["prdlstReportNo",]
+
+    list_filter = ["prdlstReportNo",]
