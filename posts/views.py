@@ -294,6 +294,9 @@ def post_update(request, pk):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
+        if len(request.POST['content']) == 0:
+            return render(request, 'posts/post_create.html', {'alert_flag': True})
+            
         if category in ["INFO", "COMMUNICATE"]:
             post = get_object_or_404(Post, id=pk)
             form = PostForm(request.POST, request.FILES, instance=post)

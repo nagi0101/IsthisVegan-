@@ -1,11 +1,14 @@
 from django.contrib import admin
 from . import models
 
-# Register your models here.
-
-
 @admin.register(models.Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
     list_display = ["name", "category"]
 
     list_filter = ["category"]
+
+@admin.register(models.TipOffPost)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["prdlstReportNo", "is_checked"]
+
+    list_filter = ["is_checked", "prdlstReportNo", ]
