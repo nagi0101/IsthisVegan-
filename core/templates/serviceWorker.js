@@ -16,26 +16,16 @@ if ("serviceWorker" in navigator) {
   console.warn("Service Worker is not supported");
 }
 
-const STATIC_CACHE_NAME = "static-cache";
-const STATIC_ASSETS = [
+const staticAssets = [
   "/",
   "/static/css/layout.css",
   "/static/css/reset.css",
   "/static/css/scrollbar.css",
 ];
 
-const OFFLINE_CACHE_NAME = "offline-cache";
-const OFFLINE_URL = "/offline";
-const OFFLINE_ASSETS = ["/offline"];
-
 self.addEventListener("install", async (event) => {
-  /* static */
-  const staticCache = await caches.open(STATIC_CACHE_NAME);
-  staticCache.addAll(STATIC_ASSETS); 
-
-  /* offline */
-  const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
-  offlineCache.addAll(OFFLINE_ASSETS);
+  const cache = await caches.open("static-cache");
+  cache.addAll(staticAssets);
 });
 
 async function cacheFirst(req) {
@@ -44,16 +34,14 @@ async function cacheFirst(req) {
 }
 
 async function networkFirst(req) {
-  {% comment %} const cache = await caches.open("dynamic-cache"); {% endcomment %}
+  const cache = await caches.open("dynamic-cache");
 
   try {
     const res = await fetch(req);
-    {% comment %} cache.put(req, res.clone()); {% endcomment %}
+    cache.put(req, res.clone());
     return res;
   } catch (error) {
-    const cache = await caches.open(OFFLINE_CACHE_NAME);
-    const cachedResponse = await cache.match(OFFLINE_URL);
-    return cachedResponse;
+    return await cache.match(req);
   }
 }
 
@@ -61,21 +49,9 @@ self.addEventListener("fetch", async (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  try {
-    if (url.origin === location.url) {
-      event.respondWith(cacheFirst(req));
-    } else {
-      event.respondWith(networkFirst(req));
-    }
-  } catch (error) {
-    // catch is only triggered if an exception is thrown, which is likely
-    // due to a network error.
-    // If fetch() returns a valid HTTP response with a response code in
-    // the 4xx or 5xx range, the catch() will NOT be called.
-    console.log("Fetch failed; returning offline page instead.", error);
-
-    const cache = await caches.open(OFFLINE_CACHE_NAME);
-    const cachedResponse = await cache.match(OFFLINE_URL);
-    return cachedResponse;
+  if (url.origin === location.url) {
+    event.respondWith(cacheFirst(req));
+  } else {
+    {% comment %} event.respondWith(networkFirst(req)); {% endcomment %}
   }
 });
