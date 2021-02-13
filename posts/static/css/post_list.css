@@ -207,4 +207,7 @@
   .search_form {
     width: 300px;
   }
+  .edit {
+    padding: 15px;
+  }
 }
