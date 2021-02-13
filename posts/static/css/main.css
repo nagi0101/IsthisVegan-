@@ -230,9 +230,13 @@ ul {
   }
 
   ul {
-    margin-top: 40px;
-    margin-bottom: 100px;
-    padding-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 40px;
+  }
+
+  .list, .fa-heart{
+    font-size: 12px;
   }
 
   .instagrams {

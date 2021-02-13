@@ -83,7 +83,7 @@
                 {% endfor %} {% endcomment %}
                 <ul id="commu">
                 {% for post in COMMUNICATE %}
-                <li>
+                <li class='content_text'>
         <span class="list"><a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           >{{post.title}}</a
@@ -94,7 +94,7 @@
     </ul>
     <ul id="info" style="display:none;">
       {% for post in INFO %}
-      <li>
+      <li class='content_text'>
         <span class="list"><a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
@@ -105,7 +105,7 @@
     </ul>
     <ul id="visit" style="display:none;">
       {% for post in VISIT %}
-      <li>
+      <li class='content_text'>
         <span class="list"><a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
@@ -116,7 +116,7 @@
     </ul>
     <ul id="buy" style="display:none;">
       {% for post in BUY %}
-      <li>
+      <li class='content_text'>
         <span class="list"><a
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
