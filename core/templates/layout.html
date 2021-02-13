@@ -10,6 +10,20 @@
       src="https://kit.fontawesome.com/9ada8679dc.js"
       crossorigin="anonymous"></script>
     <link rel="manifest" href="{% static 'js/manifest.json' %}">
+    <script>
+      if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/serviceWorker.js", { scope: "/" })
+    .then((reg) => {
+      console.log("Registration successful", reg);
+    })
+    .catch((e) =>
+      console.error("Error during service worker registration:", e)
+    );
+} else {
+  console.warn("Service Worker is not supported");
+}
+    </script>
     <script src="{% url 'serviceWorker.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" />

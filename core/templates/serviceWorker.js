@@ -1,31 +1,20 @@
-if ("serviceWorker" in navigator) {
-  //   navigator.serviceWorker.getRegistrations().then(function (registrations) {
-  //     for (let registration of registrations) {
-  //       registration.unregister();
-  //     }
-  //   });
-  navigator.serviceWorker
-    .register("/serviceWorker.js", { scope: "/" })
-    .then((reg) => {
-      console.log("Registration successful", reg);
-    })
-    .catch((e) =>
-      console.error("Error during service worker registration:", e)
-    );
-} else {
-  console.warn("Service Worker is not supported");
-}
-
-const staticAssets = [
+const STATIC_CACHE_NAME = "static-cache-v1";
+const STATIC_ASSETS = [
   "/",
   "/static/css/layout.css",
   "/static/css/reset.css",
   "/static/css/scrollbar.css",
 ];
 
+const OFFLINE_CACHE_NAME = "offline-cache-v1";
+const OFFLINE_ASSETS = ["/offline"];
+
 self.addEventListener("install", async (event) => {
-  const cache = await caches.open("static-cache");
-  cache.addAll(staticAssets);
+  {% comment %} const staticCache = await caches.open(STATIC_CACHE_NAME);
+  staticCache.addAll(STATIC_ASSETS); {% endcomment %}
+
+  const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
+  offlineCache.addAll(OFFLINE_ASSETS);
 });
 
 async function cacheFirst(req) {
@@ -45,13 +34,25 @@ async function networkFirst(req) {
   }
 }
 
-self.addEventListener("fetch", async (event) => {
-  const req = event.request;
-  const url = new URL(req.url);
+self.addEventListener("fetch", (event) => {
+  if (event.request.mode !== "navigate") {
+    // page navigation 제외
+    return;
+  }
 
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return caches
+        .open(OFFLINE_CACHE_NAME)
+        .then((cache) => cache.match("/offline"));
+    })
+  );
+
+  /*
   if (url.origin === location.url) {
-    event.respondWith(cacheFirst(req));
+    {% comment %} event.respondWith(cacheFirst(req)); {% endcomment %}
   } else {
     {% comment %} event.respondWith(networkFirst(req)); {% endcomment %}
   }
+  */
 });
