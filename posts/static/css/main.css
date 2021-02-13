@@ -96,7 +96,6 @@ video {
 
 .information {
   background-image: url("../img/main2.png");
-  
 }
 
 .info_text {
@@ -237,8 +236,19 @@ ul {
   }
 
   .instagrams {
-    width: 60%;
+    width: 65%;
     height: 400px;
   }
 
+  .information {
+    background-image: none;
+  }
+
+  .new {
+    background-image: none;
+  }
+
+  .call {
+    background-image: none;
+  }
 }
