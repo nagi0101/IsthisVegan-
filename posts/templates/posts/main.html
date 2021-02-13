@@ -64,6 +64,12 @@
                 <button id="menu"  onClick="btn4()">BUY</button>
             </div>
             <div class="new_text">
+              <span class="textwrap">
+                <a href="{% url 'posts:post_list' %}?category=COMMUNICATE" id="commu2" class="link">COMMUNICATE</a>
+                <a href="{% url 'posts:post_list' %}?category=INFO"id="info2" class="link" style="display:none">INFO</a>
+                <a href="{% url 'posts:post_list' %}?category=VISIT" id="visit2" class="link"style="display:none">VISIT</a>
+                <a href="{% url 'posts:post_list' %}?category=BUY" id="buy2" class="link"style="display:none">BUY</a>
+              </span>
                 {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
                 <li>
                 <a href="{% url 'posts:post_list' %}?category={{post.category}}"
@@ -82,16 +88,16 @@
 
                 {% endfor %} {% endcomment %}
                 <ul id="commu">
-                {% for post in COMMUNICATE %}
-                <li class='content_text'>
-        <span class="list"><a
-          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
-          >{{post.title}}</a
-        >
-        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
-      </li>
-      {% endfor %}
-    </ul>
+                  {% for post in COMMUNICATE %}
+                  <li class='content_text'>
+                    <span class="list"><a
+                      href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+                      >{{post.title}}</a
+                    >
+                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+                 </li>
+                  {% endfor %}
+                </ul>
     <ul id="info" style="display:none;">
       {% for post in INFO %}
       <li class='content_text'>
@@ -166,24 +172,40 @@
         $('#info').hide();
         $('#visit').hide();
         $('#buy').hide();
+        $('#commu2').show();
+        $('#info2').hide();
+        $('#visit2').hide();
+        $('#buy2').hide();
     }
     function btn2(){
         $('#commu').hide();
         $('#info').show();
         $('#visit').hide();
         $('#buy').hide();
+        $('#commu2').hide();
+        $('#info2').show();
+        $('#visit2').hide();
+        $('#buy2').hide();
     }
     function btn3(){
         $('#commu').hide();
         $('#info').hide();
         $('#visit').show();
         $('#buy').hide();
+        $('#commu2').hide();
+        $('#info2').hide();
+        $('#visit2').show();
+        $('#buy2').hide();
     }
     function btn4(){
         $('#commu').hide();
         $('#info').hide();
         $('#visit').hide();
         $('#buy').show();
+        $('#commu2').hide();
+        $('#info2').hide();
+        $('#visit2').hide();
+        $('#buy2').show();
     }
 </script>
 

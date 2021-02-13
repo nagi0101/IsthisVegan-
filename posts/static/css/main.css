@@ -165,7 +165,8 @@ a:hover {
 ul {
   margin-top: 80px;
   margin-bottom: 100px;
-  padding-left: 200px;
+  margin-left: 10px;
+  width: 450px;
 }
 
 .new_text {
@@ -173,8 +174,11 @@ ul {
   background-size: auto;
   background-position: center center;
   border-radius: 20px;
-  width: 700px;
+  width: 720px;
   height: 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .call {
@@ -186,8 +190,22 @@ ul {
   height: 500px;
 }
 
+.textwrap {
+  width: 176px;
+  /* border: solid 1px black; */
+  margin-right: 10px;
+  text-align: center;
+}
 
-@media (max-width:575px) {
+/* ul {
+  border: solid 1px black;
+} */
+
+.link {
+  text-align: center;
+}
+
+@media (max-width: 575px) {
   #content__top h1 {
     font-size: 90px;
   }
@@ -201,11 +219,11 @@ ul {
     width: 290px;
     font-size: 13px;
   }
-  
+
   #product_search_btn {
     width: 30px;
   }
-  
+
   #product_search_btn i {
     font-size: 15px;
   }
@@ -219,17 +237,17 @@ ul {
     align-items: center;
     text-align: center;
   }
-  
+
   .info_text .left {
     width: 300px;
     font-size: 40px;
   }
-  
+
   .info_text .right {
     width: 280px;
     font-size: 13px;
   }
-  
+
   #menu {
     margin: 10px;
   }
@@ -245,7 +263,8 @@ ul {
     padding-left: 40px;
   }
 
-  .list, .fa-heart{
+  .list,
+  .fa-heart {
     font-size: 12px;
   }
 
