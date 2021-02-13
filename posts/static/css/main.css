@@ -210,13 +210,23 @@ ul {
     font-size: 15px;
   }
 
+  .info_text {
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+  
   .info_text .left {
-    width: 180px;
+    width: 300px;
     font-size: 40px;
   }
   
   .info_text .right {
-    width: 140px;
+    width: 280px;
     font-size: 13px;
   }
   
