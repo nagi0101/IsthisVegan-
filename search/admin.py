@@ -9,6 +9,6 @@ class IngredientAdmin(admin.ModelAdmin):
 
 @admin.register(models.TipOffPost)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["prdlstReportNo",]
+    list_display = ["prdlstReportNo", "is_checked"]
 
-    list_filter = ["prdlstReportNo",]
+    list_filter = ["is_checked", "prdlstReportNo", ]

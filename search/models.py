@@ -37,6 +37,7 @@ class Ingredient(models.Model):
 class TipOffPost(AbstractTimestamp):
     prdlstReportNo =models.PositiveIntegerField(verbose_name="상품번호", default=0)
     content = RichTextUploadingField(verbose_name="제보 내용")
+    is_checked = models.BooleanField(verbose_name="확인 여부", default=False)
 
     def __str__(self):
         return f"{self.prdlstReportNo}"
