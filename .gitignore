@@ -299,8 +299,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# End of https://www.toptal.com/developers/gitignore/api/python,django,vscode,venv,macos,windows,linux
-posts/migrations/0001_initial.py
-
-users/migrations/0001_initial.py
