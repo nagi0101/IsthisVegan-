@@ -2,7 +2,6 @@ import requests
 import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
 from .models import Ingredient
 from .forms import TipOffPostForm
 
@@ -72,7 +71,6 @@ def search_detail_filter(request):
 
         return JsonResponse(ctx)
 
-@login_required
 def tip_off(request):
     if request.method == "POST":
         prdlstReportNo = request.POST['prdlstReportNo']
@@ -83,10 +81,10 @@ def tip_off(request):
         }
         return render(request, 'search/tipoff_create.html', ctx)
 
-@login_required
 def tip_off_create(request):
+    #TODO Badge 기능 추가 시 로그인한 유저에 한해 경험치 부여
+
     if request.method == "POST":
-        print(request.POST['prdlstReportNo'])
         if len(request.POST['content']) == 0:
             return render(request, 'search/tipoff_create.html', {'alert_flag': True})
 
@@ -94,12 +92,11 @@ def tip_off_create(request):
 
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
             post.prdlstReportNo = request.POST["prdlstReportNo"]
             post.save()
 
         return redirect(f"/")
-    
+
     else:
         form = TipOffPostForm()
         ctx = {
