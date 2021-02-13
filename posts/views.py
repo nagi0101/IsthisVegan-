@@ -235,7 +235,7 @@ def comment_delete(request):
 
     return JsonResponse(commentList, safe=False)
 
-
+@login_required
 def post_create(request):
     category = request.GET["category"]
 

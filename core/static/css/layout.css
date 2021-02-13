@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;900&display=swap");
+
 html,
 body {
   height: 100%;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 header {
@@ -34,6 +37,9 @@ header {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63c3530', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 
+.leftwrap {
+  display: flex;
+}
 .rightwrap {
   display: flex;
 }
@@ -105,4 +111,35 @@ header {
 
 a {
   text-decoration: none;
+}
+
+.dtn2 {
+  display: none;
+  color: white;
+  margin-right: 10px;
+}
+
+.dtn2:hover {
+  color: #9ebf56;
+  text-shadow: 1px 1px 1px gray;
+}
+
+@media (max-width: 695px) {
+  .dtn {
+    display: none;
+  }
+  #dtn {
+    display: none;
+  }
+  .dtn2 {
+    display: block;
+  }
+  .dropdown-content {
+    right: 7px;
+    font-size: 15px;
+  }
+  .admin {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
 }

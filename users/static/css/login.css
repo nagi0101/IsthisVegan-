@@ -218,8 +218,7 @@
 
 @media (max-width:575px) {
   .all_content{
-    width: 330px;
-    height: 500px;
+    width: 80%;
     box-shadow:2px 2px 7px #999;
   }
 

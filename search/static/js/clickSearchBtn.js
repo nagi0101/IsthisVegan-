@@ -4,42 +4,48 @@ const SEARCH_INPUT = document.querySelector("#product_search_input");
 const modifyDataList = (data_list) => {
   const oldUl = document.querySelector("#search_result > ul");
   const newUl = document.createElement("ul");
-  data_list.forEach((data) => {
+  if (data_list.length > 0) {
+    data_list.forEach((data) => {
+      const li = document.createElement("li");
+      const image = document.createElement("img");
+      const name = document.createElement("span");
+      const category = document.createElement("span");
+      const ingredient = document.createElement("span");
+
+      // 안에 들어갈 text 설정
+      name.innerText = data["prdlstNm"];
+      category.innerText = data["prdkind"];
+      const rawmtrl = data["rawmtrl"];
+      const allergy = data["allergy"];
+      if (allergy === "알수없음") {
+        ingredient.innerText = rawmtrl;
+      } else {
+        ingredient.innerText = rawmtrl + "\n\n 알러지 정보 : " + allergy;
+      }
+      ingredient.style.display = "none";
+
+      // class, src 등 설정
+      name.className = "product_name";
+      category.className = "product_category";
+      ingredient.className = "product_ingredient";
+      image.src = data["imgurl1"];
+      li.onclick = onClickProductDetail;
+
+      // DOM Tree 구성
+      li.append(image, name, category, ingredient);
+      newUl.append(li);
+      console.log("appended!");
+    });
+  } else {
     const li = document.createElement("li");
-    const image = document.createElement("img");
-    const name = document.createElement("span");
-    const category = document.createElement("span");
-    const ingredient = document.createElement("span");
-    const prdlstReportNo = document.createElement("span");
+    const message = document.createElement("span");
 
-    // 안에 들어갈 text 설정
-    name.innerText = data["prdlstNm"];
-    category.innerText = data["prdkind"];
-    prdlstReportNo.innerText = data["prdlstReportNo"]
-    const rawmtrl = data["rawmtrl"];
-    const allergy = data["allergy"];
+    message.innerText = "검색 결과가 없습니다.";
 
-    if (allergy === "알수없음") {
-      ingredient.innerText = rawmtrl;
-    } else {
-      ingredient.innerText = rawmtrl + "\n\n 알러지 정보 : " + allergy;
-    }
-    ingredient.style.display = "none";
-    prdlstReportNo.style.display = "none";
-
-    // class, src 등 설정
-    name.className = "product_name";
-    category.className = "product_category";
-    ingredient.className = "product_ingredient";
-    prdlstReportNo.className = "product_id";
-    image.src = data["imgurl1"];
-    li.onclick = onClickProductDetail;
-
-    // DOM Tree 구성
-    li.append(image, name, category, ingredient, prdlstReportNo);
+    // DOM Tree
+    li.append(message);
     newUl.append(li);
-    console.log("appended!");
-  });
+  }
   oldUl.parentElement.replaceChild(newUl, oldUl);
 };
 
