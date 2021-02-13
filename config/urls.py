@@ -23,6 +23,7 @@ import users.views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("posts.urls")),
+    path("offline/", include("core.urls")),
     path("users/", include("users.urls")),
     path("askproduct/",include("reports.urls")),
     path("ckeditor/", include("ckeditor_uploader.urls")),

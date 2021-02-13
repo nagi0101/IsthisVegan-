@@ -16,16 +16,26 @@ if ("serviceWorker" in navigator) {
   console.warn("Service Worker is not supported");
 }
 
-const staticAssets = [
+const STATIC_CACHE_NAME = "static-cache";
+const STATIC_ASSETS = [
   "/",
   "/static/css/layout.css",
   "/static/css/reset.css",
   "/static/css/scrollbar.css",
 ];
 
+const OFFLINE_CACHE_NAME = "offline-cache";
+const OFFLINE_URL = "/offline";
+const OFFLINE_ASSETS = ["/offline"];
+
 self.addEventListener("install", async (event) => {
-  const cache = await caches.open("static-cache");
-  cache.addAll(staticAssets);
+  /* static */
+  const staticCache = await caches.open(STATIC_CACHE_NAME);
+  staticCache.addAll(STATIC_ASSETS); 
+
+  /* offline */
+  const offlineCache = await caches.open(OFFLINE_CACHE_NAME);
+  offlineCache.addAll(OFFLINE_ASSETS);
 });
 
 async function cacheFirst(req) {
@@ -34,14 +44,16 @@ async function cacheFirst(req) {
 }
 
 async function networkFirst(req) {
-  const cache = await caches.open("dynamic-cache");
+  {% comment %} const cache = await caches.open("dynamic-cache"); {% endcomment %}
 
   try {
     const res = await fetch(req);
-    cache.put(req, res.clone());
+    {% comment %} cache.put(req, res.clone()); {% endcomment %}
     return res;
   } catch (error) {
-    return await cache.match(req);
+    const cache = await caches.open(OFFLINE_CACHE_NAME);
+    const cachedResponse = await cache.match(OFFLINE_URL);
+    return cachedResponse;
   }
 }
 
@@ -49,9 +61,21 @@ self.addEventListener("fetch", async (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  if (url.origin === location.url) {
-    event.respondWith(cacheFirst(req));
-  } else {
-    {% comment %} event.respondWith(networkFirst(req)); {% endcomment %}
+  try {
+    if (url.origin === location.url) {
+      event.respondWith(cacheFirst(req));
+    } else {
+      event.respondWith(networkFirst(req));
+    }
+  } catch (error) {
+    // catch is only triggered if an exception is thrown, which is likely
+    // due to a network error.
+    // If fetch() returns a valid HTTP response with a response code in
+    // the 4xx or 5xx range, the catch() will NOT be called.
+    console.log("Fetch failed; returning offline page instead.", error);
+
+    const cache = await caches.open(OFFLINE_CACHE_NAME);
+    const cachedResponse = await cache.match(OFFLINE_URL);
+    return cachedResponse;
   }
 });
