@@ -68,6 +68,34 @@
           <a href="/accounts/login" class="dtn">로그인</a>
           </div>
         {% endif %}
+
+        <!--반응형용 네브바-->
+          <div class="dropdown">
+            <a href="#" class="dtn2">메뉴</a>
+              <div class="dropdown-content">
+                <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+                <a href="{% url 'posts:post_list' %}?category=COMMUNICATE"
+                >떠들어요!</a>
+                <a href="{% url 'posts:post_list' %}?category=VISIT"
+                >가봤어요!</a>
+                <a href="{% url 'posts:post_list' %}?category=BUY"
+                >사봤어요!</a>
+                <a href="#">도전해요!</a>
+              </div>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dtn2">회원정보</a>
+              <div class="dropdown-content">
+                {% if user.is_authenticated %}
+                  <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
+                  <a href="/accounts/logout" class="dtn">로그아웃</a>
+                  <div class="admin">{{user.username}} 님이 로그인 중</div>
+                {% else %}
+                  <a href="/accounts/signup" class="dtn">회원가입</a>
+                  <a href="/accounts/login" class="dtn">로그인</a>
+                {% endif %}
+              </div>
+          </div>
       </div>
     </header>
     <div class="main_container">

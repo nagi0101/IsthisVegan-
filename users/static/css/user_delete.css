@@ -66,19 +66,28 @@ p {
 }
 
 @media (max-width: 575px) {
+  .bg {
+    background-image: none;
+  }
   .wrap {
     width: 250px;
+    box-shadow: 2px 2px 7px #999;
   }
-  .t1 {
-    padding: 5px;
-    margin: 5px 5px;
-    width: 100px;
+  .i1 {
+    background-color: #d9c1bb;
+    box-shadow: 2px 2px 4px #999;
   }
   .t2 {
     font-size: 12px;
   }
   .i1 {
     font-size: 12px;
+  }
+  .t2:hover {
+    color: white;
+  }
+  .i1:hover {
+    color: white;
   }
   .deleteform {
     width: 230px;

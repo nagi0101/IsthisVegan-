@@ -66,17 +66,25 @@ li {
 }
 
 @media (max-width: 575px) {
+  .bg {
+    background-image: none;
+  }
   .wrap {
     width: 300px;
+    box-shadow: 2px 2px 7px #999;
   }
   .wrap2 {
     width: 270px;
+    box-shadow: 2px 2px 4px #999;
   }
   .text-center {
     font-size: 15px;
   }
   .title {
     font-size: 12px;
+  }
+  .title:hover {
+    color: #d9c1bb;
   }
   li {
     width: 250px;
