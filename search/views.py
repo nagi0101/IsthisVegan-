@@ -1,10 +1,9 @@
 import requests
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Ingredient
-
-# Create your views here.
+from .forms import TipOffPostForm
 
 
 def search_main(request):
@@ -71,3 +70,36 @@ def search_detail_filter(request):
         print(ctx)
 
         return JsonResponse(ctx)
+
+def tip_off(request):
+    if request.method == "POST":
+        prdlstReportNo = request.POST['prdlstReportNo']
+        form = TipOffPostForm()
+        ctx = {
+            'form': form,
+            'prdlstReportNo': prdlstReportNo,
+        }
+        return render(request, 'search/tipoff_create.html', ctx)
+
+def tip_off_create(request):
+    #TODO Badge 기능 추가 시 로그인한 유저에 한해 경험치 부여
+
+    if request.method == "POST":
+        if len(request.POST['content']) == 0:
+            return render(request, 'search/tipoff_create.html', {'alert_flag': True})
+
+        form = TipOffPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.prdlstReportNo = request.POST["prdlstReportNo"]
+            post.save()
+
+        return redirect(f"/")
+
+    else:
+        form = TipOffPostForm()
+        ctx = {
+                "form": form,
+        }
+        return render(request, "search/tipoff_create.html", ctx) 

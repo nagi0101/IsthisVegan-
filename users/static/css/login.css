@@ -1,3 +1,10 @@
+input {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+  outline: none;
+}
+
 .main_container {
   padding-top: 82px;
 }
@@ -40,6 +47,10 @@
   line-height: 50px;
 }
 
+.signup_info .login_link {
+  color: #f16b6f;
+  text-decoration: underline;
+}
 
 .password_info {
   display: flex;
@@ -216,10 +227,10 @@
   transform: translateY(-7px);
 }
 
-@media (max-width:575px) {
-  .all_content{
+@media (max-width: 575px) {
+  .all_content {
     width: 80%;
-    box-shadow:2px 2px 7px #999;
+    box-shadow: 2px 2px 7px #999;
   }
 
   .login_title {
@@ -228,11 +239,11 @@
     line-height: 50px;
   }
 
-  .login_info{
+  .login_info {
     line-height: 5px;
   }
 
-  .bg{
-    visibility:hidden;
+  .bg {
+    visibility: hidden;
   }
 }

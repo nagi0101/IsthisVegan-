@@ -5,6 +5,43 @@ const closeModal = () => {
   background.remove();
 };
 
+const onClickTipOffModalBtn = () => {
+  product_id = document.querySelector(".id_span").innerText;
+  
+  function parse_cookies() {
+    var cookies = {};
+    if (document.cookie && document.cookie !== '') {
+        document.cookie.split(';').forEach(function (c) {
+            var m = c.trim().match(/(\w+)=(.*)/);
+            if(m !== undefined) {
+                cookies[m[1]] = decodeURIComponent(m[2]);
+            }
+        });
+    }
+    return cookies;
+  }
+  const cookies = parse_cookies();
+
+  const form = document.createElement("form");
+  form.setAttribute("method", "Post");
+  form.setAttribute("action", "tipoff/");
+
+  const idField = document.createElement("input");
+  idField.setAttribute("type", "hidden");
+  idField.setAttribute("name", "prdlstReportNo");
+  idField.setAttribute("value", product_id);
+  form.appendChild(idField);
+
+  const hiddenField = document.createElement("input");
+  hiddenField.setAttribute("type", "hidden");
+  hiddenField.setAttribute("name", "csrfmiddlewaretoken");
+  hiddenField.setAttribute("value", cookies['csrftoken']);
+  form.appendChild(hiddenField);
+
+  document.body.appendChild(form);
+  form.submit()
+};
+
 const createVeganInfoBox = (clickedLi, data) => {
   const categoryList = data["category_list"];
   const veganFilter = data["vegan_filter"];
@@ -58,15 +95,19 @@ const showProductModal = (clickedLi, data) => {
   const modal = document.createElement("div");
   const imageBox = document.createElement("div");
   const nameBox = document.createElement("div");
+  const idBox = document.createElement("div")
   const image = document.createElement("img");
+  const idSpan = document.createElement("span")
   const closeModalBtn = document.createElement("button");
-
+  const tipoffModalBtn = document.createElement("button");
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정
   nameBox.innerText = clickedLi.querySelector(".product_name").innerText;
+  idSpan.innerText = clickedLi.querySelector(".product_id").innerText;
 
   closeModalBtn.innerText = "닫기";
+  tipoffModalBtn.innerText = "제보하기";
 
   // img src, className, onclick 설정
   background.className = "modal_background";
@@ -75,14 +116,19 @@ const showProductModal = (clickedLi, data) => {
   closeModalBtn.className = "modal_button";
   nameBox.className = "modal_product_name";
   veganInfoBox.className = "modal_vegan_info";
-
+  tipoffModalBtn.className = "modal_button";
+  idSpan.className = "id_span";
+  
   image.src = clickedLi.querySelector("img").src;
   closeModalBtn.onclick = closeModal;
   background.onclick = closeModal;
+  tipoffModalBtn.onclick = onClickTipOffModalBtn;
 
+  idSpan.style.display = "none";
   // HTML DOM 구성
   imageBox.append(image);
-  modal.append(imageBox, nameBox, veganInfoBox, closeModalBtn);
+  idBox.append(idSpan);
+  modal.append(imageBox, nameBox, veganInfoBox, idBox, closeModalBtn, tipoffModalBtn);
   body.append(background, modal);
 };
 

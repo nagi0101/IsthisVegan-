@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;900&display=swap");
 
 html,
 body {
   height: 100%;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 header {
@@ -37,6 +37,9 @@ header {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a63c3530', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 
+.leftwrap {
+  display: flex;
+}
 .rightwrap {
   display: flex;
 }
@@ -122,9 +125,6 @@ a {
 }
 
 @media (max-width: 695px) {
-  .loge {
-    display: none;
-  }
   .dtn {
     display: none;
   }
