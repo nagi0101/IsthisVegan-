@@ -1,0 +1,28 @@
+.main_container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.local_container {
+  height: 100%;
+  width: 80%;
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.445);
+  border-radius: 20px;
+  width: 100%;
+}
