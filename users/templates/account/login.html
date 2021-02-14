@@ -1,0 +1,60 @@
+{% extends 'posts/layout.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+{% endblock head_block %}
+
+
+{% block global_block %}
+
+<div class="bg"></div>
+<div class='all_content'>
+
+  <h1 class="login_title">{% trans "Sign In" %}</h1>
+
+  </br>
+  {% get_providers as socialaccount_providers %}
+
+  {% if socialaccount_providers %}
+  <p class="login_info">소셜 계정으로 로그인</p>
+
+  </br>
+  <div class="socialaccount_ballot">
+
+    <div class="socialaccount_providers"> 
+      <a href="{% provider_login_url "google" %}" class='google'>GOOGLE</a>
+      <a href="{% provider_login_url "naver" %}" class='naver'>NAVER</a>
+      <a href="{% url 'kakao_login' %}" class="kakao">KAKAO</a>
+    </div>
+  </div>
+
+  <hr align="center" style=" background-color: #fff;
+  border-top: 2px dashed #8c8b8b;">
+  </br>
+  <div class="login-or">
+    이건비건으로 로그인
+  </div>
+  </br>
+  {% include "socialaccount/snippets/login_extra.html" %}
+
+  {% endif %}
+
+  <div class='local_login'> 
+    <form class="login_form" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class='submit_button'>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button></br></br></div>
+    </form></br>
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
+  </div>
+</div>
+
+{% endblock global_block %}

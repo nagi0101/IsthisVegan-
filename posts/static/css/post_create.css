@@ -1,0 +1,110 @@
+@import "background.css";
+@import "post_container.css";
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 100px;
+  /* border: solid 1px black; */
+  width: 80%;
+  /* height: 80%; */
+}
+
+.post_create_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.post_create_content form .django-ckeditor-widget {
+  width: 100%;
+}
+
+#cke_id_content {
+  height: 100%;
+  width: 100% !important;
+  height: 100%;
+}
+
+.post_create_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+}
+
+.post_create_form > p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.post_create_form > p > input {
+  width: 100%;
+  margin-left: 20px;
+  height: 15px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid gray;
+}
+
+.post_create_form > p > input:focus {
+  height: 30px;
+  border: 1px solid black;
+  transition: 0.2s;
+}
+
+#cke_1_resizer {
+  display: none;
+}
+
+.post_title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 80px;
+}
+
+.wrap2 > input {
+  height: 30px;
+  width: 60px;
+  outline: none;
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #cdcdcd;
+  margin: 0px 5px;
+  border-radius: 3px;
+}
+
+.wrap2 > input:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  transition: 0.2s;
+}
+
+@media (max-width: 575px) {
+  .post_title {
+    display: none;
+  }
+  .post_create_content {
+    margin: 0;
+  }
+  .wrap {
+    width: 80%;
+    padding: 0;
+  }
+  #cke_id_content {
+    max-width: 370px;
+  }
+  p {
+    padding-bottom: 10px;
+  }
+}

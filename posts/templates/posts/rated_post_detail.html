@@ -1,0 +1,11 @@
+{% extends 'posts/post_detail.html' %} 
+{% load static %} 
+
+{% block rated_post_detail_rate %}
+  <span class="post_rate">{{post.rate}}</span>
+{% endblock rated_post_detail_rate %}
+
+{% block rated_post_detail_script %}
+  <script src="{% static 'js/rateToStar.js' %}"></script>
+{% endblock rated_post_detail_script %}
+

@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#92BF56"/>
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/9ada8679dc.js"
+      crossorigin="anonymous"></script>
+    <link rel="manifest" href="{% static 'js/manifest.json' %}">
+    <script>
+      if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/serviceWorker.js", { scope: "/" })
+    .then((reg) => {
+      console.log("Registration successful", reg);
+    })
+    .catch((e) =>
+      console.error("Error during service worker registration:", e)
+    );
+} else {
+  console.warn("Service Worker is not supported");
+}
+    </script>
+    <script src="{% url 'serviceWorker.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
+    {% block head_block %} {% endblock head_block %}
+  </head>
+  <body>
+    <header>
+      <div class="leftwrap">
+        <div class="dropdown">
+          <a href="{% url 'posts:post_main' %}"
+            ><div class="loge">이건?비건!</div></a
+          >
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">알아봐요!</a>
+          <div class="dropdown-content">
+            <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">소통해요!</a>
+          <div class="dropdown-content">
+            <a href="{% url 'posts:post_list' %}?category=COMMUNICATE"
+              >우리 떠들어요!</a
+            >
+            <a href="{% url 'posts:post_list' %}?category=VISIT"
+              >여기 가봤어요!</a
+            >
+            <a href="{% url 'posts:post_list' %}?category=BUY"
+              >이거 사봤어요!</a
+            >
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#" class="dtn">함께해요!</a>
+          <div class="dropdown-content">
+            <a href="#">함께 도전해요!</a>
+          </div>
+        </div>
+      </div>
+      <div class="rightwrap">
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+          <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
+        </div>
+        <div class="dropdown">
+          <a href="/accounts/logout" class="dtn">로그아웃</a>
+        </div>
+        <div class="dropdown" id="dtn">{{user.username}} 님이 로그인 중</div>
+        {% else %}
+          <div class="dropdown">
+          <a href="/accounts/signup" class="dtn">회원가입</a>
+          </div>
+          <div class="dropdown">
+          <a href="/accounts/login" class="dtn">로그인</a>
+          </div>
+        {% endif %}
+
+        <!--반응형용 네브바-->
+          <div class="dropdown">
+            <a href="#" class="dtn2">메뉴</a>
+              <div class="dropdown-content">
+                <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+                <a href="{% url 'posts:post_list' %}?category=COMMUNICATE"
+                >떠들어요!</a>
+                <a href="{% url 'posts:post_list' %}?category=VISIT"
+                >가봤어요!</a>
+                <a href="{% url 'posts:post_list' %}?category=BUY"
+                >사봤어요!</a>
+                <a href="#">도전해요!</a>
+              </div>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dtn2">회원정보</a>
+              <div class="dropdown-content">
+                {% if user.is_authenticated %}
+                  <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
+                  <a href="/accounts/logout" class="dtn">로그아웃</a>
+                  <div class="admin">{{user.username}} 님이 로그인 중</div>
+                {% else %}
+                  <a href="/accounts/signup" class="dtn">회원가입</a>
+                  <a href="/accounts/login" class="dtn">로그인</a>
+                {% endif %}
+              </div>
+          </div>
+      </div>
+    </header>
+    <div class="main_container">
+      {% block global_block %} {% endblock global_block %}
+    </div>
+  </body>
+</html>

@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 pillow = "*"
+django-seed = "*"
+django-ckeditor = "*"
+django-allauth = "*"
 
 [dev-packages]
 black = "*"

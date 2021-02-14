@@ -1,9 +1,10 @@
+import os
 from uuid import uuid4
 
 
 def upload_to_uuid(instance, filename):
-    uuid_name = uuid4.hex
-    ext = filename.split(".")[-1]
+    uuid_name = uuid4().hex
+    ext = os.path.splitext(filename)[-1].lower()
 
     return "/".join(
         [

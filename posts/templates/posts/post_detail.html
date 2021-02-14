@@ -1,0 +1,107 @@
+{% extends 'posts/layout.html' %} 
+{% load static %} 
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}" />
+{% endblock head_block %} 
+
+{% block local_block %}
+<div class="bg"></div>
+<div class="container">
+  <div class="wrap">
+    <div class="post_content">
+      <div class="post_header">
+        <h1 class="post.title">{{post.title}}</h1>
+        <span class="user">{{post.user.nickname}}</span>
+        <div class="post_btns_container">
+          <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
+            {% if bookmarked %}
+            <i class="fas fa-bookmark"></i>
+            {% else %}
+            <i class="far fa-bookmark"></i>
+            {% endif %}
+          </button>
+          {% if user == post.user %}
+          <button id="post_delete_btn">
+            <a href="{% url 'posts:post_delete' post.pk %}?category={{category}}"
+              ><i class="fas fa-trash-alt"></i><span>삭제</span></a
+            >
+          </button>
+          <button id="post_edit_btn">
+            <a href="{% url 'posts:post_update' post.pk %}?category={{category}}"
+              ><i class="fas fa-edit"></i><span>수정</span></a
+            >
+          </button>
+          {% endif %}
+          <button id="post_list_btn">
+            <a href="{% url 'posts:post_list' %}?category={{category}}">목록</a>
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="post_content_content">{{post.content|safe}}</div>
+      <br />
+      {% block rated_post_detail_rate %}
+      {% endblock rated_post_detail_rate %}
+      <button id="post_like_btn" onClick="onPostLikeBtnClicked({{post.pk}})">
+        {% if user in post.like.all %}
+        <i class="fas fa-heart"></i>
+        {% else %}
+        <i class="far fa-heart"></i>
+        {% endif %}<span id="post_like_count">{{post.like.all|length}}</span></button
+      >
+    </div>
+    <hr />
+    <div class="comment_create_area">
+      <textarea name="" id="" cols="100" rows="5"></textarea>
+      <button onClick="onCommentCreateBtnClicked({{post.pk}}, '{{category}}')">
+        <i class="far fa-paper-plane"></i>
+      </button>
+    </div>
+    <div class="comments_container">
+      <h3>Comments</h3>
+      <ul>
+        {% for comment in comments %}
+        <li id="comment-{{comment.pk}}">
+          <h4 class="">{{comment.user.nickname}}</h4>
+          <p>{{comment.content}}</p>
+          <div class="comment_btns_container">
+            <button
+              class="comment_like_btn"
+              onClick="onCommentLikeBtnClicked({{comment.pk}})"
+            >
+              {% if user in comment.like.all %}
+              <i class="fas fa-heart"></i>
+              {% else %}
+              <i class="far fa-heart"></i>
+              {% endif %}
+              <span class="comment_like_count">{{comment.like.all|length}}</span>
+            </button>
+
+            {% if user == comment.user %}
+            <button class="comment_delete_btn" onClick="onCommentDeleteBtnClicked({{comment.pk}})">
+              <i class="fas fa-trash-alt"></i><span>삭제</span>
+            </button>
+            {% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  axios.defaults.xsrfCookieName = "csrftoken";
+  axios.defaults.xsrfHeaderName = "X-CSRFToken";
+</script>
+<script src="{% static 'js/toggleBookmark.js' %}"></script>
+<script src="{% static 'js/togglePostLike.js' %}"></script>
+<script src="{% static 'js/toggleCommentLike.js' %}"></script>
+<script src="{% static 'js/modifyComment.js' %}"></script>
+<script src="{% static 'js/deleteComment.js' %}"></script>
+<script src="{% static 'js/createComment.js' %}"></script>
+{% block rated_post_detail_script %}
+{% endblock rated_post_detail_script %}
+{% endblock local_block %}

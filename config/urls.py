@@ -17,11 +17,27 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from ckeditor_uploader import views as views_ckeditor
+from django.views.decorators.cache import never_cache
+import users.views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("posts.urls")),
+    path("offline/", include("core.urls")),
     path("users/", include("users.urls")),
+    path("askproduct/",include("reports.urls")),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("upload/", login_required(views_ckeditor.upload), name="ckeditor_upload"),
+    path("browse/", never_cache(login_required(views_ckeditor.browse)), name="ckeditor_browse"),
+    path("accounts/", include("allauth.urls")),
+    path("oauth/", users.views.oauth, name="oauth"),
+    path("login/", users.views.login, name="slogin"),
+    path("search_prd/", include("search.urls")),
+    path('serviceWorker.js', (TemplateView.as_view(template_name="serviceWorker.js", 
+  content_type='application/javascript', )), name='serviceWorker.js'),
 ]
 
 if settings.DEBUG:
