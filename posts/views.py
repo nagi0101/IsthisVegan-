@@ -347,24 +347,6 @@ def main(request):
     ctx["category_list"] = category_list
     ctx["pk"] = request.user.id
 
-    # buy = Post.objects.filter(category="BUY").order_by("-get_like_count", "title")[:5]
-    #  # print(buy)
-    # communicate = Post.objects.filter(category="COMMUNICATE").order_by(
-    #     "-get_like_count", "title"
-    # )[:5]
-    # info = Post.objects.filter(category="INFO").order_by("-get_like_count", "title")[:5]
-    # visit = Post.objects.filter(category="VISIT").order_by("-get_like_count", "title")[
-    #     :5
-    # ]
-
-    # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
-    # pk = request.user.id
-
-    # ctx = {
-    #     "posts": posts,
-    #     "pk": pk,
-    # }
-
     return render(request, "posts/main.html", ctx)
 
 
