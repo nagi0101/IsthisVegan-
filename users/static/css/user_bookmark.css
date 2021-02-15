@@ -86,9 +86,43 @@ li {
   .title:hover {
     color: #d9c1bb;
   }
-  }
   li {
     width: 250px;
+  }
+  .pwform {
+    width: 230px;
+    font-size: 7px;
+  }
+}
+
+@media (max-height: 440px) and (max-width: 820px) {
+  .bg {
+    background-image: none;
+  }
+  .wrap {
+    width: 70%;
+    height: 70%;
+    box-shadow: 2px 2px 7px #999;
+  }
+  .wrap2 {
+    width: 60%;
+    height: 50%;
+    box-shadow: 2px 2px 4px #999;
+  }
+  .text-center {
+    font-size: 15px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .title:hover {
+    color: #d9c1bb;
+  }
+  ul {
+    height: 80%;
+  }
+  li {
+    width: 70%;
   }
   .pwform {
     width: 230px;
