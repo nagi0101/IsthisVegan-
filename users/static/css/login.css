@@ -94,6 +94,14 @@ input {
   height: 300px;
 }
 
+.social_signupform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 240px;
+}
+
+
 .google {
   background-color: #4287f5;
   -webkit-border-top-left-radius: 15px;
