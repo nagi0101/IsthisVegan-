@@ -157,6 +157,7 @@ a {
 
 .comment_create_area {
   position: relative;
+  margin-top: 5px;
 }
 
 .comment_create_area > textarea {
@@ -213,6 +214,14 @@ a {
 
 @media (max-width: 575px) {
   .wrap {
-    width: 400px;
+    width: 80%;
+    padding: 0;
+  }
+  .post_content .post_header .user {
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
   }
 }

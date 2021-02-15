@@ -24,8 +24,8 @@ input {
 
 .all_content {
   box-sizing: border-box;
-  width: 450px;
-  height: 550px;
+  width: 70%;
+  height: 80%;
   margin: 20px auto;
   border: 1px solid white;
   border-radius: 20px;
@@ -93,6 +93,14 @@ input {
   justify-content: space-between;
   height: 300px;
 }
+
+.social_signupform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 240px;
+}
+
 
 .google {
   background-color: #4287f5;
@@ -229,7 +237,7 @@ input {
 
 @media (max-width: 575px) {
   .all_content {
-    width: 80%;
+    width: 75%;
     box-shadow: 2px 2px 7px #999;
   }
 
