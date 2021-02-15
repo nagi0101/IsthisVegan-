@@ -111,7 +111,7 @@ const handleScroll = (event) => {
   const scrollHeight = target.scrollHeight;
   const scrollTop = target.scrollTop;
   const clientHeight = target.clientHeight;
-  if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+  if (scrollTop + clientHeight >= scrollHeight - 70 * 5 && fetching === false) {
     fetchMorePosts();
   }
 };
