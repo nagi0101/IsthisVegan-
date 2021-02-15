@@ -1,7 +1,7 @@
 const POST_PER_PAGE = 50;
-const FIRST_POST_ID = document.querySelector(".posts").firstElementChild.dataset
-  .postId;
-const LOCAL_CONTAINER = document.querySelector(".local_container");
+const FIRST_POST_ID = document.querySelector(".post_grid-li").firstElementChild
+  .dataset.postId;
+const CONTAINER = document.querySelector(".container");
 const POSTS_URL = "/posts/";
 // const POSTS_URL = "{% url 'post_list' %}";
 let fetching = false;
@@ -9,7 +9,7 @@ let page = 1;
 let maxPage = 1;
 
 const modifyPost = (data, mode) => {
-  let posts_container = document.querySelector(".posts");
+  let posts_container = document.querySelector(".post_grid-ul");
   const newUl = document.createElement("ul");
   data.forEach((post) => {
     const li = document.createElement("li");
@@ -19,21 +19,28 @@ const modifyPost = (data, mode) => {
     const like_container = document.createElement("span");
     const like_count = document.createElement("span");
     const like_icon = document.createElement("i");
+    const date = document.createElement("span");
 
     // 내부에 들어가는 text 설정
     title.innerText = post.title;
     user.innerText = post.nickname;
     like_count.innerText = post.liked_total;
+    date.innerText = post.date;
 
     // class, id, dataSet, link 등 설정
-    li.dataset.postId = post.postId;
-    li.className = "post";
-    like_icon.className = "fas fa-heart";
+    li.className = "post_grid-li";
     a.href = `/detail/${post.id}?category=${category}`;
+    a.className = "post_grid-a";
+    a.dataset.postId = post.postId;
+    title.className = "post_title";
+    user.className = "post_user";
+    like_container.className = "post_like";
+    like_icon.className = "fas fa-heart";
+    date.className = "post_date";
 
     // DOM 구성
     like_container.append(like_icon, like_count);
-    a.append(title, user, like_container);
+    a.append(title, user, like_container, date);
     li.append(a);
 
     // RatedPost 처리
@@ -41,8 +48,11 @@ const modifyPost = (data, mode) => {
       const post_rate = document.createElement("span");
       post_rate.innerText = post.rate;
       post_rate.className = "post_rate";
-      a.append(post_rate);
+      a.classList.add("rated_post_grid-a");
+      a.insertBefore(post_rate, date);
     }
+
+    // append
     if (mode === "add") {
       posts_container.append(li);
     } else if (mode === "replace") {
@@ -50,9 +60,9 @@ const modifyPost = (data, mode) => {
     }
   });
   if (mode === "replace") {
-    newUl.className = "posts";
+    newUl.className = "post_grid-ul";
     newUl.addEventListener("scroll", handleScroll);
-    posts_container.parentNode.replaceChild(newUl, posts_container);
+    posts_container.parentElement.replaceChild(newUl, posts_container);
   }
 };
 
@@ -76,6 +86,8 @@ const sendAxiosRequest = (mode) => {
       try {
         rateToStar();
       } catch (error) {}
+      // fetch가 끝났고, 다시 fetching이 가능한 상태로 변경
+      fetching = false;
     })
     .catch(function (error) {
       console.log(error);
@@ -83,17 +95,33 @@ const sendAxiosRequest = (mode) => {
 };
 
 const fetchMorePosts = async () => {
+  if (page >= maxPage) {
+    if (page > maxPage) {
+      page = maxPage;
+    }
+    return;
+  }
+  // fetching을 시작한다. 그 동안 추가적인 fetching은 불가능하다.
   fetching = true;
   sendAxiosRequest("add");
-  fetching = false;
 };
 
 const handleScroll = (event) => {
-  const target = event.target;
+  const target = event.target.closest("ul");
   const scrollHeight = target.scrollHeight;
   const scrollTop = target.scrollTop;
   const clientHeight = target.clientHeight;
-  if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+  if (scrollTop + clientHeight >= scrollHeight - 70 * 5 && fetching === false) {
+    fetchMorePosts();
+  }
+};
+
+const handleTouchMove = (event) => {
+  const target = event.target.closest("ul");
+  const scrollHeight = target.scrollHeight;
+  const scrollTop = target.scrollTop;
+  const clientHeight = target.clientHeight;
+  if (scrollTop + clientHeight >= scrollHeight - 70 * 5 && fetching === false) {
     fetchMorePosts();
   }
 };
@@ -108,18 +136,48 @@ const onClickPaginationNode = function (pageClicked) {
 
 const createPagination = () => {
   const paginationContainer = document.createElement("div");
-  for (let index = 0; index < maxPage; index++) {
+  const paginationHead = document.createElement("div");
+  const paginationTail = document.createElement("div");
+  let ADD_ELLIPSES = false;
+  let PAGINATION_HEAD_LENGTH = 3;
+  let PAGINATION_TAIL_LENGTH = 2;
+
+  paginationHead.className = "pagination_head";
+  paginationTail.className = "pagination_tail";
+  if (maxPage < PAGINATION_HEAD_LENGTH + PAGINATION_TAIL_LENGTH) {
+    PAGINATION_TAIL_LENGTH = maxPage - PAGINATION_HEAD_LENGTH;
+    if (maxPage < PAGINATION_HEAD_LENGTH) {
+      PAGINATION_HEAD_LENGTH = maxPage;
+    }
+  }
+  if (PAGINATION_HEAD_LENGTH + PAGINATION_TAIL_LENGTH < maxPage) {
+    ADD_ELLIPSES = true;
+  }
+  for (let index = 0; index < PAGINATION_HEAD_LENGTH; index++) {
     const paginationNode = document.createElement("div");
     paginationNode.innerText = index + 1;
-    paginationNode.style.cursor = "pointer";
-    paginationNode.style.border = "1px solid #eeeeee";
     paginationNode.onclick = (event) => onClickPaginationNode(index);
-    paginationContainer.append(paginationNode);
+    paginationNode.className = "page";
+    paginationHead.append(paginationNode);
   }
-  paginationContainer.style.position = "fixed";
-  paginationContainer.style.right = "20px";
-  paginationContainer.style.top = "20px";
-  LOCAL_CONTAINER.append(paginationContainer);
+  for (let index = 0; index < PAGINATION_TAIL_LENGTH; index++) {
+    const paginationNode = document.createElement("div");
+    paginationNode.innerText = maxPage - index;
+    paginationNode.onclick = (event) =>
+      onClickPaginationNode(maxPage - index - 1);
+    paginationNode.className = "page";
+    paginationTail.prepend(paginationNode);
+  }
+  if (ADD_ELLIPSES) {
+    const ellipses = document.createElement("div");
+    ellipses.innerText = "...";
+    ellipses.className = "page";
+    paginationContainer.append(paginationHead, ellipses, paginationTail);
+  } else {
+    paginationContainer.append(paginationHead, paginationTail);
+  }
+  paginationContainer.className = "pagination";
+  CONTAINER.append(paginationContainer);
 };
 
 const initPage = () => {
@@ -130,4 +188,9 @@ const initPage = () => {
 
 initPage();
 
-document.querySelector(".posts").addEventListener("scroll", handleScroll);
+document
+  .querySelector(".post_grid-ul")
+  .addEventListener("scroll", handleScroll);
+document
+  .querySelector(".post_grid-ul")
+  .addEventListener("touchmove", handleTouchMove);

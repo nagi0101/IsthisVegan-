@@ -1,20 +1,22 @@
 {% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/user_edit.css' %}" />
 {% endblock head_block %} {% block local_block %}
+
+<div class="bg"></div>
 <div class="container">
   <div class="wrap">
     {% if request.user.pk == person.pk %}
-    <h2 class="text-center">회원정보 변경</h2>
-    <form method="POST" enctype="multipart/form-data">
+    <div class="text-center">회원정보 변경</div>
+    <form class="pwform" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <table>
         {{ user_change_form }}
       </table>
       <div class="wrap2">
-        <a class="t2" href="{% url 'users:user_password' user.pk %}"
+        <div class="t1"><a class="t2" href="{% url 'users:user_password' user.pk %}"
           >비밀번호 변경</a
-        >
-        <input class="i1" type="submit" value="저장" />
+        ></div>
+        <div class="t1"><input class="i1" type="submit" value="저장" /></div>
       </div>
     </form>
     {% else %}

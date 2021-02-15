@@ -1,0 +1,39 @@
+{% extends 'reports/layout.html' %}
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/ask_product_create.css' %}" />
+{% endblock head_block %}
+
+{% block local_block %}
+
+<div class='bg'></div>
+  <div class="container">
+    <div class="wrap">
+    <p class="ask_title">궁금해요!</p>
+    <p class="ask_info">검색 결과가 없는 음식을 물어보세요!</p>
+      <div class='ask_product'>
+        <form
+          action=""
+          method="post"
+          enctype="multipart/form-data"
+          autocomplete="off"
+          class="ask_product_create_form"
+        >
+          {% csrf_token %} {{form.media}} {{form.as_p}}
+
+      {% if alert_flag %}
+      <script>
+        alert("내용을 입력하세요");
+        history.back();
+      </script>
+      {% endif %}
+          <div class="wrap2">
+            <input class="i1" type="submit" value="저장" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock local_block %}

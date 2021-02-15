@@ -1,42 +1,66 @@
 .container {
-  height: calc(100vh - 140px);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: solid 1px black;
+}
+
+.bg {
+  background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .wrap {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
   padding: 20px;
-  border: solid 1px black;
-  width: 700px;
+  background-color: rgba(255, 255, 255, 0.445);
+  border-radius: 20px;
+  width: 70%;
 }
 .pagename {
-  border: solid 1px black;
-  padding: 10px;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 50px;
 }
 
 p {
-  border: solid 1px black;
-  padding: 10px;
-  width: 500px;
+  padding-bottom: 10px;
+  width: 70%;
+  font-size: 16px;
 }
 
 .t1 {
-  border: solid 1px black;
+  border-radius: 10px;
+  background-color: white;
   padding: 10px;
   margin: 10px 10px;
+  width: 70%;
+}
+
+.btn:hover {
+  color: #9ebf56;
+}
+
+.btn {
+  color: black;
 }
 
 .wrap2 {
   display: flex;
   justify-content: center;
-  flex-direction: column;
 }
 
 .miniwrap {
@@ -45,4 +69,81 @@ p {
 
 .miniwrap2 {
   justify-content: center;
+  padding-bottom: 40px;
+}
+
+/* @media (min-width: 320px) and (max-width: 575px) {
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.445);
+    border-radius: 20px;
+    width: 300px;
+  }
+} */
+
+@media (max-width: 575px) {
+  .bg {
+    visibility: hidden;
+  }
+  .wrap {
+    box-shadow: 2px 2px 7px #999;
+  }
+  .t1 {
+    background-color: #d9c1bb;
+    padding: 5px;
+    margin: 5px 5px;
+    width: 80%;
+    box-shadow: 2px 2px 4px #999;
+  }
+  .btn {
+    color: black;
+    font-size: 12px;
+  }
+  .btn:hover {
+    color: white;
+  }
+  p {
+    width: 70%;
+    font-size: 10px;
+  }
+  .pagename {
+    font-size: 15px;
+  }
+}
+
+@media (max-height: 440px) and (max-width: 820px) {
+  .bg {
+    visibility: hidden;
+  }
+  .wrap {
+    height: 60%;
+    width: 60%;
+    box-shadow: 2px 2px 7px #999;
+  }
+  .t1 {
+    background-color: #d9c1bb;
+    padding: 5px;
+    margin: 5px 5px;
+    width: 80%;
+    box-shadow: 2px 2px 4px #999;
+  }
+  .btn {
+    color: black;
+    font-size: 12px;
+  }
+  .btn:hover {
+    color: white;
+  }
+  p {
+    width: 70%;
+    font-size: 10px;
+  }
+  .pagename {
+    font-size: 15px;
+  }
 }

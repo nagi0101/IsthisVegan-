@@ -1,0 +1,28 @@
+{% extends 'users/layout.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load static %}
+
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock head_block %}
+
+
+{% block content_block %}
+<ul class='login'>           
+    {% if user.is_authenticated %}
+    <a href="/accounts/logout">로그아웃</a>
+    <br>
+    {{user.username}} 님이 로그인 중
+
+    {% else %}
+    <a href= "/accounts/login" class='local_login'>로그인</a>
+
+    {% endif %}
+</ul>
+
+{% endblock content_block %}
+
+
+

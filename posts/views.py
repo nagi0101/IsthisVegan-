@@ -70,6 +70,7 @@ def post_list(request):
                     "nickname": post.user.nickname,
                     "title": post.title,
                     "liked_total": len(post.like.all()),
+                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 
@@ -91,6 +92,7 @@ def post_list(request):
                     "title": post.title,
                     "liked_total": len(post.like.all()),
                     "rate": post.rate,
+                    "date": post.return_written_time_or_date(),
                 }
                 postList.append(aPost)
 
@@ -233,7 +235,7 @@ def comment_delete(request):
 
     return JsonResponse(commentList, safe=False)
 
-
+@login_required
 def post_create(request):
     category = request.GET["category"]
 
@@ -249,8 +251,8 @@ def post_create(request):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
-        if len(request.POST['content']) == 0:
-            return render(request, 'posts/post_create.html', {'alert_flag': True})
+        if len(request.POST["content"]) == 0:
+            return render(request, "posts/post_create.html", {"alert_flag": True})
 
         pk = 0
         if category in ["INFO", "COMMUNICATE"]:
@@ -292,6 +294,9 @@ def post_update(request, pk):
         }
         return render(request, "posts/post_create.html", ctx)
     else:
+        if len(request.POST['content']) == 0:
+            return render(request, 'posts/post_create.html', {'alert_flag': True})
+            
         if category in ["INFO", "COMMUNICATE"]:
             post = get_object_or_404(Post, id=pk)
             form = PostForm(request.POST, request.FILES, instance=post)
@@ -341,25 +346,7 @@ def main(request):
         ctx[category] = ordered_list
     ctx["category_list"] = category_list
     ctx["pk"] = request.user.id
-
-    # buy = Post.objects.filter(category="BUY").order_by("-get_like_count", "title")[:5]
-    #  # print(buy)
-    # communicate = Post.objects.filter(category="COMMUNICATE").order_by(
-    #     "-get_like_count", "title"
-    # )[:5]
-    # info = Post.objects.filter(category="INFO").order_by("-get_like_count", "title")[:5]
-    # visit = Post.objects.filter(category="VISIT").order_by("-get_like_count", "title")[
-    #     :5
-    # ]
-
-    # 유진아 마이페이지 잘 연결되는지 확인하려고 내가 pk 추가했어!! 놀라지말길
-    # pk = request.user.id
-
-    # ctx = {
-    #     "posts": posts,
-    #     "pk": pk,
-    # }
-
+    
     return render(request, "posts/main.html", ctx)
 
 
