@@ -225,3 +225,9 @@ a {
     display: block;
   }
 }
+
+@media (max-height: 440px) and (max-width: 820px) {
+  .wrap {
+    padding-left: 200px;
+  }
+}

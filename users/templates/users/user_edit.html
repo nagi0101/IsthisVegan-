@@ -6,7 +6,7 @@
 <div class="container">
   <div class="wrap">
     {% if request.user.pk == person.pk %}
-    <h2 class="text-center">회원정보 변경</h2>
+    <div class="text-center">회원정보 변경</div>
     <form class="pwform" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <table>
