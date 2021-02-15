@@ -51,9 +51,9 @@ header {
 .dropdown {
   position: relative;
   display: inline-block;
-  height: 50px;
+  height: 20px;
   margin-left: 10px;
-  padding-top: 25px;
+  padding-top: 5px;
 }
 
 .dropdown-content {
