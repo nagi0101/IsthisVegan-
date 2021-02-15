@@ -398,3 +398,30 @@ a:hover {
     transform: translateX(-50%) translateY(-35%);
   }
 }
+
+@media (max-width: 820px) and (max-height: 440px) {
+  .navbarcontain{
+    margin-top: 5%;
+  }
+
+  .textwrap {
+    width: 90%;
+  }
+
+  #menu {
+    margin: 15px;
+  }
+
+  .new_text{
+    width: 640px;
+    height: 65%;
+  }
+
+  .link {
+    font-size: 18px;
+  }
+
+  .list {
+    font-size: 12px;
+  }
+}
