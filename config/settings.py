@@ -27,17 +27,15 @@ SECRET_KEY = "!uujw4uqgz_f!e*+axfy4@=7go#met=p74i@9)6%&(c%=^q&+s"
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".pythonanywhere.com",
+    "*",
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    
     "users",
     "posts",
-
     # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
