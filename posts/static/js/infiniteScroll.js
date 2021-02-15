@@ -121,7 +121,7 @@ const handleTouchMove = (event) => {
   const scrollHeight = target.scrollHeight;
   const scrollTop = target.scrollTop;
   const clientHeight = target.clientHeight;
-  if (scrollTop + clientHeight >= scrollHeight - 1 && fetching === false) {
+  if (scrollTop + clientHeight >= scrollHeight - 10 && fetching === false) {
     fetchMorePosts();
   }
 };
