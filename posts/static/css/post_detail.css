@@ -224,6 +224,21 @@ a {
     white-space: nowrap;
     display: block;
   }
+  #iconline {
+    display: none;
+  }
+  #bookmark_btn {
+    width: 30px;
+  }
+  #post_delete_btn {
+    width: 30px;
+  }
+  #post_edit_btn {
+    width: 30px;
+  }
+  #post_list_btn {
+    width: 60px;
+  }
 }
 
 @media (max-height: 440px) and (max-width: 820px) {

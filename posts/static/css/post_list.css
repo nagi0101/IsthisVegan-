@@ -289,3 +289,9 @@
     padding: 15px;
   }
 }
+
+@media (max-height: 440px) and (max-width: 820px) {
+  .bg {
+    visibility: hidden;
+  }
+}
