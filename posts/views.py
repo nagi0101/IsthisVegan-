@@ -346,7 +346,7 @@ def main(request):
         ctx[category] = ordered_list
     ctx["category_list"] = category_list
     ctx["pk"] = request.user.id
-    ##되라
+
     return render(request, "posts/main.html", ctx)
 
 
