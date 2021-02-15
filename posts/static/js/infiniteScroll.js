@@ -173,3 +173,6 @@ initPage();
 document
   .querySelector(".post_grid-ul")
   .addEventListener("scroll", handleScroll);
+document
+  .querySelector(".post_grid-ul")
+  .addEventListener("touchmove", handleScroll);
