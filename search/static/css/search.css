@@ -39,7 +39,7 @@
   align-items: center;
   background-color: white;
   flex-direction: column;
-  padding: 20px 70px 20px 70px;
+  padding: 20px 0 20px 0;
   font-size: 1.5rem;
 }
 
@@ -84,6 +84,7 @@ input:focus {
   display: flex;
   align-items: center;
   margin-right: 5px;
+  margin-top: 10px;
 }
 
 button {
@@ -187,6 +188,7 @@ span {
   white-space: nowrap;
 }
 
+
 .MEAT {
   background-color: red;
   white-space: nowrap;
@@ -258,12 +260,15 @@ span {
 
   #box_wrap {
     height: 100%;
-    width: 80%;
+    width: 100%;
     font-size: 1rem;
   }
 
+  .search_form{
+    width: 90%;
+  }
+
   input {
-    width: 300px;
     font-size: 15px;
     font-weight: 300;
   }

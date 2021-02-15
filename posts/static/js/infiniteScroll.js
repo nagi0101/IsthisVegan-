@@ -86,6 +86,8 @@ const sendAxiosRequest = (mode) => {
       try {
         rateToStar();
       } catch (error) {}
+      // fetch가 끝났고, 다시 fetching이 가능한 상태로 변경
+      fetching = false;
     })
     .catch(function (error) {
       console.log(error);
@@ -93,17 +95,33 @@ const sendAxiosRequest = (mode) => {
 };
 
 const fetchMorePosts = async () => {
+  if (page >= maxPage) {
+    if (page > maxPage) {
+      page = maxPage;
+    }
+    return;
+  }
+  // fetching을 시작한다. 그 동안 추가적인 fetching은 불가능하다.
   fetching = true;
   sendAxiosRequest("add");
-  fetching = false;
 };
 
 const handleScroll = (event) => {
-  const target = event.target;
+  const target = event.target.closest("ul");
   const scrollHeight = target.scrollHeight;
   const scrollTop = target.scrollTop;
   const clientHeight = target.clientHeight;
-  if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+  if (scrollTop + clientHeight >= scrollHeight - 70 * 5 && fetching === false) {
+    fetchMorePosts();
+  }
+};
+
+const handleTouchMove = (event) => {
+  const target = event.target.closest("ul");
+  const scrollHeight = target.scrollHeight;
+  const scrollTop = target.scrollTop;
+  const clientHeight = target.clientHeight;
+  if (scrollTop + clientHeight >= scrollHeight - 70 * 5 && fetching === false) {
     fetchMorePosts();
   }
 };
@@ -175,4 +193,4 @@ document
   .addEventListener("scroll", handleScroll);
 document
   .querySelector(".post_grid-ul")
-  .addEventListener("touchmove", handleScroll);
+  .addEventListener("touchmove", handleTouchMove);
