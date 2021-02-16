@@ -42,6 +42,22 @@ const onClickTipOffModalBtn = () => {
   form.submit();
 };
 
+const indexes = (source, find) => {
+  let result = [];
+  const findLength = find.length;
+  for (let index = 0; index < source.length; index++) {
+    if (source.substring(index, index + findLength) == find) {
+      result.push(index);
+    }
+  }
+  // result를 내림차순으로 정렬한다.
+  result.sort(function (a, b) {
+    return a > b ? -1 : a === b ? 0 : -1;
+  });
+  console.log(result);
+  return result;
+};
+
 const createVeganInfoBox = (clickedLi, data) => {
   const categoryList = data["category_list"];
   const veganFilter = data["vegan_filter"];
@@ -68,19 +84,21 @@ const createVeganInfoBox = (clickedLi, data) => {
       if (keyA < keyB) return 1;
       return 0;
     });
-    console.log(ingredientName[categoryName]);
     ingredientName[categoryName].forEach((name) => {
-      let index = innerHTML.indexOf(name);
-      // index가 -1인 경우 예상치 못한 오류가 발생한 것이다.
-      // 두 가지 이상의 식재료가 겹쳐서 적혀있을 경우가 그러하다.
-      // 그 경우 오류가 발생한 ingredient는 표시하지 않는다.
-      if (index !== -1) {
-        innerHTML =
-          innerHTML.substring(0, index) +
-          `<span class=${categoryName}>` +
-          innerHTML.substring(index, index + name.length) +
-          "</span>" +
-          innerHTML.substring(index + name.length);
+      const ingredientIndexes = indexes(innerHTML, name);
+      for (let i = 0; i < ingredientIndexes.length; i++) {
+        let index = ingredientIndexes[i];
+        // index가 -1인 경우 예상치 못한 오류가 발생한 것이다.
+        // 두 가지 이상의 식재료가 겹쳐서 적혀있을 경우가 그러하다.
+        // 그 경우 오류가 발생한 ingredient는 표시하지 않는다.
+        if (index !== -1) {
+          innerHTML =
+            innerHTML.substring(0, index) +
+            `<span class=${categoryName}>` +
+            innerHTML.substring(index, index + name.length) +
+            "</span>" +
+            innerHTML.substring(index + name.length);
+        }
       }
     });
   });
