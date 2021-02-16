@@ -1,4 +1,8 @@
-{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+{% extends 'posts/layout.html' %} 
+{% load static %} 
+
+
+{% block head_block %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
@@ -6,10 +10,18 @@
 <script>
 </script>
 {% endblock head_block %}
+
+
 {% block local_block %}
 <div class="swiper-container">
     <div class="swiper-wrapper">
         <div id="content" class="swiper-slide">
+            <div id="content_bg-container">
+                <div data-nth-bg="1" id="content_bg-1" class="content_bg"></div>
+                <div data-nth-bg="2" id="content_bg-2" class="content_bg"></div>
+                <div data-nth-bg="3" id="content_bg-3" class="content_bg"></div>
+                <div data-nth-bg="4" id="content_bg-4" class="content_bg"></div>
+            </div>
             <div class="product_text">
                 <div id="content__top">
                     <h1>IsThis?<br>VEGAN!</h1>
@@ -221,4 +233,5 @@
         },
     });
 </script>
+<script src="{% static 'js/mainBgSlide.js' %}"></script>
 {% endblock local_block %}
