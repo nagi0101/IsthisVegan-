@@ -33,7 +33,6 @@ const modifyPost = (data, mode) => {
     a.href = `/detail/${post.id}?category=${category}`;
     a.className = "post_grid-a";
     a.dataset.postId = post.id;
-    a.target = "_blank";
     title.className = "post_title";
     user.className = "post_user";
     like_container.className = "post_like";
