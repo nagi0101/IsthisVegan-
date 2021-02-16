@@ -12,6 +12,7 @@ const modifyPost = (data, mode) => {
   let posts_container = document.querySelector(".post_grid-ul");
   const newUl = document.createElement("ul");
   data.forEach((post) => {
+    console.log(post);
     const li = document.createElement("li");
     const a = document.createElement("a");
     const title = document.createElement("span");
@@ -31,7 +32,8 @@ const modifyPost = (data, mode) => {
     li.className = "post_grid-li";
     a.href = `/detail/${post.id}?category=${category}`;
     a.className = "post_grid-a";
-    a.dataset.postId = post.postId;
+    a.dataset.postId = post.id;
+    a.target = "_blank";
     title.className = "post_title";
     user.className = "post_user";
     like_container.className = "post_like";
