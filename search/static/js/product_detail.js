@@ -7,16 +7,16 @@ const closeModal = () => {
 
 const onClickTipOffModalBtn = () => {
   product_id = document.querySelector(".id_span").innerText;
-  
+
   function parse_cookies() {
     var cookies = {};
-    if (document.cookie && document.cookie !== '') {
-        document.cookie.split(';').forEach(function (c) {
-            var m = c.trim().match(/(\w+)=(.*)/);
-            if(m !== undefined) {
-                cookies[m[1]] = decodeURIComponent(m[2]);
-            }
-        });
+    if (document.cookie && document.cookie !== "") {
+      document.cookie.split(";").forEach(function (c) {
+        var m = c.trim().match(/(\w+)=(.*)/);
+        if (m !== undefined) {
+          cookies[m[1]] = decodeURIComponent(m[2]);
+        }
+      });
     }
     return cookies;
   }
@@ -35,11 +35,11 @@ const onClickTipOffModalBtn = () => {
   const hiddenField = document.createElement("input");
   hiddenField.setAttribute("type", "hidden");
   hiddenField.setAttribute("name", "csrfmiddlewaretoken");
-  hiddenField.setAttribute("value", cookies['csrftoken']);
+  hiddenField.setAttribute("value", cookies["csrftoken"]);
   form.appendChild(hiddenField);
 
   document.body.appendChild(form);
-  form.submit()
+  form.submit();
 };
 
 const createVeganInfoBox = (clickedLi, data) => {
@@ -57,14 +57,31 @@ const createVeganInfoBox = (clickedLi, data) => {
   // set innerHTML
   let innerHTML = clickedLi.querySelector(".product_ingredient").innerHTML;
   categoryList.forEach((categoryName) => {
+    // ingredientName[categoryName]를 이름 길이가 긴 순서로 정렬한다.
+    // "닭", "닭고기" 등이 같이 있을 경우 닭을 먼저 처리하면
+    // "<span>닭</span>고기"가 되어서 "닭고기"를 처리할 때 오류가 나는 것을
+    // 방지하기 위해서이다.
+    ingredientName[categoryName].sort((a, b) => {
+      const keyA = a.length,
+        keyB = b.length;
+      if (keyA > keyB) return -1;
+      if (keyA < keyB) return 1;
+      return 0;
+    });
+    console.log(ingredientName[categoryName]);
     ingredientName[categoryName].forEach((name) => {
       let index = innerHTML.indexOf(name);
-      innerHTML =
-        innerHTML.substring(0, index) +
-        `<span class=${categoryName}>` +
-        innerHTML.substring(index, index + name.length) +
-        "</span>" +
-        innerHTML.substring(index + name.length);
+      // index가 -1인 경우 예상치 못한 오류가 발생한 것이다.
+      // 두 가지 이상의 식재료가 겹쳐서 적혀있을 경우가 그러하다.
+      // 그 경우 오류가 발생한 ingredient는 표시하지 않는다.
+      if (index !== -1) {
+        innerHTML =
+          innerHTML.substring(0, index) +
+          `<span class=${categoryName}>` +
+          innerHTML.substring(index, index + name.length) +
+          "</span>" +
+          innerHTML.substring(index + name.length);
+      }
     });
   });
   ingredientSpan.innerHTML = innerHTML;
@@ -95,9 +112,9 @@ const showProductModal = (clickedLi, data) => {
   const modal = document.createElement("div");
   const imageBox = document.createElement("div");
   const nameBox = document.createElement("div");
-  const idBox = document.createElement("div")
+  const idBox = document.createElement("div");
   const image = document.createElement("img");
-  const idSpan = document.createElement("span")
+  const idSpan = document.createElement("span");
   const closeModalBtn = document.createElement("button");
   const tipoffModalBtn = document.createElement("button");
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
@@ -118,7 +135,7 @@ const showProductModal = (clickedLi, data) => {
   veganInfoBox.className = "modal_vegan_info";
   tipoffModalBtn.className = "modal_button";
   idSpan.className = "id_span";
-  
+
   image.src = clickedLi.querySelector("img").src;
   closeModalBtn.onclick = closeModal;
   background.onclick = closeModal;
@@ -128,7 +145,14 @@ const showProductModal = (clickedLi, data) => {
   // HTML DOM 구성
   imageBox.append(image);
   idBox.append(idSpan);
-  modal.append(imageBox, nameBox, veganInfoBox, idBox, closeModalBtn, tipoffModalBtn);
+  modal.append(
+    imageBox,
+    nameBox,
+    veganInfoBox,
+    idBox,
+    closeModalBtn,
+    tipoffModalBtn
+  );
   body.append(background, modal);
 };
 
@@ -143,6 +167,7 @@ const getProductDetail = (clickedLi) => {
     // 응답(성공)
     .then(function (response) {
       data = response.data;
+      console.log(data);
       showProductModal(clickedLi, data);
     })
     // 응답(실패)
