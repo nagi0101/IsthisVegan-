@@ -63,7 +63,6 @@ body,
   opacity: 0;
   transition: 1s;
 }
-
 .content_bg-active {
   opacity: 1;
 }
