@@ -299,3 +299,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# custom
+
+serviceAccountKey.json

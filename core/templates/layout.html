@@ -100,8 +100,12 @@
       </div>
     </header>
     <div class="main_container">
-      {% block global_block %} {% endblock global_block %}
+      {% block global_block %} 
+      {% endblock global_block %}
     </div>
+
+
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
 
@@ -126,16 +130,11 @@
       firebase.analytics();
       const messaging = firebase.messaging();
     </script>
-    {% comment %}
-    <script src="{% url 'firebase-messaging-sw.js' %}"></script> 
-    {% endcomment %}
-
-        <script>
+    <script>
       if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/serviceWorker.js", { scope: "/" })
     .then((reg) => {
-      messaging.useServiceWorker(reg);
       console.log("Registration successful", reg);
     })
     .catch((e) =>
@@ -145,6 +144,27 @@
   console.warn("Service Worker is not supported");
 }
     </script>
-    <script src="{% url 'serviceWorker.js' %}"></script>
+    <script>
+      // Firebase
+      messaging.onMessage((payload) => {
+        console.log("Message received. ", payload);
+        // ...
+      });
+    </script>
+    <script>
+      messaging.getToken({ vapidKey: 'BGrP1OXQDNpi1nsjv58z2POlDXenRKaHwASczZl4BltLtqvw2wNAU-kJup4hw7D9ryqM7nzIgw3uojDJLeH6OLc' })
+      .then((currentToken) => {
+        if (currentToken) {
+          console.log(currentToken)
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          // ...
+        }
+      }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      // ...
+    });
+    </script>
   </body>
 </html>
