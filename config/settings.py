@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "core",
     "reports",
     "search",
+    "notifications",
     # Social login
     "django.contrib.sites",
     "allauth",

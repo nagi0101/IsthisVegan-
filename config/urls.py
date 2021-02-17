@@ -31,19 +31,37 @@ urlpatterns = [
     path("askproduct/", include("reports.urls")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("upload/", login_required(views_ckeditor.upload), name="ckeditor_upload"),
-    path("browse/", never_cache(login_required(views_ckeditor.browse)),
-         name="ckeditor_browse"),
+    path(
+        "browse/",
+        never_cache(login_required(views_ckeditor.browse)),
+        name="ckeditor_browse",
+    ),
     path("accounts/", include("allauth.urls")),
     path("oauth/", users.views.oauth, name="oauth"),
     path("login/", users.views.login, name="slogin"),
     path("search_prd/", include("search.urls")),
-    path('serviceWorker.js', (TemplateView.as_view(template_name="serviceWorker.js",
-                                                   content_type='application/javascript', )), name='serviceWorker.js'),
-    path('firebase-messaging-sw.js', (TemplateView.as_view(template_name="firebase-messaging-sw.js",
-                                                           content_type='application/javascript', )), name='firebase-messaging-sw.js'),
-
+    path(
+        "serviceWorker.js",
+        (
+            TemplateView.as_view(
+                template_name="serviceWorker.js",
+                content_type="application/javascript",
+            )
+        ),
+        name="serviceWorker.js",
+    ),
+    path(
+        "firebase-messaging-sw.js",
+        (
+            TemplateView.as_view(
+                template_name="firebase-messaging-sw.js",
+                content_type="application/javascript",
+            )
+        ),
+        name="firebase-messaging-sw.js",
+    ),
+    path("notifications/", include("notifications.urls")),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
