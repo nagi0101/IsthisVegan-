@@ -235,3 +235,15 @@
 </script>
 <script src="{% static 'js/mainBgSlide.js' %}"></script>
 {% endblock local_block %}
+
+
+{% block FCM_script_block %}
+  {% if user.is_authenticated %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    </script>
+    <script src="{% static 'js/createFCMToken.js' %}"></script>
+  {% endif %}
+{% endblock FCM_script_block %}
