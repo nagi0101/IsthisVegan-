@@ -116,5 +116,30 @@
     <div class="main_container">
       {% block global_block %} {% endblock global_block %}
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDARGGBG3LCA4d-9wfCQ7sGaP6jyjUmYZc",
+        authDomain: "isthisvegan-84941.firebaseapp.com",
+        projectId: "isthisvegan-84941",
+        storageBucket: "isthisvegan-84941.appspot.com",
+        messagingSenderId: "652802757668",
+        appId: "1:652802757668:web:2dae2d18586a06cf4774b1",
+        measurementId: "G-HT4TVL6J5D"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script src="{% url 'firebase-messaging-sw.js' %}"></script>
+
   </body>
 </html>
