@@ -1,3 +1,4 @@
+// pwa
 const STATIC_CACHE_NAME = "static-cache-v1";
 const STATIC_ASSETS = [
   "offline/",
