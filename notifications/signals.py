@@ -6,22 +6,27 @@ from firebase_admin import messaging
 
 @receiver(post_save, sender=Comment)
 def Comment_post_save(sender, **kwargs):
+    print("comment created!")
     comment = kwargs["instance"]
     post = comment.post
+    print(comment.user, post.user)
     if comment.user != post.user:
         registration_tokens = post.user.FCMTokens
-        print(registration_tokens)
+        print(registration_tokens.all())
 
         # See documentation on defining a message payload.
-        for token in registration_tokens:
-            message = messaging.Message(
-                data={
-                    "title": f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
-                    "body": comment.content[:20],
-                },
-                token=token,
-            )
+        for token in registration_tokens.all():
+            try:
+                message = messaging.Message(
+                    data={
+                        "title": f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
+                        "body": comment.content[:20],
+                    },
+                    token=token.value,
+                )
 
-            response = messaging.send(message)
-            # Response is a message ID string.
-            print("Successfully sent message:", response)
+                response = messaging.send(message)
+                # Response is a message ID string.
+                print("Successfully sent message:", response)
+            except:
+                continue
