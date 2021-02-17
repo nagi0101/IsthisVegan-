@@ -20,7 +20,7 @@ def Comment_post_save(sender, **kwargs):
                 message = messaging.Message(
                     data={
                         "title": f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
-                        "body": comment.content[:20],
+                        "body": comment.content,
                     },
                     token=token.value,
                 )
