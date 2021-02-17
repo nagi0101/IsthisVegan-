@@ -9,10 +9,7 @@ from .models import User, Badge
 class UserAdmin(admin.ModelAdmin):
     list_display = ["username", "nickname", "email", "is_staff"]
 
-    filter_horizontal = [
-        "bookmarks",
-        "badges",
-    ]
+    filter_horizontal = ["bookmarks", "badges"]
 
 
 @admin.register(Badge)
