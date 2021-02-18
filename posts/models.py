@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 from core.models import AbstractTimestamp
 from core.utils import upload_to_uuid
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -31,7 +31,8 @@ class Post(AbstractTimestamp):
     )
     title = models.CharField(max_length=120, verbose_name="제목")
     content = RichTextUploadingField(verbose_name="내용")
-    like = models.ManyToManyField("users.User", blank=True, related_name="likedPosts")
+    like = models.ManyToManyField(
+        "users.User", blank=True, related_name="likedPosts")
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
     comments = GenericRelation("Comment")
 
@@ -51,7 +52,7 @@ class Post(AbstractTimestamp):
             return self.created_at.strftime("%H:%M")
 
     def get_absolute_url(self):
-        return reverse("posts:post_detail", kwargs={"pk": self.pk})
+        return redirect(f"/detail/{self.pk}?category={self.category}")
 
 
 class RatedPost(Post):
