@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from .models import Post, RatedPost, Comment
 import json
@@ -240,7 +240,7 @@ def post_create(request):
     category = request.GET["category"]
 
     if request.method == "GET":
-        if category in ["INFO", "COMMUNICATE", "NOTICE"]:
+        if category in ["INFO", "COMMUNICATE"]:
             form = PostForm()
         else:
             form = RatedPostForm()
@@ -255,7 +255,7 @@ def post_create(request):
             return render(request, "posts/post_create.html", {"alert_flag": True})
 
         pk = 0
-        if category in ["INFO", "COMMUNICATE", "NOTICE"]:
+        if category in ["INFO", "COMMUNICATE"]:
             form = PostForm(request.POST)
 
             if form.is_valid():
@@ -275,6 +275,39 @@ def post_create(request):
                 pk = ratedpost.id
 
         return redirect(f"/detail/{pk}?category={category}")
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, redirect_field_name='')
+def post_create(request):
+    category = request.GET["category"]
+
+    if request.method == "GET":
+        if category in ["NOTICE"]:
+            form = PostForm()        
+
+        ctx = {
+            "form": form,
+            "category": category,
+        }
+        return render(request, "posts/post_create.html", ctx)
+
+    else:
+        if len(request.POST["content"]) == 0:
+            return render(request, "posts/post_create.html", {"alert_flag": True})
+
+        pk = 0
+        if category in ["NOTICE"]:
+            form = PostForm(request.POST)
+
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.category = category
+                post.save()
+                pk = post.id
+
+        return redirect(f"/detail/{pk}?category={category}")
+
 
 
 def post_update(request, pk):
