@@ -69,6 +69,7 @@ const createVeganInfoBox = (clickedLi, data) => {
   const veganFilterBox = document.createElement("div");
   const ingredientSpan = document.createElement("span");
   const veganFilterSpan = document.createElement("span");
+  const iconSpan = document.createElement("span");
 
   // set innerHTML
   let innerHTML = clickedLi.querySelector(".product_ingredient").innerHTML;
@@ -106,6 +107,7 @@ const createVeganInfoBox = (clickedLi, data) => {
   categoryList.forEach((element) => {
     if (veganFilter[element] === true) {
       veganFilterSpan.innerText += `${element} : O    `;
+      iconSpan.innerHTML += "<img src=\"" + `/static/img/${element}.png` +  "\">";
     } else {
       veganFilterSpan.innerText += `${element} : X    `;
     }
@@ -117,7 +119,7 @@ const createVeganInfoBox = (clickedLi, data) => {
   // set HTML DOM
   ingredientBox.append(ingredientSpan);
   veganFilterBox.append(veganFilterSpan);
-  veganInfoBox.append(ingredientBox, veganFilterBox);
+  veganInfoBox.append(ingredientBox, veganFilterBox, iconSpan);
 
   return veganInfoBox;
 };
