@@ -53,12 +53,16 @@ class Post(AbstractTimestamp):
 
 
 class RatedPost(Post):
+    num_choices = zip( range(1,11), range(1,11) )
+    rate = models.PositiveSmallIntegerField(choices=num_choices, verbose_name='평점')
+    '''
     rate = models.PositiveSmallIntegerField(
         validators=[
             MinValueValidator(1),
             MaxValueValidator(10),
         ],
     )
+    '''
 
 
 class Comment(AbstractTimestamp):
