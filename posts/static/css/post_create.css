@@ -107,6 +107,10 @@
   p {
     padding-bottom: 10px;
   }
+
+  .bg {
+    visibility: hidden;
+  }
 }
 
 @media (max-height: 440px) and (max-width: 820px) {
