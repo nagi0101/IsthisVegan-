@@ -68,16 +68,16 @@ body,
 }
 
 #content_bg-1 {
-  background-image: url("../img/back1.png");
+  background-image: url("../img/back1.jpg");
 }
 #content_bg-2 {
-  background-image: url("../img/back2.png");
+  background-image: url("../img/back2.jpg");
 }
 #content_bg-3 {
-  background-image: url("../img/back3.png");
+  background-image: url("../img/back3.jpg");
 }
 #content_bg-4 {
-  background-image: url("../img/back4.png");
+  background-image: url("../img/back4.jpg");
 }
 
 .product_text {

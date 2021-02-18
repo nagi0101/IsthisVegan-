@@ -68,6 +68,9 @@ input {
   justify-content: center;
 }
 
+.submit_button{
+}
+
 .socialaccount_providers,
 .local_login,
 .local_signup,
@@ -96,7 +99,18 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 150px;
+  height: 140px;
+  padding-top: 8px;
+  padding-bottom: 15px;
+}
+
+.login_form > p {
+    display: grid;
+    grid-template-columns: 1.4fr 3fr;
+}
+
+.login_form > p:nth-last-child( 2 ) {
+  display: none;
 }
 
 .signupform {
@@ -106,6 +120,11 @@ input {
   height: 300px;
 }
 
+.signupform > p {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+}
+
 .social_signupform {
   display: flex;
   flex-direction: column;
@@ -113,6 +132,10 @@ input {
   height: 240px;
 }
 
+.social_signupform > p {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
 
 .google {
   background-color: #4287f5;

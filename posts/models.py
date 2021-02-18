@@ -17,12 +17,14 @@ class Post(AbstractTimestamp):
     CATEGORY_COMMUNICATE = ("COMMUNICATE", "소통해요")
     CATEGORY_VISIT = ("VISIT", "가봤어요")
     CATEGORY_BUY = ("BUY", "사봤어요")
+    CATEGORY_NOTICE = ("NOTICE", "공지해요")
 
     CATEGORY_SELECT = (
         CATEGORY_INFO,
         CATEGORY_COMMUNICATE,
         CATEGORY_VISIT,
         CATEGORY_BUY,
+        CATEGORY_NOTICE,
     )
 
     user = models.ForeignKey(
