@@ -54,6 +54,7 @@ header {
   height: 20px;
   margin-left: 10px;
   padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .dropdown-content {
