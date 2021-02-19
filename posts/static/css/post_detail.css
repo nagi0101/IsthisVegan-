@@ -224,7 +224,11 @@ a {
     white-space: nowrap;
     display: block;
   }
-  #iconline {
+  .deletetext {
+    display: none;
+  }
+
+  .edittext {
     display: none;
   }
   #bookmark_btn {
