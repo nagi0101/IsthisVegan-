@@ -9,6 +9,7 @@ def Comment_post_save(sender, **kwargs):
     print("comment created!")
     comment = kwargs["instance"]
     post = comment.post
+    print(post.get_absolute_url())
     print(comment.user, post.user)
     if comment.user != post.user:
         registration_tokens = post.user.FCMTokens
@@ -21,6 +22,9 @@ def Comment_post_save(sender, **kwargs):
                     data={
                         "title": f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
                         "body": comment.content,
+                    },
+                    fcm_options={
+                        "link": f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}",
                     },
                     token=token.value,
                 )
