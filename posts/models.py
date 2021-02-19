@@ -31,8 +31,7 @@ class Post(AbstractTimestamp):
     )
     title = models.CharField(max_length=120, verbose_name="제목")
     content = RichTextUploadingField(verbose_name="내용")
-    like = models.ManyToManyField(
-        "users.User", blank=True, related_name="likedPosts")
+    like = models.ManyToManyField("users.User", blank=True, related_name="likedPosts")
     category = models.CharField(choices=CATEGORY_SELECT, max_length=20)
     comments = GenericRelation("Comment")
 
@@ -52,7 +51,7 @@ class Post(AbstractTimestamp):
             return self.created_at.strftime("%H:%M")
 
     def get_absolute_url(self):
-        return redirect(f"/detail/{self.pk}?category={self.category}")
+        return f"detail/{self.pk}?category={self.category}"
 
 
 class RatedPost(Post):
