@@ -32,6 +32,30 @@ messaging.onBackgroundMessage((payload) => {
 });
 
 
+// 포그라운드 메시지 수신 설정
+self.addEventListener("notificationclick", function (event) {
+  console.log("On notification click: ", event.notification);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: "window",
+      })
+      .then(function (clientList) {
+        for (var i = 0; i < clientList.length; i++) {
+          var client = clientList[i];
+          if (client.url == "/" && "focus" in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow("/");
+      })
+  );
+});
+
+
+
 {% comment %} const messaging = firebase.messaging();
 messaging.usePublicVapidKey(
   "AAAAYWfhPaE:APA91bE0RBDYdgnTIEMT7HsjA8WBf3AzRCSKTcJyLDWxxg2mcW6FDr34g5LXR-dX0E_SRV_xw48CdS4xtbgYG5XmnzILZxOdV-Fgv66KbYgRdECSxPVWBwbfbaqzdITl8LQw7KDorS34"

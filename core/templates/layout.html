@@ -147,23 +147,22 @@
     <script>
       // Firebase
       navigator.serviceWorker.getRegistrations().then((registration) => {
+        const serviceworkerRegistration = registration[0]
         messaging.onMessage((payload) => {
-          console.log(registration);
+          console.log(serviceworkerRegistration);
           console.log("Message received. ", payload);
           const notificationTitle = payload.notification.title;
           const notificationOptions = {
               body: payload.notification.body,
-              icon: payload.notification.icon,        
+              icon: payload.notification.icon,   
+              data: payload.notification.click_action,     
           };
-          notification = registration[0].showNotification(notificationTitle, notificationOptions);
+          notification = serviceworkerRegistration.showNotification(notificationTitle, notificationOptions);
+          console.log(notification);
           // const notification = new Notification(notificationTitle, notificationOptions);
-          notification.onclick = function(event) {
-              event.preventDefault(); // prevent the browser from focusing the Notification's tab
-              window.open(payload.notification.click_action);
-              notification.close();
-          };
         });
-      });
+        });
+      
     </script>
     {% block FCM_script_block %}
     {% endblock FCM_script_block %}

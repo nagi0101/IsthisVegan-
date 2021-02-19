@@ -18,20 +18,22 @@ def Comment_post_save(sender, **kwargs):
 
         # See documentation on defining a message payload.
         for token in registration_tokens.all():
-
-            message = messaging.Message(
-                webpush=messaging.WebpushConfig(
-                    fcm_options=messaging.WebpushFCMOptions(
-                        link=f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
+            try:
+                message = messaging.Message(
+                    webpush=messaging.WebpushConfig(
+                        notification=messaging.WebpushNotification(
+                            title=f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
+                            body=comment.content,
+                            icon="/static/img/icon6x.png",
+                        ),
+                        fcm_options=messaging.WebpushFCMOptions(
+                            link=f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
+                        ),
                     ),
-                    notification=messaging.WebpushNotification(
-                        title=f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
-                        body=comment.content,
-                        icon="/static/img/icon6x.png",
-                    ),
-                ),
-                token=token.value,
-            )
-            response = messaging.send(message)
-            # Response is a message ID string.
-            print("Successfully sent message:", response)
+                    token=token.value,
+                )
+                response = messaging.send(message)
+                # Response is a message ID string.
+                print("Successfully sent message:", response)
+            except:
+                continue
