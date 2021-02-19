@@ -311,7 +311,6 @@ def notice_post_create(request):
         return redirect(f"/detail/{pk}?category={category}")
 
 
-
 def post_update(request, pk):
     category = request.GET["category"]
 

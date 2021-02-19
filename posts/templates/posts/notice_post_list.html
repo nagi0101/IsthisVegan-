@@ -58,11 +58,13 @@
     </ul> {% endcomment %}
   </div>
 </div>
-<div class="edit">
-  <a href="{% url 'posts:notice_post_create' %}?category={{category}}"
-    ><i id="pencil" class="fas fa-edit"></i
-  ></a>
-</div>
+{% if user.is_superuser %}
+  <div class="edit">
+    <a href="{% url 'posts:notice_post_create' %}?category={{category}}"
+      ><i id="pencil" class="fas fa-edit"></i
+    ></a>
+  </div>
+{% endif %}
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
