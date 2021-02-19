@@ -14,23 +14,24 @@ def Comment_post_save(sender, **kwargs):
     if comment.user != post.user:
         registration_tokens = post.user.FCMTokens
         print(registration_tokens.all())
+        print(post.get_absolute_url())
 
         # See documentation on defining a message payload.
         for token in registration_tokens.all():
-            try:
-                message = messaging.Message(
-                    data={
-                        "title": f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
-                        "body": comment.content,
-                    },
-                    fcm_options={
-                        "link": f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}",
-                    },
-                    token=token.value,
-                )
 
-                response = messaging.send(message)
-                # Response is a message ID string.
-                print("Successfully sent message:", response)
-            except:
-                continue
+            message = messaging.Message(
+                webpush=messaging.WebpushConfig(
+                    fcm_options=messaging.WebpushFCMOptions(
+                        link=f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
+                    ),
+                    notification=messaging.WebpushNotification(
+                        title=f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
+                        body=comment.content,
+                        icon="/static/img/icon6x.png",
+                    ),
+                ),
+                token=token.value,
+            )
+            response = messaging.send(message)
+            # Response is a message ID string.
+            print("Successfully sent message:", response)
