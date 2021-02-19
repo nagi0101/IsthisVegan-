@@ -7,14 +7,17 @@
     {% if request.user.pk == person.pk %}
     <h2 class="text-center">북마크 목록</h2>
     <div class="wrap2">
-      <ul>
       {% for bookmark in bookmarks %}
-      <li>
-        <a
-          href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}" class="title"
-          >{{ bookmark.title }}</a
-        >
-      </li>
+      <ul>
+        <li>
+          <a
+            href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}" class="title"
+            >{{ bookmark.title }}</a
+          >
+        </li>
+      </ul>
+      {% empty %}
+        <p>북마크가 아직 없습니다. 마음에 드는 글을 북마크해보세요!</p>
       {% endfor %}
     </ul>
     </div>

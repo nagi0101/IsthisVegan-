@@ -148,13 +148,17 @@
       // Firebase
       messaging.onMessage((payload) => {
         console.log("Message received. ", payload);
-        const notificationTitle = payload.data.title;
+        const notificationTitle = payload.notification.title;
         const notificationOptions = {
-          body: payload.data.body,
-          icon: '/static/img/icon6x.png',
+            body: payload.notification.body,
+            icon: payload.notification.icon,        
         };
-
-        const notification = new Notification(notificationTitle, notificationOptions)
+        const notification = new Notification(notificationTitle, notificationOptions);
+        notification.onclick = function(event) {
+            event.preventDefault(); // prevent the browser from focusing the Notification's tab
+            window.open(payload.notification.click_action , '_blank');
+            notification.close();
+        };
       });
     </script>
     {% block FCM_script_block %}
