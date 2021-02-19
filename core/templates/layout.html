@@ -146,19 +146,23 @@
     </script>
     <script>
       // Firebase
-      messaging.onMessage((payload) => {
-        console.log("Message received. ", payload);
-        const notificationTitle = payload.notification.title;
-        const notificationOptions = {
-            body: payload.notification.body,
-            icon: payload.notification.icon,        
-        };
-        const notification = new Notification(notificationTitle, notificationOptions);
-        notification.onclick = function(event) {
-            window.open(payload.notification.click_action , '_blank');
-            // event.preventDefault(); // prevent the browser from focusing the Notification's tab
-            notification.close();
-        };
+      navigator.serviceWorker.getRegistrations().then((registration) => {
+        messaging.onMessage((payload) => {
+          console.log(registration);
+          console.log("Message received. ", payload);
+          const notificationTitle = payload.notification.title;
+          const notificationOptions = {
+              body: payload.notification.body,
+              icon: payload.notification.icon,        
+          };
+          notification = registration[0].showNotification(notificationTitle, notificationOptions);
+          // const notification = new Notification(notificationTitle, notificationOptions);
+          notification.onclick = function(event) {
+              window.open(payload.notification.click_action);
+              // event.preventDefault(); // prevent the browser from focusing the Notification's tab
+              notification.close();
+          };
+        });
       });
     </script>
     {% block FCM_script_block %}
