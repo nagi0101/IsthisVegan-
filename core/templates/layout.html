@@ -28,7 +28,7 @@
         <div class="dropdown">
           <a href="#" class="dtn">알아봐요!</a>
           <div class="dropdown-content">
-            <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+            <a href="{% url 'posts:post_list' %}?category=INFO">이거 알려줘요!</a>
           </div>
         </div>
         <div class="dropdown">
@@ -81,7 +81,7 @@
                 >가봤어요!</a>
                 <a href="{% url 'posts:post_list' %}?category=BUY"
                 >사봤어요!</a>
-                <a href="#">도전해요!</a>
+                <a href="{% url 'posts:post_list' %}?category=NOTICE"> 공지해요!</a>
               </div>
           </div>
           <div class="dropdown">
