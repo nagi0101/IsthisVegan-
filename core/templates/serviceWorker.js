@@ -5,10 +5,10 @@ const STATIC_ASSETS = [
   "static/css/reset.css",
   "static/css/layout.css",
   "static/css/offline.css",
-  "static/img/back1.png",
-  "static/img/back2.png",
-  "static/img/back3.png",
-  "static/img/back4.png",
+  "static/img/back1.jpg",
+  "static/img/back2.jpg",
+  "static/img/back3.jpg",
+  "static/img/back4.jpg",
 ];
 
 const OFFLINE_CACHE_NAME = "offline-cache-v1";
