@@ -158,13 +158,8 @@
           notification = registration[0].showNotification(notificationTitle, notificationOptions);
           // const notification = new Notification(notificationTitle, notificationOptions);
           notification.onclick = function(event) {
-<<<<<<< HEAD
               event.preventDefault(); // prevent the browser from focusing the Notification's tab
               window.open(payload.notification.click_action);
-=======
-              window.open(payload.notification.click_action);
-              // event.preventDefault(); // prevent the browser from focusing the Notification's tab
->>>>>>> firebase
               notification.close();
           };
         });
