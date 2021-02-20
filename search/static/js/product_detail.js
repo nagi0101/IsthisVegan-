@@ -142,6 +142,7 @@ const showProductModal = (clickedLi, data) => {
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정
+  nameBox.innerText = clickedLi.querySelector(".product_name").innerText;
   idSpan.innerText = clickedLi.querySelector(".product_id").innerText;
   
   closeModalBtn.innerText = "닫기";
