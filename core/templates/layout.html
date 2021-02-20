@@ -60,7 +60,7 @@
         <div class="dropdown">
           <a href="/accounts/logout" class="dtn">로그아웃</a>
         </div>
-        <div class="dropdown" id="dtn">{{user.username}} 님이 로그인 중</div>
+        <div class="dropdown" id="dtn">Lv{{user.level}}. {{user.username}} 님이 로그인 중</div>
         {% else %}
           <div class="dropdown">
           <a href="/accounts/signup" class="dtn">회원가입</a>
@@ -99,10 +99,48 @@
           </div>
       </div>
     </header>
+
+
     <div class="main_container">
       {% block global_block %} 
       {% endblock global_block %}
     </div>
+
+    <!-- in app notification -->
+    {% if user.new_notifications_list %}
+      <div class="notifications_container">
+        <div class="notifications_btn" >
+          <div class="notifications_btn_vain"></div>
+        </div>
+        <div class="notifications_list_container">
+          <ul>
+            {% for notification in user.new_notifications_list %}
+              <li>
+                <a href="{% url 'notifications:on_in_app_notification_clicked' notification.pk %}">
+                  <div class="notification_left_section">
+                      {% if notification.category == "COMM" %}
+                        <div class="notification_icon COMM">
+                          <i class="far fa-comment-alt "></i>
+                        </div>
+                      {% endif %}
+                  </div>
+
+                  <div class="notification_right_section">
+                    <div class="notification_head">
+                      <span>{{notification.title}}</span>
+                    </div>
+                    <div class="notification_body">
+                      <span>{{notification.content}}</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <script src="{% static 'js/inAppNotification.js' %}"></script>
+    {% endif %}
 
 
 
@@ -147,23 +185,22 @@
     <script>
       // Firebase
       navigator.serviceWorker.getRegistrations().then((registration) => {
+        const serviceworkerRegistration = registration[0]
         messaging.onMessage((payload) => {
-          console.log(registration);
+          console.log(serviceworkerRegistration);
           console.log("Message received. ", payload);
           const notificationTitle = payload.notification.title;
           const notificationOptions = {
               body: payload.notification.body,
-              icon: payload.notification.icon,        
+              icon: payload.notification.icon,   
+              data: payload.notification.click_action,     
           };
-          notification = registration[0].showNotification(notificationTitle, notificationOptions);
+          notification = serviceworkerRegistration.showNotification(notificationTitle, notificationOptions);
+          console.log(notification);
           // const notification = new Notification(notificationTitle, notificationOptions);
-          notification.onclick = function(event) {
-              event.preventDefault(); // prevent the browser from focusing the Notification's tab
-              window.open(payload.notification.click_action);
-              notification.close();
-          };
         });
-      });
+        });
+      
     </script>
     {% block FCM_script_block %}
     {% endblock FCM_script_block %}
