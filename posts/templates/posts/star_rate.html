@@ -1,0 +1,7 @@
+{% load static %}
+
+{% include "django/forms/widgets/input.html" %}
+
+{{ form.media }}
+
+<div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div>

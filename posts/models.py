@@ -51,18 +51,9 @@ class Post(AbstractTimestamp):
 
 
 class RatedPost(Post):
-    num_choices = zip( range(1,11), range(1,11) )
-    rate = models.PositiveSmallIntegerField(choices=num_choices, verbose_name='평점')
-    '''
-    rate = models.PositiveSmallIntegerField(
-        validators=[
-            MinValueValidator(1),
-            MaxValueValidator(10),
-        ],
-    )
-    '''
-
-
+    rate = models.FloatField(verbose_name='평점')
+ 
+ 
 class Comment(AbstractTimestamp):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="comments"
