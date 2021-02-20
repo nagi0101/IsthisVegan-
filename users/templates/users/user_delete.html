@@ -1,0 +1,21 @@
+{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
+<link rel="stylesheet" href="{% static 'css/user_delete.css' %}" />
+{% endblock head_block %} {% block local_block %}
+<div class="bg"></div>
+<div class="container">
+  <div class="wrap">
+    {% if request.user.pk == person.pk %}
+    <h2 class="text-center">회원 탈퇴</h2>
+    <form class="deleteform" method="POST">
+      {% csrf_token %}
+      <p>정말로 이건비건을 탈퇴하시겠습니까?</p>
+      <div class="wrap2">
+        <input class="i1" type="submit" value="Yes" />
+      </div>
+    </form>
+    {% else %}
+    <p>다른 사용자의 회원 탈퇴에 접근할 수 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock local_block %}

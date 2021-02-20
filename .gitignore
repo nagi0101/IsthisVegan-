@@ -267,7 +267,7 @@ pyvenv.cfg
 pip-selfcheck.json
 
 ### vscode ###
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -300,4 +300,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/python,django,vscode,venv,macos,windows,linux
+# custom
+
+serviceAccountKey.json

@@ -1,0 +1,138 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: solid 1px black; */
+}
+
+.main_container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.local_container {
+  height: 100%;
+  background-color: white;
+}
+
+.bg {
+  background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  /* border: solid 1px black; */
+  width: 80%;
+}
+
+.post_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
+  width: 80%;
+}
+
+.post_create_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+}
+
+.post_title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 100px;
+}
+
+@media (max-width: 575px) {
+  .post_title {
+    display: none;
+  }
+  .post_create_content {
+    margin: 0;
+  }
+  .wrap {
+    width: 80%;
+    padding: 0;
+  }
+  #cke_id_content {
+    max-width: 370px;
+  }
+  p {
+    padding-bottom: 10px;
+  }
+
+  .bg {
+    visibility: hidden;
+  }
+}
+
+@media (max-height: 440px) and (max-width: 820px) {
+  .bg {
+    visibility: hidden;
+  }
+  .wrap{
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+  .container {
+    height: 100%;
+    background-color: white;
+    padding-top: 15%;
+  }
+
+  .post_title {
+    line-height: 80px;
+    margin-top: 20px;
+  }
+
+  .post_content {
+    margin-top: 20px;
+  }
+
+  .post_create_form{
+		height: 100%;
+		margin-top: 20px;
+		font-size: 15px;
+	}
+
+  #cke_id_content{
+		max-width: 600px;
+		max-height: 500px;
+	}
+
+	#cke_1_contents{
+		max-height: 200px;
+	}
+
+	#cke_1_top{
+		max-height: 150px;
+	}
+  .wrap2{
+    padding-bottom: 15px;
+    padding-top: 10px;
+  }
+}

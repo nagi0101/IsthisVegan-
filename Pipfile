@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 pillow = "*"
+django-seed = "*"
+django-ckeditor = "*"
+django-allauth = "*"
+firebase-admin = "*"
 
 [dev-packages]
 black = "*"

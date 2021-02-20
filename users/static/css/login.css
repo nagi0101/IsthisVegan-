@@ -1,0 +1,314 @@
+input {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+  outline: none;
+}
+
+.main_container {
+  padding-top: 82px;
+}
+
+.bg {
+  background-image: url("../img/userimage.png");
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.all_content {
+  box-sizing: border-box;
+  width: 70%;
+  height: 80%;
+  margin: auto;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: #3c3530;
+  background-color: white;
+  line-height: 100%;
+}
+
+.login_title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 70px;
+}
+
+.signup_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 50px;
+}
+
+.signup_info .login_link {
+  color: #f16b6f;
+  text-decoration: underline;
+}
+
+.password_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 30px;
+}
+
+.login_title,
+.login_info,
+.login-or,
+.submit_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit_button{
+}
+
+.socialaccount_providers,
+.local_login,
+.local_signup,
+.local_password_reset {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3c3530;
+}
+
+.local_login{
+  padding-bottom: 20px;
+}
+
+.local_signup{
+  padding-bottom: 60px;
+}
+
+.local_password_reset{
+  padding-bottom: 80px;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+  padding-top: 8px;
+  padding-bottom: 15px;
+}
+
+.login_form > p {
+    display: grid;
+    grid-template-columns: 1.4fr 3fr;
+}
+
+.login_form > p:nth-last-child( 2 ) {
+  display: none;
+}
+
+.signupform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
+
+.signupform > p {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+}
+
+.social_signupform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 240px;
+}
+
+.social_signupform > p {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+.google {
+  background-color: #4287f5;
+  -webkit-border-top-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-right-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-right-radius: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  border-bottom-left-radius: 15px;
+  text-indent: 0;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial Black;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 5px;
+  height: 45px;
+  line-height: 45px;
+  width: 200px;
+  text-decoration: none;
+  text-align: center;
+}
+.google:hover {
+  background-color: #3c79d6;
+}
+.google:active {
+  position: relative;
+  top: 1px;
+}
+
+.naver {
+  background-color: #1ec800;
+  -webkit-border-top-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-right-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-right-radius: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  border-bottom-left-radius: 15px;
+  text-indent: 0;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial Black;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 5px;
+  height: 45px;
+  line-height: 45px;
+  width: 200px;
+  text-decoration: none;
+  text-align: center;
+}
+.naver:hover {
+  background-color: #1cba00;
+}
+.naver:active {
+  position: relative;
+  top: 1px;
+}
+
+.kakao {
+  background-color: #ffe600;
+  -webkit-border-top-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-right-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-right-radius: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  border-bottom-left-radius: 15px;
+  text-indent: 0;
+  display: inline-block;
+  color: #000000;
+  font-family: Arial Black;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 5px;
+  height: 45px;
+  line-height: 45px;
+  width: 200px;
+  text-decoration: none;
+  text-align: center;
+}
+.kakao:hover {
+  background-color: #edd603;
+}
+.kakao:active {
+  position: relative;
+  top: 1px;
+}
+
+.primaryAction {
+  width: 140px;
+  height: 45px;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #aacd6e;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.primaryAction:hover {
+  background-color: #9ebf56;
+  box-shadow: 0px 15px 20px rgba(158, 191, 86, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+@media (max-width: 575px) {
+  .all_content {
+    width: 80%;
+    box-shadow: 2px 2px 7px #999;
+  }
+
+  .login_title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 50px;
+  }
+
+  .login_info {
+    line-height: 5px;
+  }
+
+  .bg {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 820px) and (max-height: 440px) {
+  .all_content {
+    width: 60%;
+    height: 500px;
+    box-shadow: 2px 2px 7px #999;
+  }
+
+  .login_title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 50px;
+  }
+
+  .login_info {
+    line-height: 5px;
+  }
+
+  .bg {
+    visibility: hidden;
+  }
+}

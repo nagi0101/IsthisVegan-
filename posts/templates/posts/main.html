@@ -1,0 +1,249 @@
+{% extends 'posts/layout.html' %} 
+{% load static %} 
+
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script>
+</script>
+{% endblock head_block %}
+
+
+{% block local_block %}
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div id="content" class="swiper-slide">
+            <div id="content_bg-container">
+                <div data-nth-bg="1" id="content_bg-1" class="content_bg"></div>
+                <div data-nth-bg="2" id="content_bg-2" class="content_bg"></div>
+                <div data-nth-bg="3" id="content_bg-3" class="content_bg"></div>
+                <div data-nth-bg="4" id="content_bg-4" class="content_bg"></div>
+            </div>
+            <div class="product_text">
+                <div id="content__top">
+                    <h1>IsThis?<br>VEGAN!</h1>
+                </div>
+
+                <div class="search_prd_container">
+                    <form class="search_form" method="GET" action="{% url 'search:search' %}">
+                        <input
+                        id="product_search_input"
+                        type="text"
+                        name="init"
+                        id=""
+                        placeholder="제품명을 검색해봐요!"
+                        />
+                        <button
+                        id="product_search_btn"
+                        onclick="onProductSearchBtnClicked()"
+                        type="submit"
+                        >
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="information swiper-slide">
+            <div class="info_text">
+                <div class="left">
+                    <h1>IsThis?<br>VEGAN!</h1>
+                </div>
+
+                <div class="right">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In qui eveniet
+                        dolor sit commodi corrupti inventore maiores nemo, earum similique quis
+                        voluptas provident cupiditate? Facilis reiciendis aut eaque velit omnis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="new swiper-slide">
+            <div class="navbarcontain">
+                <button id="menu" onClick="btn1()">COMMUNICATE</button>
+                <button id="menu" onClick="btn2()">INFO</button>
+                <button id="menu" onClick="btn3()">VISIT</button>
+                <button id="menu"  onClick="btn4()">BUY</button>
+            </div>
+            <div class="new_text">
+              <span class="textwrap">
+                <a href="{% url 'posts:post_list' %}?category=COMMUNICATE" id="commu2" class="link">COMMUNICATE</a>
+                <a href="{% url 'posts:post_list' %}?category=INFO"id="info2" class="link" style="display:none">INFO</a>
+                <a href="{% url 'posts:post_list' %}?category=VISIT" id="visit2" class="link"style="display:none">VISIT</a>
+                <a href="{% url 'posts:post_list' %}?category=BUY" id="buy2" class="link"style="display:none">BUY</a>
+              </span>
+                {% comment %} {% for post in posts|dictsort:'category' %} {% ifchanged %}
+                <li>
+                <a href="{% url 'posts:post_list' %}?category={{post.category}}"
+                    ><h2>{{post.category}}</h2></a
+                >
+                {% endifchanged %}
+
+                <a
+                    href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+                >
+                    <span>{{post.title}}</span>
+                    <span>{{post.user.nickname}}</span>
+                    <span><i class="fas fa-heart"></i> {{post.like.all|length}}</span>
+                </a>
+                </li>
+
+                {% endfor %} {% endcomment %}
+                <ul id="commu">
+                  {% for post in COMMUNICATE %}
+                  <li class='content_text'>
+                    <span class="list"><a
+                      href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+                      >{{post.title}}</a
+                    >
+                    <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
+                 </li>
+                  {% endfor %}
+                </ul>
+    <ul id="info" style="display:none;">
+      {% for post in INFO %}
+      <li class='content_text'>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul id="visit" style="display:none;">
+      {% for post in VISIT %}
+      <li class='content_text'>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul id="buy" style="display:none;">
+      {% for post in BUY %}
+      <li class='content_text'>
+        <span class="list"><a
+          href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
+          class="list">{{post.title}}</a
+        >
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+        <div class="call swiper-slide">
+            <div class="instagrams">
+                <!-- Place <div> tag where you want the feed to appear -->
+                <div id="curator-feed-default-feed-layout">
+                <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
+                </div>
+                <!-- The Javascript can be moved to the end of the html page before the </body> tag -->
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.js"
+  integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  /* curator-feed-default-feed-layout */
+  (function () {
+    var i,
+      e,
+      d = document,
+      s = "script";
+    i = d.createElement("script");
+    i.async = 1;
+    i.src =
+      "https://cdn.curator.io/published/cd33a21b-e808-46dc-9676-e6530d263a8b.js";
+    e = d.getElementsByTagName(s)[0];
+    e.parentNode.insertBefore(i, e);
+  })();
+  
+    function btn1(){
+        $('#commu').show();
+        $('#info').hide();
+        $('#visit').hide();
+        $('#buy').hide();
+        $('#commu2').show();
+        $('#info2').hide();
+        $('#visit2').hide();
+        $('#buy2').hide();
+    }
+    function btn2(){
+        $('#commu').hide();
+        $('#info').show();
+        $('#visit').hide();
+        $('#buy').hide();
+        $('#commu2').hide();
+        $('#info2').show();
+        $('#visit2').hide();
+        $('#buy2').hide();
+    }
+    function btn3(){
+        $('#commu').hide();
+        $('#info').hide();
+        $('#visit').show();
+        $('#buy').hide();
+        $('#commu2').hide();
+        $('#info2').hide();
+        $('#visit2').show();
+        $('#buy2').hide();
+    }
+    function btn4(){
+        $('#commu').hide();
+        $('#info').hide();
+        $('#visit').hide();
+        $('#buy').show();
+        $('#commu2').hide();
+        $('#info2').hide();
+        $('#visit2').hide();
+        $('#buy2').show();
+    }
+</script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        mousewheel: true,
+        keyboard: {
+            enabled: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+</script>
+<script src="{% static 'js/mainBgSlide.js' %}"></script>
+{% endblock local_block %}
+
+
+{% block FCM_script_block %}
+  {% if user.is_authenticated %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    </script>
+    <script src="{% static 'js/createFCMToken.js' %}"></script>
+  {% endif %}
+{% endblock FCM_script_block %}

@@ -1,0 +1,174 @@
+.container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	/* border: solid 1px black; */
+  }
+  
+  .main_container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .local_container {
+	height: 100%;
+	background-color: white;
+  }
+  
+.bg {
+	background-image: url("../img/userimage.png");
+	height: 100vh;
+	width: 100vw;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+  }
+
+.wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 20px 100px;
+  
+	/* border: solid 1px black; */
+	width: 700px;
+  }
+
+.wrap2{
+	padding-bottom: 15px;
+	padding-top: 10px;
+}
+
+.ask_product{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.ask_product_create_form{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 500px;
+}
+
+.ask_title{
+	font-size: 30px;
+	font-weight: 400;
+	line-height: 100px;
+}
+
+@media (max-width:575px) {
+	.bg{
+		visibility:hidden;
+	  }
+
+	.container {
+	    height: 100%;
+	    background-color: white;
+		padding: 0;
+	}
+
+	.wrap{
+		width: 100%;
+		height: 100%;
+		padding: 0px;
+	}
+
+	.ask_title{
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 50px;
+	}
+
+	.ask_info{
+		font-size: 14px;
+	}
+
+	.ask_product_create_form{
+		height: 100%;
+		margin-top: 20px;
+		font-size: 13px;
+	}
+
+	.ask_product{
+		margin-top: 5px;
+	}
+
+	#cke_id_content{
+		max-width: 350px;
+		max-height: 400px;
+	}
+
+	#cke_1_contents{
+		max-height: 200px;
+	}
+
+	#cke_1_top{
+		max-height: 150px;
+	}
+}
+
+@media (max-width: 820px) and (max-height: 440px) {
+	.bg{
+		visibility:hidden;
+	  }
+
+	.container {
+	    height: 100%;
+	    background-color: white;
+		padding-top: 10%;
+	}
+
+	.wrap{
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+
+	.ask_title{
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 50px;
+	}
+
+	.ask_info{
+		font-size: 14px;
+	}
+
+	.ask_product_create_form{
+		height: 100%;
+		margin-top: 20px;
+		font-size: 12px;
+	}
+
+	.ask_product{
+		margin-top: 5px;
+	}
+
+	#cke_id_content{
+		max-width: 600px;
+		max-height: 500px;
+	}
+
+	#cke_1_contents{
+		max-height: 200px;
+	}
+
+	#cke_1_top{
+		max-height: 150px;
+	}
+}
+}
