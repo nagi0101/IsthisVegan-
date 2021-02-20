@@ -1,5 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .models import InAppNotification
 from posts.models import Post, RatedPost, Comment
 from firebase_admin import messaging
 
@@ -12,9 +13,19 @@ def Comment_post_save(sender, **kwargs):
     print(post.get_absolute_url())
     print(comment.user, post.user)
     if comment.user != post.user:
+        TITLE = f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!"
+        CONTENT = comment.content
+        LINK = f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
+
+        new_in_app_notification = InAppNotification(
+            user=post.user,
+            title=TITLE,
+            content=CONTENT,
+            link=LINK,
+            category="COMM",
+        )
+        new_in_app_notification.save()
         registration_tokens = post.user.FCMTokens
-        print(registration_tokens.all())
-        print(post.get_absolute_url())
 
         # See documentation on defining a message payload.
         for token in registration_tokens.all():
@@ -22,13 +33,11 @@ def Comment_post_save(sender, **kwargs):
                 message = messaging.Message(
                     webpush=messaging.WebpushConfig(
                         notification=messaging.WebpushNotification(
-                            title=f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!",
-                            body=comment.content,
+                            title=TITLE,
+                            body=CONTENT,
                             icon="/static/img/icon6x.png",
                         ),
-                        fcm_options=messaging.WebpushFCMOptions(
-                            link=f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
-                        ),
+                        fcm_options=messaging.WebpushFCMOptions(link=LINK),
                     ),
                     token=token.value,
                 )
