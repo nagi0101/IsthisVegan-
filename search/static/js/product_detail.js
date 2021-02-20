@@ -102,14 +102,18 @@ const createVeganInfoBox = (clickedLi, data) => {
       }
     });
   });
+  let filterNum = 0;
   ingredientSpan.innerHTML = innerHTML;
   categoryList.forEach((element) => {
     if (veganFilter[element] === true) {
-      veganFilterSpan.innerText += `${element} : O    `;
-    } else {
-      veganFilterSpan.innerText += `${element} : X    `;
+      veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/${element}.jpg` +  "\">";
+      filterNum++;
     }
   });
+
+  if(filterNum == 0){
+    veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/VEGI.jpg` +  "\">";
+  }
 
   // set ClassName
   veganFilterBox.className = "modal_vegan_filter";
@@ -119,7 +123,7 @@ const createVeganInfoBox = (clickedLi, data) => {
   veganFilterBox.append(veganFilterSpan);
   veganInfoBox.append(ingredientBox, veganFilterBox);
 
-  return veganInfoBox;
+  return veganInfoBox
 };
 
 const showProductModal = (clickedLi, data) => {
@@ -138,9 +142,8 @@ const showProductModal = (clickedLi, data) => {
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
 
   //   innerText 설정
-  nameBox.innerText = clickedLi.querySelector(".product_name").innerText;
   idSpan.innerText = clickedLi.querySelector(".product_id").innerText;
-
+  
   closeModalBtn.innerText = "닫기";
   tipoffModalBtn.innerText = "제보하기";
 
