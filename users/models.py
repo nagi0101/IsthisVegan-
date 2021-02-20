@@ -18,6 +18,9 @@ class User(AbstractUser, AbstractTimestamp):
             self.exp = self.exp - self.exp_for_level_up()
             self.level += 1
 
+    def exp_percentage(self):
+        return (self.exp / self.exp_for_level_up()) * 100
+
     def __str__(self):
         return self.nickname
 

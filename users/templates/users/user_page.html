@@ -1,12 +1,24 @@
-{% extends 'posts/layout.html' %} {% load static %} {% block head_block %}
-<link rel="stylesheet" href="{% static 'css/user_page.css' %}" />
-{% endblock head_block %} {% block local_block %}
+{% extends 'posts/layout.html' %} 
+{% load static %} 
 
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/user_page.css' %}" />
+{% endblock head_block %} 
+
+
+{% block local_block %}
 <div class="bg"></div>
 <div class="container">
   <div class="wrap">
     {% if request.user.pk == person.pk %}
     <h2 class="pagename">{{person.nickname}}의 페이지</h2>
+    <div class="level_container">
+      <span>Lv. {{user.level}}</span>
+      <div class="exp_container">
+        <div class="exp_bar" style="width: {{user.exp_percentage}}%;"></div>
+      </div>
+      <span>{{user.exp}}/{{user.exp_for_level_up}}</span>
+    </div>
     <p>
       사용자 이름(id) : {{person.username}}<br /><br/>
       성 : {{person.last_name}}<br /><br/>
