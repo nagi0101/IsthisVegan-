@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 import json
-from .models import FCMToken
+from .models import FCMToken, InAppNotification
 
 
 def create_FCM_token(request):
@@ -17,3 +17,12 @@ def create_FCM_token(request):
         # 이미 등록된 token이지만 접속한 유저가 다른 경우, 다른 기기에서
         # 로그인한 유저 A가 유저 B가 등록한 기기에서 로그인한 것이다.
         return JsonResponse(False, safe=False)
+
+
+def on_in_app_notification_clicked(request, pk):
+    print("notification clicked!")
+    notification = get_object_or_404(InAppNotification, pk=pk)
+    notification.is_read = True
+    notification.save()
+
+    return redirect(notification.link)
