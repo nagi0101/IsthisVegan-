@@ -102,7 +102,7 @@
                       href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
                       >{{post.title}}</a
                     >
-                    <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+                    <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
                  </li>
                   {% endfor %}
                 </ul>
@@ -113,7 +113,7 @@
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
         >
-        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
       </li>
       {% endfor %}
     </ul>
@@ -124,7 +124,7 @@
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
         >
-        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
       </li>
       {% endfor %}
     </ul>
@@ -135,7 +135,7 @@
           href="{% url 'posts:post_detail' post.pk %}?category={{post.category}}"
           class="list">{{post.title}}</a
         >
-        <i class="fas fa-heart"></i><span>{{post.get_like_count}}</span></span>
+        <i class="fas fa-heart"></i><span class="likecount">{{post.get_like_count}}</span></span>
       </li>
       {% endfor %}
     </ul>
@@ -235,3 +235,15 @@
 </script>
 <script src="{% static 'js/mainBgSlide.js' %}"></script>
 {% endblock local_block %}
+
+
+{% block FCM_script_block %}
+  {% if user.is_authenticated %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    </script>
+    <script src="{% static 'js/createFCMToken.js' %}"></script>
+  {% endif %}
+{% endblock FCM_script_block %}

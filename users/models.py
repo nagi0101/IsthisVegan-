@@ -21,6 +21,9 @@ class User(AbstractUser, AbstractTimestamp):
     def __str__(self):
         return self.nickname
 
+    def new_notifications_list(self):
+        return self.in_app_notifications.filter(is_read=False).order_by("-created_at")
+
 
 class Badge(AbstractTimestamp):
     grade = models.PositiveIntegerField(default=1)
