@@ -69,7 +69,6 @@ const createVeganInfoBox = (clickedLi, data) => {
   const veganFilterBox = document.createElement("div");
   const ingredientSpan = document.createElement("span");
   const veganFilterSpan = document.createElement("span");
-  const iconSpan = document.createElement("span");
 
   // set innerHTML
   let innerHTML = clickedLi.querySelector(".product_ingredient").innerHTML;
@@ -107,16 +106,13 @@ const createVeganInfoBox = (clickedLi, data) => {
   ingredientSpan.innerHTML = innerHTML;
   categoryList.forEach((element) => {
     if (veganFilter[element] === true) {
-      veganFilterSpan.innerText += `${element} : O    `;
-      iconSpan.innerHTML += "<img src=\"" + `/static/img/${element}.png` +  "\">";
+      veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/${element}.jpg` +  "\">";
       filterNum++;
-    } else {
-      veganFilterSpan.innerText += `${element} : X    `;
     }
   });
 
   if(filterNum == 0){
-    iconSpan.innerHTML += "<img src=\"" + `/static/img/VEGI.png` +  "\">";
+    veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/VEGI.jpg` +  "\">";
   }
 
   // set ClassName
@@ -125,9 +121,9 @@ const createVeganInfoBox = (clickedLi, data) => {
   // set HTML DOM
   ingredientBox.append(ingredientSpan);
   veganFilterBox.append(veganFilterSpan);
-  veganInfoBox.append(ingredientBox, veganFilterBox, iconSpan);
+  veganInfoBox.append(ingredientBox, veganFilterBox);
 
-  return veganInfoBox;
+  return veganInfoBox
 };
 
 const showProductModal = (clickedLi, data) => {
@@ -144,14 +140,9 @@ const showProductModal = (clickedLi, data) => {
   const closeModalBtn = document.createElement("button");
   const tipoffModalBtn = document.createElement("button");
   const veganInfoBox = createVeganInfoBox(clickedLi, data);
-  //const iconBox = document.createElement("span");
 
   //   innerText 설정
-  nameBox.innerText = clickedLi.querySelector(".product_name").innerText;
   idSpan.innerText = clickedLi.querySelector(".product_id").innerText;
-
-  //iconBox.innerHTML += "<img src=\"" + `/static/img/${element}.png` +  "\">";
-  //iconBox.innerHTML = "<img src=\"" + `/static/img/default.png` +  "\">";
   
   closeModalBtn.innerText = "닫기";
   tipoffModalBtn.innerText = "제보하기";
@@ -178,7 +169,6 @@ const showProductModal = (clickedLi, data) => {
   modal.append(
     imageBox,
     nameBox,
-    //iconBox,
     veganInfoBox,
     idBox,
     closeModalBtn,
