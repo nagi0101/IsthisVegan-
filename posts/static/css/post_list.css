@@ -111,8 +111,9 @@
   text-decoration: none;
   color: #3c3530;
   border-bottom: 1px dashed #3c3530;
-  padding: 8px 0px;
+  padding: 5px 0px;
   height: 35px;
+  line-height: 25px;
   box-sizing: border-box;
 }
 
@@ -145,6 +146,8 @@
 }
 
 .post_user {
+  display: flex;
+  justify-content: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
