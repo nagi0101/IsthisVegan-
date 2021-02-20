@@ -3,10 +3,6 @@
 
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-/>
 {% endblock head_block %} 
 
 {% block local_block %}
@@ -20,42 +16,29 @@
   <div class="wrap">
     <div id="max-page" style="display: none">{{ max_page }}</div>
     <div class="post_grid-wrapper">
-      <div class="post_grid-header">
-        <span class="post_header_title">제목</span>
-        <span class="post_header_user">글쓴이</span>
-        <span class="post_header_like">좋아요</span>
-        <span class="post_header_date">날짜</span>
-      </div>
+      {% block rated_post_header %}
+        <div class="post_grid-header">
+          <span class="post_header_title">제목</span>
+          <span class="post_header_user">글쓴이</span>
+          <span class="post_header_like">좋아요</span>
+          <span class="post_header_date">날짜</span>
+        </div>
+      {% endblock rated_post_header %}
       <ul class="post_grid-ul">
         {% for post in posts %}
           <li class="post_grid-li">
-            <a data-post-id="{{post.pk}}" class="post_grid-a" href="{% url 'posts:post_detail' post.pk %}?category={{ post.category }}">
-              <span class="post_title">{{ post.title }}</span>
-              <span class="post_user">{{ post.user }}</span>
-              <span class="post_like"><i class="fas fa-heart"></i><span>{{ post.get_like_count }}</span></span>
-              <span class="post_date">{{ post.return_written_time_or_date }}</span>
-            </a>
+            {% block rated_post_li_a %}
+              <a data-post-id="{{post.pk}}" class="post_grid-a" href="{% url 'posts:post_detail' post.pk %}?category={{ post.category }}">
+                <span class="post_title">{{ post.title }}</span>
+                <span class="post_user"><span class="user-level">{{post.user.level}}</span>{{ post.user }}</span>
+                <span class="post_like"><i class="fas fa-heart"></i><span>{{ post.get_like_count }}</span></span>
+                <span class="post_date">{{ post.return_written_time_or_date }}</span>
+              </a>
+            {% endblock rated_post_li_a %}
           </li>
         {% endfor %}
       </ul>
     </div>
-    {% comment %} <ul class="posts">
-      {% for post in posts %}
-      <li data-post-id="{{post.pk}}" class="post">
-        <a
-          class="post2"
-          href="{% url 'posts:post_detail' post.pk %}?category={{category}}"
-        >
-          <div class="title">{{post.title}}</div>
-          <div>
-            {{post.user.nickname}}
-            <i class="fas fa-heart"></i>
-            <span>{{post.like.all|length}}</span>
-          </div>
-        </a>
-      </li>
-      {% endfor %}
-    </ul> {% endcomment %}
   </div>
 </div>
 <div class="edit">
@@ -64,6 +47,8 @@
   ></a>
 </div>
 
+<script src="{% static 'js/userLevelBadge.js' %}"></script>
+<script>userLevelBadge("25px", "16px")</script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
   axios.defaults.xsrfCookieName = "csrftoken";
@@ -71,4 +56,6 @@
   const category = "{{category}}";
 </script>
 <script src="{% static 'js/infiniteScroll.js' %}"></script>
+{% block rated_post_list_script %}
+{% endblock rated_post_list_script %}
 {% endblock local_block %}

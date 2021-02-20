@@ -7,18 +7,16 @@
     {% if request.user.pk == person.pk %}
     <h2 class="text-center">내가 쓴 글 목록</h2>
     <div class="wrap2">
-      {% for mylist in mylists %}
       <ul>
-        <li>
-          <a
-            href="{% url 'posts:post_detail' mylist.pk %}?category={{mylist.category}}" class="title"
-            >{{ mylist.title }}</a
-          >
-        </li>
-      </ul>
-      {% empty %}
-        <p>내가 쓴 글이 아직 없습니다. 이건비건에 글을 작성해보세요!</p>
+      {% for mylist in mylists %}
+      <li>
+        <a
+          href="{% url 'posts:post_detail' mylist.pk %}?category={{mylist.category}}"
+          class="title">{{ mylist.title }}</a
+        >
+      </li>
       {% endfor %}
+      </ul>
     </div>
     {% else %}
     <p>다른 사용자의 내가 쓴 글에 접근할 수 없습니다.</p>
