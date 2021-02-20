@@ -4,12 +4,13 @@ const BADGE_COLOR_TABLE = [
   { background: "#A4193D", text: "#FFDFB9" },
   { background: "#3B1877", text: "#DA5A2A" },
 ];
+const BADGE_LEVEL_GAP = 10;
 
-function userLevelBadge(badgeSize = "25px") {
+function userLevelBadge(badgeSize = "25px", fontSize = "18px", margin_x = "0") {
   const level_list = document.querySelectorAll(".user-level");
   level_list.forEach((element) => {
     const level = parseInt(element.innerText);
-    let badge_level = parseInt(level / 10);
+    let badge_level = parseInt(level / BADGE_LEVEL_GAP);
     if (badge_level > BADGE_COLOR_TABLE.length - 1) {
       badge_level = BADGE_COLOR_TABLE.length - 1;
     }
@@ -29,6 +30,7 @@ function userLevelBadge(badgeSize = "25px") {
     element.style.display = "flex";
     element.style.justifyContent = "center";
     element.style.alignItems = "center";
+    element.style.margin = `0 ${margin_x}`;
     badge.style.width = badgeSize;
     badge.style.height = badgeSize;
     badge.style.borderRadius = "50%";
@@ -41,6 +43,7 @@ function userLevelBadge(badgeSize = "25px") {
     span.style.alignItems = "center";
     span.style.textAlign = "center";
     span.style.fontWeight = "600";
+    span.style.fontSize = fontSize;
     span.style.color = BADGE_COLOR_TABLE[badge_level].text;
 
     // HTML DOM
