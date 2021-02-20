@@ -246,11 +246,11 @@ def post_create(request):
             form = PostForm()
         elif category in ["VISIT", "BUY"]:
             form = RatedPostForm()
+            ctx = {"rate" : True}
 
-        ctx = {
-            "form": form,
-            "category": category,
-        }
+        ctx["form"] = form
+        ctx["category"] = category
+        
         return render(request, "posts/post_create.html", ctx)
     else:
         if len(request.POST["content"]) == 0:
@@ -268,11 +268,14 @@ def post_create(request):
                 pk = post.id
         elif category in ["VISIT", "BUY"]:
             form = RatedPostForm(request.POST)
+            rate = request.POST["rate"]
+            rate = int(float(rate)*2)
 
             if form.is_valid():
                 ratedpost = form.save(commit=False)
                 ratedpost.user = request.user
                 ratedpost.category = category
+                ratedpost.rate = rate
                 ratedpost.save()
                 pk = ratedpost.id
 
@@ -321,11 +324,11 @@ def post_update(request, pk):
         else:
             post = get_object_or_404(RatedPost, id=pk)
             form = RatedPostForm(instance=post)
+            ctx = {"rate" : True}
 
-        ctx = {
-            "form": form,
-            "category": category,
-        }
+        ctx["form"] = form
+        ctx["category"] = category
+
         return render(request, "posts/post_create.html", ctx)
     else:
         if len(request.POST['content']) == 0:
@@ -334,12 +337,20 @@ def post_update(request, pk):
         if category in ["INFO", "COMMUNICATE", "NOTICE"]:
             post = get_object_or_404(Post, id=pk)
             form = PostForm(request.POST, request.FILES, instance=post)
-        else:
-            post = get_object_or_404(RatedPost, id=pk)
-            form = RatedPostForm(request.POST, request.FILES, instance=post)
 
-        if form.is_valid():
-            post.save()
+            if form.is_valid():
+                post.save()
+        else:
+            ratedpost = get_object_or_404(RatedPost, id=pk)
+            form = RatedPostForm(request.POST, request.FILES, instance=ratedpost)
+            rate = request.POST["rate"]
+            rate = int(float(rate)*2)
+            
+            if form.is_valid():
+                ratedpost = form.save(commit=False)
+                ratedpost.rate = rate
+                ratedpost.save()
+
         return redirect(f"/detail/{pk}?category={category}")
 
 
