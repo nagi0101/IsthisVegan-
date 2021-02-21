@@ -102,16 +102,23 @@ const createVeganInfoBox = (clickedLi, data) => {
       }
     });
   });
-  let filterNum = 0;
+
+  let filter = false;
+  let chick = false;
   ingredientSpan.innerHTML = innerHTML;
   categoryList.forEach((element) => {
     if (veganFilter[element] === true) {
       veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/${element}.jpg` +  "\">";
-      filterNum++;
+      filter = true;
+      
+      if (ingredientName["MEAT"].includes("닭") && chick == false) {
+        veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/CHICK.jpg` +  "\">";
+        chick = true;
+      }
     }
   });
 
-  if(filterNum == 0){
+  if(filter == false){
     veganFilterSpan.innerHTML += "<img src=\"" + `/static/img/VEGI.jpg` +  "\">";
   }
 
