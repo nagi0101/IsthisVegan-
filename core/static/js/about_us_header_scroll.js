@@ -1,3 +1,3 @@
-window.addEventListener("scroll", (event) => {
-  console.log(event);
-});
+// window.addEventListener("scroll", (event) => {
+//   console.log(event);
+// });

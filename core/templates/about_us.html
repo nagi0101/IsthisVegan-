@@ -3,6 +3,7 @@
 
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock head_block %}
 
 {% block global_block %}
@@ -10,15 +11,69 @@
     <div class='wave -one'></div>
     <div class='wave -two'></div>
     <div class='wave -three'></div>
-    <div class='title'>about_us</div>
+    <div class='title' data-aos="flip-down" data-aos-duration="1000">about_us</div>
+
+    <div class="white-dot-scroll"></div>
 </div>
-<section class="section-1">
-    <div class="chevron-right"></div>
-    <div class="section-1_content">
+<div class="section-1-scroll">
+    <section class="section-1">
+        <div class="chevron-right"></div>
+        <div class="section-1_content">
+            <h2 data-aos="flip-down" data-aos-anchor-placement="bottom-center">
+                About<br>
+                Us
+            </h2>
+        </div>
+        <div class="chevron-left"></div>
+    </section>
+    <div class="section-1_member-card-container">
+        <div class="section-1_member-card">
+            <p></p>
+            <div class="member-card_frame">
+                <img src="{% static 'img/신현지.png' %}" alt="" srcset="">
+                <h3>신현지</h3>
+            </div>
+        </div>
+
+        <div class="section-1_member-card">
+            <p></p>
+            <div class="member-card_frame">
+                <img src="{% static 'img/박은혜.png' %}" alt="" srcset="">
+                <h3>박은혜</h3>
+            </div>
+        </div>
+
+        <div class="section-1_member-card">
+            <p></p>
+            <div class="member-card_frame">
+                <img src="{% static 'img/박지인.png' %}" alt="" srcset="">
+                <h3>박지인</h3>
+            </div>
+        </div>
+
+        <div class="section-1_member-card">
+            <p></p>
+            <div class="member-card_frame">
+                <img src="{% static 'img/박희진.png' %}" alt="" srcset="">
+                <h3>박희진</h3>
+            </div>
+        </div>
+
+        <div class="section-1_member-card">
+            <p></p>
+            <div class="member-card_frame">
+                <img src="{% static 'img/성유진.png' %}" alt="" srcset="">
+                <h3>성유진</h3>
+            </div>
+        </div>
     </div>
-    <div class="chevron-left"></div>
-</section>
+</div>
 
 <script src="{% static 'js/about_us_header_scroll.js' %}"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+  window.addEventListener('load', AOS.refresh);
+</script>
 
 {% endblock global_block %}
