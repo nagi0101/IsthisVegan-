@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+{% endblock head_block %}
+
+{% block global_block %}
+<div class="head">
+    <div class='wave -one'></div>
+    <div class='wave -two'></div>
+    <div class='wave -three'></div>
+    <div class='title'>about_us</div>
+</div>
+<section class="section-1">
+    <div class="chevron-right"></div>
+    <div class="section-1_content">
+    </div>
+    <div class="chevron-left"></div>
+</section>
+
+<script src="{% static 'js/about_us_header_scroll.js' %}"></script>
+
+{% endblock global_block %}
