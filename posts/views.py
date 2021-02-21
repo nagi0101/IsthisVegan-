@@ -241,6 +241,7 @@ def comment_delete(request):
 def post_create(request):
     category = request.GET["category"]
 
+    ctx = {}
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm()
@@ -316,7 +317,8 @@ def notice_post_create(request):
 
 def post_update(request, pk):
     category = request.GET["category"]
-
+    
+    ctx = {}
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE", "NOTICE"]:
             post = get_object_or_404(Post, id=pk)
