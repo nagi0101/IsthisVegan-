@@ -1,7 +1,7 @@
 // pwa
 const STATIC_CACHE_NAME = "static-cache-v1";
 const STATIC_ASSETS = [
-  "offline/",
+  "core/offline/",
   "static/css/reset.css",
   "static/css/layout.css",
   "static/css/offline.css",
@@ -59,7 +59,7 @@ self.addEventListener("fetch", (event) => {
     fetch(event.request).catch(() => {
       return caches
         .open(STATIC_CACHE_NAME)
-        .then((cache) => cache.match("offline/"));
+        .then((cache) => cache.match("core/offline/"));
     })
   );
 

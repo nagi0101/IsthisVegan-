@@ -12,7 +12,16 @@
       <p class="post_title">게시글 작성하기</p>
       <div class='post_create_content'>
         <form action="" method="post" enctype="multipart/form-data" autocomplete="off" class="post_create_form">
-          {% csrf_token %} {{form.media}} {{form.as_p}}
+          {% csrf_token %}
+          {{form.media}}
+
+          제목: {{form.title}}
+          {{form.content}}
+
+          {% if rate %}
+            <input type="rating" name="rate" value="0" id="id_rate" min="0" max="5" step="0.5" style="display: none;">
+            <div id="star_id_rate" class="rateit rateit-bg" data-rateit-backingfld="#id_rate" >별점: </div>
+          {% endif %}
       
           {% if alert_flag %}
           <script>
