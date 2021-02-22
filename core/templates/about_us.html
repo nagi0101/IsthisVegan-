@@ -64,18 +64,23 @@
         <button><i class="fas fa-tools"></i></button>
     </section>
     <div class="section-2_margin"></div>
-    
+
     <section class="section-3" >
         <div class="color-list-container">
         </div>
-        <div class="canvas-container">
+        <div class="canvas-container" data-aos="flip-left" >
             <canvas></canvas>
+            <h3 draggable="true" class="color-name"></h3>
+            <div class="brush-preview-container">
+                <div class="brush-preview"></div>
+            </div>
+            <input class="brush-range" type="range" name="" id="" min="1" max="10">
         </div>
     </section>
 </div>
 
 <script src="{% static 'js/about_us_tools.js' %}"></script>
-<script src="{% static 'js/about_us_canvas.js' %}"></script>
+<script src="{% static 'js/about_us_color.js' %}"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init();

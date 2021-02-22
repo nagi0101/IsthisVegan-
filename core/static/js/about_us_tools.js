@@ -16,6 +16,11 @@ const TOOLS_LIST = [
   "Font Awesome",
   "Slack",
   "Notion",
+  "NGINX",
+  "uWSGI",
+  "오픈API",
+  "Adobe Illustrator",
+  "RateIt",
 ];
 
 const createToolElement = () => {
