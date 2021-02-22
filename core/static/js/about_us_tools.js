@@ -55,8 +55,15 @@ const createToolElement = () => {
 const onToolBtnClick = () => {
   const newToolElement1 = createToolElement();
   const newToolElement2 = createToolElement();
+  const newToolElement3 = createToolElement();
+  const newToolElement4 = createToolElement();
 
-  SECTION_2.append(newToolElement1, newToolElement2);
+  SECTION_2.append(
+    newToolElement1,
+    newToolElement2,
+    newToolElement3,
+    newToolElement4
+  );
 };
 
 const tools_init = () => {
