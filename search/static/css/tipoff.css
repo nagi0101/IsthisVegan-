@@ -21,7 +21,7 @@
 }
 
 .bg {
-  background-image: url("../img/userimage.png");
+  background-image: url("../img/searchist.jpg");
   height: 100vh;
   width: 100vw;
   background-position: center;
@@ -93,11 +93,11 @@
   .bg {
     visibility: hidden;
   }
-  .wrap{
-		width: 100%;
-		height: 100%;
-		padding: 0;
-	}
+  .wrap {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
   .container {
     height: 100%;
     background-color: white;
@@ -113,25 +113,25 @@
     margin-top: 20px;
   }
 
-  .post_create_form{
-		height: 100%;
-		margin-top: 20px;
-		font-size: 15px;
-	}
+  .post_create_form {
+    height: 100%;
+    margin-top: 20px;
+    font-size: 15px;
+  }
 
-  #cke_id_content{
-		max-width: 600px;
-		max-height: 500px;
-	}
+  #cke_id_content {
+    max-width: 600px;
+    max-height: 500px;
+  }
 
-	#cke_1_contents{
-		max-height: 200px;
-	}
+  #cke_1_contents {
+    max-height: 200px;
+  }
 
-	#cke_1_top{
-		max-height: 150px;
-	}
-  .wrap2{
+  #cke_1_top {
+    max-height: 150px;
+  }
+  .wrap2 {
     padding-bottom: 15px;
     padding-top: 10px;
   }
