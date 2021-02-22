@@ -33,16 +33,17 @@ const createToolElement = () => {
   toolElement.style.left = `${Math.random() * 100}%`;
   toolElement.style.transform = `rotate(${
     Math.random() * 360
-  }deg) translate(-50%)`;
+  }deg) translateX(-50%) translateY(-50%)`;
   toolElement.draggable = "true";
 
   return toolElement;
 };
 
 const onToolBtnClick = () => {
-  const newToolElement = createToolElement();
+  const newToolElement1 = createToolElement();
+  const newToolElement2 = createToolElement();
 
-  SECTION_2.append(newToolElement);
+  SECTION_2.append(newToolElement1, newToolElement2);
 };
 
 const tools_init = () => {
