@@ -8,6 +8,7 @@ from django.urls import reverse
 
 class Ingredient(models.Model):
     CATEGORY_MEAT = ("MEAT", "육류")
+    CATEGORY_CHICK = ("CHICK", "가금류")
     CATEGORY_FISH = ("FISH", "어류")
     CATEGORY_EGG = ("EGG", "난류")
     CATEGORY_MILK = ("MILK", "우유")
@@ -15,14 +16,15 @@ class Ingredient(models.Model):
 
     CATEGORY_SELECT = (
         CATEGORY_MEAT,
-        CATEGORY_FISH,
+        CATEGORY_CHICK,
         CATEGORY_EGG,
         CATEGORY_MILK,
+        CATEGORY_FISH,
         CATEGORY_ETC,
     )
 
     name = models.CharField(max_length=60)
-    category = models.CharField(choices=CATEGORY_SELECT, max_length=4)
+    category = models.CharField(choices=CATEGORY_SELECT, max_length=5)
 
     class Meta:
         verbose_name = "Ingredient"

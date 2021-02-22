@@ -190,7 +190,6 @@ span {
   width: 40px;
   height: auto;
   margin-right: 5px;
-  background-color: #d6cbc8;
   border-radius: 100%;
 }
 
@@ -199,31 +198,44 @@ span {
 }
 
 .MEAT {
-  background-color: red;
+  background-color: rgba(241, 107, 111, 0.6);
+  white-space: nowrap;
+  height: fit-content;
+}
+
+.CHICK {
+  background-color: rgba(242, 159, 5, 0.6);
   white-space: nowrap;
   height: fit-content;
 }
 
 .FISH {
-  background-color: cornflowerblue;
+  background-color: rgba(120, 194, 238, 0.6);
   white-space: nowrap;
   height: fit-content;
+  filter: alpha(opacity=80);
 }
 
 .EGG {
-  background-color: burlywood;
+  background-color: rgba(242, 203, 5, 0.6);
   white-space: nowrap;
   height: fit-content;
 }
 
 .MILK {
-  background-color: gold;
+  background-color: rgba(158, 191, 86, 0.6);
   white-space: nowrap;
   height: fit-content;
 }
 
 .ETC {
-  background-color: cadetblue;
+  background-color: rgba(210, 196, 214, 0.6);
+  white-space: nowrap;
+  height: fit-content;
+}
+
+.VEGI {
+  background-color: rgba(241, 241, 210, 0.6);
   white-space: nowrap;
   height: fit-content;
 }
