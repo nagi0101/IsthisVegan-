@@ -14,13 +14,21 @@ const TOOLS_LIST = [
   "AWS EC2",
   "Google Fonts",
   "Font Awesome",
+  "Slack",
+  "Notion",
 ];
 
 const createToolElement = () => {
   const toolElement = document.createElement("span");
 
+  // className
+  toolElement.className = "tool-element";
+
+  // innerText
   toolElement.innerText =
     TOOLS_LIST[Math.floor(Math.random() * TOOLS_LIST.length)];
+
+  // style
   toolElement.style.fontSize = `${Math.random() * 50 + 20}px`;
   toolElement.style.fontWeight = "600";
   toolElement.style.color =
