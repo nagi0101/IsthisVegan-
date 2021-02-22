@@ -22,3 +22,4 @@ class SignupForm(forms.Form):
         model = User
         # fields='__all__'
         fields = ['username', 'password', 'nickname','email']
+
