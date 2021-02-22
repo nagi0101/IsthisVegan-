@@ -8,15 +8,17 @@ body,
 }
 
 @font-face {
-  font-family: 'ghanachoco';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff') format('woff');
+  font-family: "ghanachoco";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'MaplestoryOTFBold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+  font-family: "MaplestoryOTFBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -102,12 +104,16 @@ body,
 }
 
 #content__top h1 {
-  font-family: 'ghanachoco', 'MaplestoryOTFBold';
+  font-family: "ghanachoco", "MaplestoryOTFBold";
   font-size: 100px;
   color: #ffffff;
   font-style: italic;
   margin-bottom: 20px;
   text-shadow: -3px 0 #5e7a2d, 0 2px #5e7a2d, 2px 0 #5e7a2d, 0 -2px #5e7a2d;
+}
+
+#content__top h1 a {
+  color: inherit;
 }
 
 .search_form {
@@ -437,7 +443,7 @@ a {
 @media (orientation: landscape) {
   .instagrams {
     width: 60%;
-  
+
     transform: translateX(-50%) translateY(-45%);
   }
   #curator-feed-default-feed-layout {
@@ -485,11 +491,11 @@ a {
   }
 }
 
-.crt-widget.crt-widget-branded .crt-logo{
-  color:white !important;
+.crt-widget.crt-widget-branded .crt-logo {
+  color: white !important;
 }
 
-.info_text h1{
-  font-weight:800;
-  font-size:100px;
+.info_text h1 {
+  font-weight: 800;
+  font-size: 100px;
 }
