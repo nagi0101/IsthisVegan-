@@ -112,6 +112,10 @@ body,
   text-shadow: -3px 0 #5e7a2d, 0 2px #5e7a2d, 2px 0 #5e7a2d, 0 -2px #5e7a2d;
 }
 
+#content__top h1 a {
+  color: inherit;
+}
+
 .search_form {
   width: 550px;
   height: 40px;
