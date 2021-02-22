@@ -41,7 +41,7 @@ const onColorBtnClicked = (e) => {
   const prevClickedBtn = document.querySelector(".color-btn-clicked");
   prevClickedBtn.classList.remove("color-btn-clicked");
   target.classList.add("color-btn-clicked");
-  SECTION_3_COLOR_NAME.innerText = target.dataset.name;
+  SECTION_3_COLOR_NAME.innerText = `${target.dataset.name} / ${target.dataset.color}`;
   SECTION_3_COLOR_NAME.style.color = target.dataset.color;
   SECTION_3_BRUSH_PREVIEW.style.backgroundColor = target.dataset.color;
 };
@@ -55,7 +55,6 @@ const addColorBtns = () => {
 };
 
 function stopPainting() {
-  console.log("touch stop");
   painting = false;
   SECTION_3_CANVAS_CTX.closePath();
 }
@@ -124,7 +123,7 @@ const color_init = () => {
   addColorBtns();
   const firstColorBtn = SECTION_3_COLOR_LIST_CONTAINER.firstElementChild;
   firstColorBtn.classList.add("color-btn-clicked");
-  SECTION_3_COLOR_NAME.innerText = firstColorBtn.dataset.name;
+  SECTION_3_COLOR_NAME.innerText = `${firstColorBtn.dataset.name} / ${firstColorBtn.dataset.color}`;
   SECTION_3_COLOR_NAME.style.color = firstColorBtn.dataset.color;
   SECTION_3_BRUSH_PREVIEW.style.width = `${SECTION_3_BRUSH_RANGE.value * 2}px`;
   SECTION_3_BRUSH_PREVIEW.style.height = `${SECTION_3_BRUSH_RANGE.value * 2}px`;

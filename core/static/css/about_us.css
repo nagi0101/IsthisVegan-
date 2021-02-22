@@ -200,7 +200,7 @@ body {
   width: 100%;
   color: #f5d042;
   font-weight: 600;
-  font-size: 50px;
+  font-size: 48px;
   opacity: 0.5;
 }
 
@@ -212,7 +212,19 @@ body {
   }
   .section-1_member-card > p {
     font-weight: 600;
-    font-size: 25px;
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 310px) {
+  .section-1_member-card {
+    width: 250px;
+    height: 250px;
+    border: 15px solid #f5d042;
+  }
+  .section-1_member-card > p {
+    font-weight: 600;
+    font-size: 23px;
   }
 }
 
@@ -327,11 +339,11 @@ body {
 
 @media (max-width: 768px) {
   .section-3 .canvas-container {
-    transform: scale(0.8);
+    transform: scale(0.8) perspective(2500px) rotateY(0) !important;
   }
 }
 @media (max-width: 411px) {
   .section-3 .canvas-container {
-    transform: scale(0.5);
+    transform: scale(0.5) perspective(2500px) rotateY(0) !important;
   }
 }
