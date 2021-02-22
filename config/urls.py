@@ -37,8 +37,6 @@ urlpatterns = [
         name="ckeditor_browse",
     ),
     path("accounts/", include("allauth.urls")),
-    path("oauth/", users.views.oauth, name="oauth"),
-    path("login/", users.views.login, name="slogin"),
     path("search_prd/", include("search.urls")),
     path(
         "serviceWorker.js",

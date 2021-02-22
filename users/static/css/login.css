@@ -34,6 +34,7 @@ input {
   line-height: 100%;
 }
 
+
 .login_title {
   font-size: 30px;
   font-weight: 400;
@@ -87,6 +88,10 @@ input {
   padding-bottom: 20px;
 }
 
+.password_setting{
+  padding-bottom: 20px;
+}
+
 .local_signup{
   padding-bottom: 60px;
 }
@@ -135,6 +140,16 @@ input {
 .social_signupform > p {
   display: grid;
   grid-template-columns: 2fr 5fr;
+}
+
+.password_form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+  padding-top: 8px;
+  padding-bottom: 15px;
+  align-items: center;
 }
 
 .google {

@@ -60,7 +60,7 @@
         <div class="dropdown">
           <a href="/accounts/logout" class="dtn">로그아웃</a>
         </div>
-        <div class="dropdown" id="dtn">Lv{{user.level}}. {{user.username}} 님이 로그인 중</div>
+        <div class="dropdown" id="dtn">Lv{{user.level}}. {{user.nickname}} 님이 로그인 중</div>
         {% else %}
           <div class="dropdown">
           <a href="/accounts/signup" class="dtn">회원가입</a>
@@ -90,7 +90,7 @@
                 {% if user.is_authenticated %}
                   <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
                   <a href="/accounts/logout" class="dtn">로그아웃</a>
-                  <div class="admin">{{user.username}} 님이 로그인 중</div>
+                  <div class="admin">{{user.nickname}} 님이 로그인 중</div>
                 {% else %}
                   <a href="/accounts/signup" class="dtn">회원가입</a>
                   <a href="/accounts/login" class="dtn">로그인</a>

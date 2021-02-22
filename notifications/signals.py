@@ -15,7 +15,7 @@ def Comment_post_save(sender, **kwargs):
     if comment.user != post.user:
         TITLE = f"{comment.user}님이 당신의 글에 댓글을 남겼습니다!"
         CONTENT = comment.content
-        LINK = f"https://nagi0101.pythonanywhere.com/{post.get_absolute_url()}"
+        LINK = f"https://isthisvegan.ga/{post.get_absolute_url()}"
 
         new_in_app_notification = InAppNotification(
             user=post.user,
