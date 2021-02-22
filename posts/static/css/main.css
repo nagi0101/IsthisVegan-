@@ -392,9 +392,26 @@ a {
     font-size: 40px;
   } */
 
+  .info_text .left {
+    width: 100%;
+    padding-left: 7%;
+  }
+
   .info_text .right {
-    width: 280px;
-    font-size: 13px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 10%;
+  }
+
+
+  .info_text .right > pre {
+    width: 100%;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #menu {
