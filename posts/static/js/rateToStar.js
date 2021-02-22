@@ -23,8 +23,8 @@ function rateToStar() {
   });
 }
 
-function init() {
+function rateToStarInit() {
   rateToStar();
 }
 
-init();
+rateToStarInit();

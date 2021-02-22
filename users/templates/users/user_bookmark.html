@@ -9,14 +9,13 @@
     <div class="wrap2">
       <ul>
       {% for bookmark in bookmarks %}
-      <li>
-        <a
-          href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}" class="title"
-          >{{ bookmark.title }}</a
-        >
-      </li>
+        <li>
+          <a 
+            href="{% url 'posts:post_detail' bookmark.pk%}?category={{bookmark.category}}" class="title">{{ bookmark.title }}</a
+          >
+        </li>
       {% endfor %}
-    </ul>
+      </ul>
     </div>
     {% else %}
     <p>다른 사용자의 북마크에 접근할 수 없습니다.</p>

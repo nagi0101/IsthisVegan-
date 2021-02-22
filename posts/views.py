@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from .models import Post, RatedPost, Comment
 import json
@@ -13,7 +13,7 @@ def post_list(request):
         category = request.GET["category"]
 
         # 카테고리에 따라서 Post 또는 RatedPost에서 글을 최초로 50개 불러온다.
-        if category == "INFO" or category == "COMMUNICATE":
+        if category == "INFO" or category == "COMMUNICATE" or category == "NOTICE":
             posts = Post.objects.filter(category=category).order_by("-created_at")
         else:
             posts = RatedPost.objects.filter(category=category).order_by("-created_at")
@@ -32,8 +32,10 @@ def post_list(request):
             "max_page": max_page,
         }
 
-        if category == "INFO" or category == "COMMUNICATE":
+        if category == "INFO" or category == "COMMUNICATE" :
             return render(request, "posts/post_list.html", ctx)
+        elif category == "NOTICE" :
+            return render(request, "posts/notice_post_list.html", ctx)
         else:
             return render(request, "posts/rated_post_list.html", ctx)
 
@@ -48,7 +50,7 @@ def post_list(request):
 
         # 카테고리가 무엇이냐에 따라서 Post 또는 RatedPost에서
         # 추가적으로 불러올 글을 postList에 추가한다.
-        if category == "INFO" or category == "COMMUNICATE":
+        if category == "INFO" or category == "COMMUNICATE" or category == "NOTICE":
             # 클라이언트가 첫 번째로 로드한 글을 찾는다.
             # 그 글부터 n 번째의 글을 계산하여 불러온다.
             first_post = get_object_or_404(Post, pk=first_id)
@@ -105,7 +107,7 @@ def post_list(request):
 def post_detail(request, pk):
     if request.method == "GET":
         category = request.GET["category"]
-        if category == "INFO" or category == "COMMUNICATE":
+        if category == "INFO" or category == "COMMUNICATE" or category == "NOTICE":
             post = get_object_or_404(Post, pk=pk)
         elif category == "VISIT" or category == "BUY":
             post = get_object_or_404(RatedPost, pk=pk)
@@ -118,7 +120,7 @@ def post_detail(request, pk):
             "comments": comments,
             "bookmarked": bookmarked,
         }
-        if category == "INFO" or category == "COMMUNICATE":
+        if category == "INFO" or category == "COMMUNICATE" or category == "NOTICE":
             return render(request, "posts/post_detail.html", ctx)
         elif category == "VISIT" or category == "BUY":
             return render(request, "posts/rated_post_detail.html", ctx)
@@ -177,7 +179,7 @@ def comment_create(request):
     content = data["content"]
     category = data["category"]
 
-    if category == "INFO" or category == "COMMUNICATE":
+    if category == "INFO" or category == "COMMUNICATE" or category == "NOTICE":
         post = get_object_or_404(Post, pk=postPk)
     elif category == "VISIT" or category == "BUY":
         post = get_object_or_404(RatedPost, pk=postPk)
@@ -239,16 +241,17 @@ def comment_delete(request):
 def post_create(request):
     category = request.GET["category"]
 
+    ctx = {}
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE"]:
             form = PostForm()
-        else:
+        elif category in ["VISIT", "BUY"]:
             form = RatedPostForm()
+            ctx = {"rate" : True}
 
-        ctx = {
-            "form": form,
-            "category": category,
-        }
+        ctx["form"] = form
+        ctx["category"] = category
+        
         return render(request, "posts/post_create.html", ctx)
     else:
         if len(request.POST["content"]) == 0:
@@ -264,55 +267,99 @@ def post_create(request):
                 post.category = category
                 post.save()
                 pk = post.id
-        else:
+        elif category in ["VISIT", "BUY"]:
             form = RatedPostForm(request.POST)
+            rate = request.POST["rate"]
+            rate = int(float(rate)*2)
 
             if form.is_valid():
                 ratedpost = form.save(commit=False)
                 ratedpost.user = request.user
                 ratedpost.category = category
+                ratedpost.rate = rate
                 ratedpost.save()
                 pk = ratedpost.id
 
         return redirect(f"/detail/{pk}?category={category}")
 
-
-def post_update(request, pk):
+@login_required
+@user_passes_test(lambda u: u.is_superuser, redirect_field_name='')
+def notice_post_create(request):
     category = request.GET["category"]
 
     if request.method == "GET":
-        if category in ["INFO", "COMMUNICATE"]:
-            post = get_object_or_404(Post, id=pk)
-            form = PostForm(instance=post)
-        else:
-            post = get_object_or_404(RatedPost, id=pk)
-            form = RatedPostForm(instance=post)
+        if category in ["NOTICE"]:
+            form = PostForm()        
 
         ctx = {
             "form": form,
             "category": category,
         }
         return render(request, "posts/post_create.html", ctx)
+
+    else:
+        if len(request.POST["content"]) == 0:
+            return render(request, "posts/post_create.html", {"alert_flag": True})
+
+        pk = 0
+        if category in ["NOTICE"]:
+            form = PostForm(request.POST)
+
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.category = category
+                post.save()
+                pk = post.id
+
+        return redirect(f"/detail/{pk}?category={category}")
+
+
+def post_update(request, pk):
+    category = request.GET["category"]
+    
+    ctx = {}
+    if request.method == "GET":
+        if category in ["INFO", "COMMUNICATE", "NOTICE"]:
+            post = get_object_or_404(Post, id=pk)
+            form = PostForm(instance=post)
+        else:
+            post = get_object_or_404(RatedPost, id=pk)
+            form = RatedPostForm(instance=post)
+            ctx = {"rate" : True}
+
+        ctx["form"] = form
+        ctx["category"] = category
+
+        return render(request, "posts/post_create.html", ctx)
     else:
         if len(request.POST['content']) == 0:
             return render(request, 'posts/post_create.html', {'alert_flag': True})
             
-        if category in ["INFO", "COMMUNICATE"]:
+        if category in ["INFO", "COMMUNICATE", "NOTICE"]:
             post = get_object_or_404(Post, id=pk)
             form = PostForm(request.POST, request.FILES, instance=post)
-        else:
-            post = get_object_or_404(RatedPost, id=pk)
-            form = RatedPostForm(request.POST, request.FILES, instance=post)
 
-        if form.is_valid():
-            post.save()
+            if form.is_valid():
+                post.save()
+        else:
+            ratedpost = get_object_or_404(RatedPost, id=pk)
+            form = RatedPostForm(request.POST, request.FILES, instance=ratedpost)
+            rate = request.POST["rate"]
+            rate = int(float(rate)*2)
+            
+            if form.is_valid():
+                ratedpost = form.save(commit=False)
+                ratedpost.rate = rate
+                ratedpost.save()
+
         return redirect(f"/detail/{pk}?category={category}")
 
 
 def post_delete(request, pk):
     category = request.GET["category"]
 
-    if category in ["INFO", "COMMUNICATE"]:
+    if category in ["INFO", "COMMUNICATE", "NOTICE"]:
         post = get_object_or_404(Post, id=pk)
     else:
         post = get_object_or_404(RatedPost, id=pk)

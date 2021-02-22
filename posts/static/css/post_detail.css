@@ -48,6 +48,8 @@ a {
 .post_content .post_header .user {
   font-size: 22px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .post_content .post_header .post_btns_container {
@@ -204,6 +206,8 @@ a {
   font-size: 20px;
   margin-bottom: 4px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .comments_container > ul > li > p {
@@ -224,7 +228,11 @@ a {
     white-space: nowrap;
     display: block;
   }
-  #iconline {
+  .deletetext {
+    display: none;
+  }
+
+  .edittext {
     display: none;
   }
   #bookmark_btn {

@@ -12,7 +12,7 @@
     <div class="post_content">
       <div class="post_header">
         <h1 class="post.title">{{post.title}}</h1>
-        <span class="user">{{post.user.nickname}}</span>
+        <span class="user"><span class="user-level">{{post.user.level}}</span>{{post.user.nickname}}</span>
         <div class="post_btns_container">
           <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
             {% if bookmarked %}
@@ -24,12 +24,12 @@
           {% if user == post.user %}
           <button id="post_delete_btn">
             <a href="{% url 'posts:post_delete' post.pk %}?category={{category}}"
-              ><i class="fas fa-trash-alt"></i><span>삭제</span></a
+              ><i class="fas fa-trash-alt"></i><span class="deletetext">삭제</span></a
             >
           </button>
           <button id="post_edit_btn">
             <a href="{% url 'posts:post_update' post.pk %}?category={{category}}"
-              ><i class="fas fa-edit"></i><span>수정</span></a
+              ><i class="fas fa-edit"></i><span class="edittext">수정</span></a
             >
           </button>
           {% endif %}
@@ -62,7 +62,7 @@
       <ul>
         {% for comment in comments %}
         <li id="comment-{{comment.pk}}">
-          <h4 class="">{{comment.user.nickname}}</h4>
+          <h4 class=""><span class="user-level">{{comment.user.level}}</span>{{comment.user.nickname}}</h4>
           <p>{{comment.content}}</p>
           <div class="comment_btns_container">
             <button
@@ -101,6 +101,8 @@
 <script src="{% static 'js/modifyComment.js' %}"></script>
 <script src="{% static 'js/deleteComment.js' %}"></script>
 <script src="{% static 'js/createComment.js' %}"></script>
+<script src="{% static 'js/userLevelBadge.js' %}"></script>
+<script>userLevelBadge("28px", "18px", "3px")</script>
 {% block rated_post_detail_script %}
 {% endblock rated_post_detail_script %}
 {% endblock local_block %}

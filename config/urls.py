@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from ckeditor_uploader import views as views_ckeditor
@@ -26,18 +26,41 @@ import users.views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("posts.urls")),
-    path("offline/", include("core.urls")),
+    path("core/", include("core.urls")),
     path("users/", include("users.urls")),
-    path("askproduct/",include("reports.urls")),
+    path("askproduct/", include("reports.urls")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("upload/", login_required(views_ckeditor.upload), name="ckeditor_upload"),
-    path("browse/", never_cache(login_required(views_ckeditor.browse)), name="ckeditor_browse"),
+    path(
+        "browse/",
+        never_cache(login_required(views_ckeditor.browse)),
+        name="ckeditor_browse",
+    ),
     path("accounts/", include("allauth.urls")),
     path("oauth/", users.views.oauth, name="oauth"),
     path("login/", users.views.login, name="slogin"),
     path("search_prd/", include("search.urls")),
-    path('serviceWorker.js', (TemplateView.as_view(template_name="serviceWorker.js", 
-  content_type='application/javascript', )), name='serviceWorker.js'),
+    path(
+        "serviceWorker.js",
+        (
+            TemplateView.as_view(
+                template_name="serviceWorker.js",
+                content_type="application/javascript",
+            )
+        ),
+        name="serviceWorker.js",
+    ),
+    path(
+        "firebase-messaging-sw.js",
+        (
+            TemplateView.as_view(
+                template_name="firebase-messaging-sw.js",
+                content_type="application/javascript",
+            )
+        ),
+        name="firebase-messaging-sw.js",
+    ),
+    path("notifications/", include("notifications.urls")),
 ]
 
 if settings.DEBUG:

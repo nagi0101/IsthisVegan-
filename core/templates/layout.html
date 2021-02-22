@@ -11,21 +11,7 @@
       src="https://kit.fontawesome.com/9ada8679dc.js"
       crossorigin="anonymous"></script>
     <link rel="manifest" href="{% static 'js/manifest.json' %}">
-    <script>
-      if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/serviceWorker.js", { scope: "/" })
-    .then((reg) => {
-      console.log("Registration successful", reg);
-    })
-    .catch((e) =>
-      console.error("Error during service worker registration:", e)
-    );
-} else {
-  console.warn("Service Worker is not supported");
-}
-    </script>
-    <script src="{% url 'serviceWorker.js' %}"></script>
+
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" />
     <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}" />
@@ -42,7 +28,7 @@
         <div class="dropdown">
           <a href="#" class="dtn">알아봐요!</a>
           <div class="dropdown-content">
-            <a href="{% url 'posts:post_list' %}?category=INFO">알려줘요!</a>
+            <a href="{% url 'posts:post_list' %}?category=INFO">이거 알려줘요!</a>
           </div>
         </div>
         <div class="dropdown">
@@ -60,9 +46,9 @@
           </div>
         </div>
         <div class="dropdown">
-          <a href="#" class="dtn">함께해요!</a>
+          <a href="#" class="dtn">공지해요!</a>
           <div class="dropdown-content">
-            <a href="#">함께 도전해요!</a>
+            <a href="{% url 'posts:post_list' %}?category=NOTICE">이거 공지해요!</a>
           </div>
         </div>
       </div>
@@ -74,7 +60,7 @@
         <div class="dropdown">
           <a href="/accounts/logout" class="dtn">로그아웃</a>
         </div>
-        <div class="dropdown" id="dtn">{{user.username}} 님이 로그인 중</div>
+        <div class="dropdown" id="dtn">Lv{{user.level}}. {{user.nickname}} 님이 로그인 중</div>
         {% else %}
           <div class="dropdown">
           <a href="/accounts/signup" class="dtn">회원가입</a>
@@ -95,7 +81,7 @@
                 >가봤어요!</a>
                 <a href="{% url 'posts:post_list' %}?category=BUY"
                 >사봤어요!</a>
-                <a href="#">도전해요!</a>
+                <a href="{% url 'posts:post_list' %}?category=NOTICE"> 공지해요!</a>
               </div>
           </div>
           <div class="dropdown">
@@ -104,7 +90,7 @@
                 {% if user.is_authenticated %}
                   <a href="{% url 'users:user_page' user.pk %}" class="dtn">마이페이지</a>
                   <a href="/accounts/logout" class="dtn">로그아웃</a>
-                  <div class="admin">{{user.username}} 님이 로그인 중</div>
+                  <div class="admin">{{user.nickname}} 님이 로그인 중</div>
                 {% else %}
                   <a href="/accounts/signup" class="dtn">회원가입</a>
                   <a href="/accounts/login" class="dtn">로그인</a>
@@ -113,8 +99,110 @@
           </div>
       </div>
     </header>
+
+
     <div class="main_container">
-      {% block global_block %} {% endblock global_block %}
+      {% block global_block %} 
+      {% endblock global_block %}
     </div>
+
+    <!-- in app notification -->
+    {% if user.new_notifications_list %}
+      <div class="notifications_container">
+        <div class="notifications_btn" >
+          <div class="notifications_btn_vain"></div>
+        </div>
+        <div class="notifications_list_container">
+          <ul>
+            {% for notification in user.new_notifications_list %}
+              <li>
+                <a href="{% url 'notifications:on_in_app_notification_clicked' notification.pk %}">
+                  <div class="notification_left_section">
+                      {% if notification.category == "COMM" %}
+                        <div class="notification_icon COMM">
+                          <i class="far fa-comment-alt "></i>
+                        </div>
+                      {% endif %}
+                  </div>
+
+                  <div class="notification_right_section">
+                    <div class="notification_head">
+                      <span>{{notification.title}}</span>
+                    </div>
+                    <div class="notification_body">
+                      <span>{{notification.content}}</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <script src="{% static 'js/inAppNotification.js' %}"></script>
+    {% endif %}
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-messaging.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyC39lD1jN0UR5I9THqBlL0GBW0dHATUbDA",
+        authDomain: "isthisvegan-501b8.firebaseapp.com",
+        projectId: "isthisvegan-501b8",
+        storageBucket: "isthisvegan-501b8.appspot.com",
+        messagingSenderId: "418354642337",
+        appId: "1:418354642337:web:78793b8ffeb0c636f4dfe0",
+        measurementId: "G-Y8VBTH6PWW"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const messaging = firebase.messaging();
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/serviceWorker.js", { scope: "/" })
+    .then((reg) => {
+      console.log("Registration successful", reg);
+    })
+    .catch((e) =>
+      console.error("Error during service worker registration:", e)
+    );
+} else {
+  console.warn("Service Worker is not supported");
+}
+    </script>
+    <script>
+      // Firebase
+      navigator.serviceWorker.getRegistrations().then((registration) => {
+        const serviceworkerRegistration = registration[0]
+        messaging.onMessage((payload) => {
+          console.log(serviceworkerRegistration);
+          console.log("Message received. ", payload);
+          const notificationTitle = payload.notification.title;
+          const notificationOptions = {
+              body: payload.notification.body,
+              icon: payload.notification.icon,   
+              data: payload.notification.click_action,     
+          };
+          notification = serviceworkerRegistration.showNotification(notificationTitle, notificationOptions);
+          console.log(notification);
+          // const notification = new Notification(notificationTitle, notificationOptions);
+        });
+        });
+      
+    </script>
+    {% block FCM_script_block %}
+    {% endblock FCM_script_block %}
   </body>
 </html>
