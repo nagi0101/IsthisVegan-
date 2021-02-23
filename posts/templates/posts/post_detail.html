@@ -14,7 +14,6 @@
     <div class="post_content">
       <div class="post_header">
         <h1 class="post.title">{{post.title}}</h1>
-        <span class="user"><span class="user-level">{{post.user.level}}</span>{{post.user.nickname}}</span>
         <div class="post_btns_container">
           <button id="bookmark_btn" onClick="onBookmarkBtnClicked({{post.pk}})">
             {% if bookmarked %}
@@ -39,6 +38,7 @@
             <a href="{% url 'posts:post_list' %}?category={{category}}">목록</a>
           </button>
         </div>
+        <span class="user"><span class="user-level">{{post.user.level}}</span>{{post.user.nickname}}</span>
       </div>
       <hr />
       <div class="post_content_content">{{post.content|safe}}</div>
