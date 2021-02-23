@@ -56,18 +56,15 @@ a {
   position: absolute;
   right: 0;
   bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .post_content .post_content_content {
   font-weight: 300;
   line-height: 1.2;
   font-size: 18px;
-}
-
-.post_content .post_header .post_btns_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* .post_content .post_header #bookmark_btn,
@@ -189,6 +186,7 @@ a {
 }
 .comments_container {
   width: 100%;
+  max-width: 90vw;
 }
 
 .comments_container h3 {
@@ -214,19 +212,33 @@ a {
   font-size: 17px;
   font-weight: 300;
   line-height: 1.2;
+  word-wrap: break-word;
+  width: 100%;
+}
+
+@media (max-width: 910px) {
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10%;
+    /* border: solid 1px black; */
+    width: 70%;
+  }
 }
 
 @media (max-width: 575px) {
   .wrap {
     width: 80%;
     padding: 0;
+    margin-top: 50px;
   }
   .post_content .post_header .user {
     max-width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    display: block;
   }
   .deletetext {
     display: none;
@@ -252,5 +264,19 @@ a {
 @media (max-height: 440px) and (max-width: 820px) {
   .wrap {
     padding-left: 200px;
+  }
+}
+
+@media (max-width: 340px) {
+  .post_content .post_header h1 {
+    font-size: 35px;
+    font-weight: 900;
+    margin: 15px 0 10px 0;
+  }
+
+  .post_content .post_header .post_btns_container {
+    position: static;
+    width: 200px;
+    margin-bottom: 10px;
   }
 }
