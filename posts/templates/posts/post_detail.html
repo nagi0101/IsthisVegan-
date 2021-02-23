@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" />
 {% endblock head_block %} 
 
+{% block title_block %}| {{category}} {% endblock title_block %}
+
 {% block local_block %}
 <div class="bg"></div>
 <div class="container">
