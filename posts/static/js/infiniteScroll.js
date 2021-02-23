@@ -21,12 +21,14 @@ const modifyPost = (data, mode) => {
     const like_count = document.createElement("span");
     const like_icon = document.createElement("i");
     const date = document.createElement("span");
+    const level = document.createElement("span");
 
     // 내부에 들어가는 text 설정
     title.innerText = post.title;
-    user.innerText = post.nickname;
     like_count.innerText = post.liked_total;
     date.innerText = post.date;
+    level.innerText = post.level;
+    console.log(post.level);
 
     // class, id, dataSet, link 등 설정
     li.className = "post_grid-li";
@@ -38,8 +40,10 @@ const modifyPost = (data, mode) => {
     like_container.className = "post_like";
     like_icon.className = "fas fa-heart";
     date.className = "post_date";
+    level.className = "user-level";
 
     // DOM 구성
+    user.innerHTML = `<span class="user-level">${post.level}</span>${post.nickname}`;
     like_container.append(like_icon, like_count);
     a.append(title, user, like_container, date);
     li.append(a);
@@ -65,6 +69,7 @@ const modifyPost = (data, mode) => {
     newUl.addEventListener("scroll", handleScroll);
     posts_container.parentElement.replaceChild(newUl, posts_container);
   }
+  userLevelBadge("25px", "16px");
 };
 
 const sendAxiosRequest = (mode) => {

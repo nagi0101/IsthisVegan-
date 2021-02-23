@@ -32,9 +32,9 @@ def post_list(request):
             "max_page": max_page,
         }
 
-        if category == "INFO" or category == "COMMUNICATE" :
+        if category == "INFO" or category == "COMMUNICATE":
             return render(request, "posts/post_list.html", ctx)
-        elif category == "NOTICE" :
+        elif category == "NOTICE":
             return render(request, "posts/notice_post_list.html", ctx)
         else:
             return render(request, "posts/rated_post_list.html", ctx)
@@ -73,6 +73,7 @@ def post_list(request):
                     "title": post.title,
                     "liked_total": len(post.like.all()),
                     "date": post.return_written_time_or_date(),
+                    "level": post.user.level,
                 }
                 postList.append(aPost)
 
@@ -95,6 +96,7 @@ def post_list(request):
                     "liked_total": len(post.like.all()),
                     "rate": post.rate,
                     "date": post.return_written_time_or_date(),
+                    "level": post.user.level,
                 }
                 postList.append(aPost)
 
@@ -237,6 +239,7 @@ def comment_delete(request):
 
     return JsonResponse(commentList, safe=False)
 
+
 @login_required
 def post_create(request):
     category = request.GET["category"]
@@ -247,11 +250,11 @@ def post_create(request):
             form = PostForm()
         elif category in ["VISIT", "BUY"]:
             form = RatedPostForm()
-            ctx = {"rate" : True}
+            ctx = {"rate": True}
 
         ctx["form"] = form
         ctx["category"] = category
-        
+
         return render(request, "posts/post_create.html", ctx)
     else:
         if len(request.POST["content"]) == 0:
@@ -270,7 +273,7 @@ def post_create(request):
         elif category in ["VISIT", "BUY"]:
             form = RatedPostForm(request.POST)
             rate = request.POST["rate"]
-            rate = int(float(rate)*2)
+            rate = int(float(rate) * 2)
 
             if form.is_valid():
                 ratedpost = form.save(commit=False)
@@ -282,14 +285,15 @@ def post_create(request):
 
         return redirect(f"/detail/{pk}?category={category}")
 
+
 @login_required
-@user_passes_test(lambda u: u.is_superuser, redirect_field_name='')
+@user_passes_test(lambda u: u.is_superuser, redirect_field_name="")
 def notice_post_create(request):
     category = request.GET["category"]
 
     if request.method == "GET":
         if category in ["NOTICE"]:
-            form = PostForm()        
+            form = PostForm()
 
         ctx = {
             "form": form,
@@ -317,7 +321,7 @@ def notice_post_create(request):
 
 def post_update(request, pk):
     category = request.GET["category"]
-    
+
     ctx = {}
     if request.method == "GET":
         if category in ["INFO", "COMMUNICATE", "NOTICE"]:
@@ -326,16 +330,16 @@ def post_update(request, pk):
         else:
             post = get_object_or_404(RatedPost, id=pk)
             form = RatedPostForm(instance=post)
-            ctx = {"rate" : True}
+            ctx = {"rate": True}
 
         ctx["form"] = form
         ctx["category"] = category
 
         return render(request, "posts/post_create.html", ctx)
     else:
-        if len(request.POST['content']) == 0:
-            return render(request, 'posts/post_create.html', {'alert_flag': True})
-            
+        if len(request.POST["content"]) == 0:
+            return render(request, "posts/post_create.html", {"alert_flag": True})
+
         if category in ["INFO", "COMMUNICATE", "NOTICE"]:
             post = get_object_or_404(Post, id=pk)
             form = PostForm(request.POST, request.FILES, instance=post)
@@ -346,8 +350,8 @@ def post_update(request, pk):
             ratedpost = get_object_or_404(RatedPost, id=pk)
             form = RatedPostForm(request.POST, request.FILES, instance=ratedpost)
             rate = request.POST["rate"]
-            rate = int(float(rate)*2)
-            
+            rate = int(float(rate) * 2)
+
             if form.is_valid():
                 ratedpost = form.save(commit=False)
                 ratedpost.rate = rate
@@ -393,7 +397,7 @@ def main(request):
         ctx[category] = ordered_list
     ctx["category_list"] = category_list
     ctx["pk"] = request.user.id
-    
+
     return render(request, "posts/main.html", ctx)
 
 
