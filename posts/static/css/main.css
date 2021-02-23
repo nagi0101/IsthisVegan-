@@ -405,6 +405,11 @@ a {
     padding-right: 10%; */
   }
 
+  #contentabout {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
   /* .info_text .right > pre {
     width: 100%;
     font-size: 11px;
