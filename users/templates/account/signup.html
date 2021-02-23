@@ -6,12 +6,13 @@
 <link rel="stylesheet" href="{% static 'css/login.css' %}" />
 {% endblock head_block %}
 
+{% block title_block %}| 회원가입 {% endblock title_block %}
 
 {% block global_block %}
 
 <div class="bg"></div>
 <div class='all_content'>
-  <h1 class="login_title">{% trans "Sign Up" %}</h1>
+  <h1 class="login_title">회원가입</h1>
 
   </br>
   <p class='signup_info' style='line-height:100%'>이미 계정이 있으신가요?</p>
@@ -28,7 +29,7 @@
 
       </br>
       <div class='submit_button'>
-      <button class="primaryAction" type="submit" >{% trans "Sign Up" %} &raquo;</button>
+      <button class="primaryAction" type="submit" >회원가입 &raquo;</button>
       </div>
     </form>
   </div>
