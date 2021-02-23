@@ -16,7 +16,7 @@
 {% block rated_post_li_a %}
   <a data-post-id="{{post.pk}}" class="post_grid-a rated_post_grid-a" href="{% url 'posts:post_detail' post.pk %}?category={{ post.category }}">
     <span class="post_title">{{ post.title }}</span>
-    <span class="post_user">{{ post.user }}</span>
+    <span class="post_user"><span class="user-level">{{post.user.level}}</span>{{ post.user }}</span>
     <span class="post_like"><i class="fas fa-heart"></i><span>{{ post.get_like_count }}</span></span>
     <span class="post_rate">{{ post.rate }}</span>
     <span class="post_date">{{ post.return_written_time_or_date }}</span>
